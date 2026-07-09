@@ -1,0 +1,14 @@
+﻿using AsuraGate.Spec.Consts;
+using AsuraGate.Spec.Models.V2;
+using AsuraGate.Spec.Requests.Components;
+
+namespace AsuraGate.Spec.Requests.V2.Wvw;
+
+public class WvwMatchWorldScoresRequest :
+    IGetsSingle<WvwMatchWorldScores, int>,
+    IGetsIds<int>
+{
+    public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WvwMatchScore;
+    public bool IsAuthenticated { get; } = false;
+    public bool IsLocalized { get; } = false;
+}
