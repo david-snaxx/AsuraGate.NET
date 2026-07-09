@@ -5,7 +5,7 @@ namespace AsuraGate.Spec.Models.V2;
 /// <summary>Represents a build template saved in the authenticated account's build storage.</summary>
 public record AccountBuildStorageTemplate
 {
-    /// <summary>Display name given to this saved build template.</summary>
+    /// <summary>Display the name given to this saved build template.</summary>
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
@@ -49,7 +49,7 @@ public record BuildStorageSpecialization
 /// <summary>Represents the skill loadout within an <see cref="AccountBuildStorageTemplate"/>.</summary>
 public record BuildStorageSkills
 {
-    /// <summary>Skill ID in the heal slot; resolvable to a <see cref="Skill"/>; null if the slot is empty.</summary>
+    /// <summary>Skill ID in the "heal" slot; resolvable to a <see cref="Skill"/>; null if the slot is empty.</summary>
     [JsonPropertyName("heal")]
     public int? Heal { get; init; }
 
