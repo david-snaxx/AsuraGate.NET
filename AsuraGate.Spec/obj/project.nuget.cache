@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "2jEQ0Vyg2j4=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\snaxx\\.nuget\\packages\\netstandard.library.ref\\2.1.0\\netstandard.library.ref.2.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}
