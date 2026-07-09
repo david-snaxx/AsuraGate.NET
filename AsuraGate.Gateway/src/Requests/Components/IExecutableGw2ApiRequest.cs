@@ -4,6 +4,7 @@ public interface IExecutableGw2ApiRequest<TModel>
 {
     IGw2ApiRequest<TModel> BaseRequest { get; }
     IEnumerable<KeyValuePair<string, string>> ExtraQueryParameters { get; }
+    public bool IsGetAllRequest { get; }
 }
 
 /// <summary>
@@ -14,4 +15,5 @@ internal class ExecutableGw2ApiRequest<TModel> : IExecutableGw2ApiRequest<TModel
 {
     public IGw2ApiRequest<TModel> BaseRequest { get; set; }
     public IEnumerable<KeyValuePair<string, string>> ExtraQueryParameters { get; set; }
+    public bool IsGetAllRequest { get; set; } = false;
 }
