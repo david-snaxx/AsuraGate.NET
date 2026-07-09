@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "AsuraGate.Gateway/1.0.0": {
+        "dependencies": {
+          "AsuraGate.Spec": "1.0.0"
+        },
+        "runtime": {
+          "AsuraGate.Gateway.dll": {}
+        }
+      },
+      "AsuraGate.Spec/1.0.0": {
+        "runtime": {
+          "AsuraGate.Spec.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "AsuraGate.Gateway/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "AsuraGate.Spec/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

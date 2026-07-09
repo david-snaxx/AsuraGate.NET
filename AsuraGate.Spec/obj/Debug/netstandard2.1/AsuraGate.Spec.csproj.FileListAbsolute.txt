@@ -1,0 +1,10 @@
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\bin\Debug\netstandard2.1\AsuraGate.Spec.deps.json
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\bin\Debug\netstandard2.1\AsuraGate.Spec.dll
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\bin\Debug\netstandard2.1\AsuraGate.Spec.pdb
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.csproj.AssemblyReference.cache
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.AssemblyInfoInputs.cache
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.AssemblyInfo.cs
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.csproj.CoreCompileInputs.cache
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.dll
+C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.pdb

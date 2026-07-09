@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Guild;
 
 public sealed class GuildSearchRequest :
-    IGw2ApiRequest<string>
+    IGw2ApiRequest<IEnumerable<string>>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.GuildSearch;
     public bool IsAuthenticated { get; } = false;

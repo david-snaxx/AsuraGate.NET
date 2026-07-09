@@ -4,14 +4,15 @@ namespace AsuraGate.Spec.Requests.Components;
 
 public static class GuildMixins
 {
-    public static IExecutableGw2ApiRequest<string> Search(
+    public static IExecutableGw2ApiRequest<IEnumerable<string>, string> Search(
         this GuildSearchRequest request,
         string guildName)
     {
-        return new ExecutableGw2ApiRequest<string>
+        return new ExecutableGw2ApiRequest<IEnumerable<string>, string>
         {
             BaseRequest = request,
-            ExtraQueryParameters = [new KeyValuePair<string, string>("name", guildName)]
+            ExtraQueryParams = new List<KeyValuePair<string, string>>(){
+                new KeyValuePair<string, string>("name", guildName) }
         };
     }
 }

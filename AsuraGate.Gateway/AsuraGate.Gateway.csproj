@@ -10,8 +10,4 @@
     <ItemGroup>
         <ProjectReference Include="..\AsuraGate.Spec\AsuraGate.Spec.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="src\" />
-    </ItemGroup>
 </Project>
