@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.Spec", "AsuraGate.Spec\AsuraGate.Spec.csproj", "{54746C56-490F-4E49-A05C-52911E6E2856}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.Gateway", "AsuraGate.Gateway\AsuraGate.Gateway.csproj", "{17F66960-76F0-4E5B-AF8A-9998C63C6B80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{54746C56-490F-4E49-A05C-52911E6E2856}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54746C56-490F-4E49-A05C-52911E6E2856}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54746C56-490F-4E49-A05C-52911E6E2856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
