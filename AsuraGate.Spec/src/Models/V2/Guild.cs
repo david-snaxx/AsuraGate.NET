@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a guild, including its public identity and (when authenticated) internal management data.</summary>
 public record Guild

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the mastery point totals and unlocked mastery points for the authenticated account.</summary>
 public record AccountMasteryPoints

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a Jade Bot skin, a cosmetic customization for the Jade Bot companion introduced in the End of Dragons expansion.</summary>
 public record JadeBot

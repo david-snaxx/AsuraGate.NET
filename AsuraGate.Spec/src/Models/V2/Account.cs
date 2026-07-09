@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the top-level account data for an authenticated Guild Wars 2 account.</summary>
 public record Account
@@ -17,7 +17,7 @@ public record Account
     [JsonPropertyName("name")]
     public required string Name { get; init; }
 
-    /// <summary>Home world ID; resolvable to a <see cref="Model.World"/>.</summary>
+    /// <summary>Home world ID; resolvable to a <see cref="V2.World"/>.</summary>
     [JsonPropertyName("world")]
     public required int World { get; init; }
 

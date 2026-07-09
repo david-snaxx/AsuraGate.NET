@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a raid instance in GW2, grouping its component wings and events.</summary>
 public record Raid

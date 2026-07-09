@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a material currently stored in the guild treasury and which upgrades require it.</summary>
 public record GuildTreasuryItem

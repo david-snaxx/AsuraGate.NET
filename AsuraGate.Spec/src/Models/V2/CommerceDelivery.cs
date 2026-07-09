@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the contents of the authenticated account's Trading Post delivery box awaiting collection.</summary>
 public record CommerceDelivery

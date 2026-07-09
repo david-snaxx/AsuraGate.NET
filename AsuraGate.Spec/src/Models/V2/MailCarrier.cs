@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a mail carrier cosmetic that customizes the appearance of in-game mail delivery.</summary>
 public record MailCarrier

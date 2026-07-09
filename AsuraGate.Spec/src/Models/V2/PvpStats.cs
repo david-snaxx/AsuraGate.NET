@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents account-wide PvP statistics, including rank progress and win/loss records across modes and professions.</summary>
 public record PvpStats

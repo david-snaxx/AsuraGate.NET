@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the full state snapshot of an active or completed WvW match, including scores, kill/death counts, objectives, and skirmish history.</summary>
 public record WvwMatch

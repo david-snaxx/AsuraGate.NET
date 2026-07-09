@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a wallet currency in GW2 (e.g., Karma, Laurels, Fractal Relics).</summary>
 public record Currency

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a novelty cosmetic (e.g., chairs, musical instruments, held items) usable by characters.</summary>
 public record Novelty

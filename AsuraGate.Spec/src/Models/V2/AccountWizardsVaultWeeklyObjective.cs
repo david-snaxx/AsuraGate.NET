@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the authenticated account's weekly Wizard's Vault objective progress and meta reward state.</summary>
 public record AccountWizardsVaultWeekly

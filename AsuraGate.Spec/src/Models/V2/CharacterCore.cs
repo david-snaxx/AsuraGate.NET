@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the core biographical and progression data for a Guild Wars 2 character.</summary>
 public record CharacterCore
@@ -45,7 +45,7 @@ public record CharacterCore
     [JsonPropertyName("deaths")]
     public required int Deaths { get; init; }
 
-    /// <summary>ID of the title currently equipped on this character; resolvable to a <see cref="Model.Title"/>; null if no title is selected.</summary>
+    /// <summary>ID of the title currently equipped on this character; resolvable to a <see cref="V2.Title"/>; null if no title is selected.</summary>
     [JsonPropertyName("title")]
     public int? Title { get; init; }
 }

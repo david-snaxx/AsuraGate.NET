@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents kill and death statistics for a WvW match broken down by team and map.</summary>
 public record WvwMatchWorldStats

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a glyph that can be used on gathering tools in a player's homestead.</summary>
 public record HomesteadGlyph

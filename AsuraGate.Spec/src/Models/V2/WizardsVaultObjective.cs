@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a Wizard's Vault objective from the static catalog, defining a task players can complete to earn Astral Acclaim.</summary>
 public record WizardsVaultObjective

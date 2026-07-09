@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a single item listing in the authenticated account's Wizard's Vault shop.</summary>
 public record AccountWizardsVaultListing

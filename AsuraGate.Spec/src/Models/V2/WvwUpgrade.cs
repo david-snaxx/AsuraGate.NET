@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the upgrade progression track for a WvW objective, unlocked incrementally as dolyaks are delivered.</summary>
 public record WvwUpgrade

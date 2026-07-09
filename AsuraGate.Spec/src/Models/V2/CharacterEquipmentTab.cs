@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a saved equipment tab (loadout slot) for a character.</summary>
 public record CharacterEquipmentTab
@@ -37,7 +37,7 @@ public record TabEquipmentItem
     [JsonPropertyName("slot")]
     public required string Slot { get; init; }
 
-    /// <summary>Applied cosmetic skin ID; resolvable to a <see cref="Model.Skin"/>; null if no skin is applied.</summary>
+    /// <summary>Applied cosmetic skin ID; resolvable to a <see cref="V2.Skin"/>; null if no skin is applied.</summary>
     [JsonPropertyName("skin")]
     public int? Skin { get; init; }
 

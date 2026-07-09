@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a PvP amulet, which defines the stat template applied to a player's equipment during PvP matches.</summary>
 public record PvpAmulet

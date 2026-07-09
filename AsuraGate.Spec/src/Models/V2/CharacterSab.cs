@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a character's Super Adventure Box (SAB) progress, including completed zones and purchased upgrades.</summary>
 public record CharacterSab

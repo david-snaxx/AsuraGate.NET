@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a single Trading Post buy or sell order, either currently open or from the transaction history.</summary>
 public record CommerceTransaction

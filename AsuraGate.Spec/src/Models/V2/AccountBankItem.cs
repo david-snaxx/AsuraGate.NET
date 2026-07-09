@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents an item stored in a bank tab slot of the authenticated account.</summary>
 public record AccountBankItem
@@ -17,7 +17,7 @@ public record AccountBankItem
     [JsonPropertyName("charges")]
     public int? Charges { get; init; }
 
-    /// <summary>Applied cosmetic skin ID; resolvable to a <see cref="Model.Skin"/>; null if no skin is applied.</summary>
+    /// <summary>Applied cosmetic skin ID; resolvable to a <see cref="V2.Skin"/>; null if no skin is applied.</summary>
     [JsonPropertyName("skin")]
     public int? Skin { get; init; }
 

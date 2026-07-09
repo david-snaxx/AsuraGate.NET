@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a single floor of a <see cref="Continent"/>, containing all regions and maps on that floor.</summary>
 public record ContinentFloor

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the score breakdown for a WvW match, including per-skirmish and per-map scores.</summary>
 public record WvwMatchWorldScores

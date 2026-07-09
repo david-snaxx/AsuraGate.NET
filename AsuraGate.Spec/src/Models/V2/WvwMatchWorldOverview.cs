@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the world and alliance composition overview for a WvW match, showing which worlds are assigned to each team.</summary>
 public record WvwMatchWorldOverview

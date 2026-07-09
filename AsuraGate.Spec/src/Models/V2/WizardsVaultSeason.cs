@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the current Wizard's Vault season, including its active listings and objectives.</summary>
 public record WizardsVaultSeason

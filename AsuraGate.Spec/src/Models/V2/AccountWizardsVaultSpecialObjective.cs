@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the authenticated account's special Wizard's Vault objectives and their completion state.</summary>
 public record AccountWizardsVaultSpecial

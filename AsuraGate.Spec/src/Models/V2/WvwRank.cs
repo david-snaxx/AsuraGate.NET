@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a WvW rank title milestone awarded when a player's WvW rank reaches a threshold.</summary>
 public record WvwRank

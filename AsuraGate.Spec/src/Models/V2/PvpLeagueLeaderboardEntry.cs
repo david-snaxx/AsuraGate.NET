@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a single entry in a PvP league season leaderboard.</summary>
 public record PvpLeagueLeaderboardEntry

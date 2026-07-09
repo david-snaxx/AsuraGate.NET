@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a killstroke finisher cosmetic that plays an animation when downing or defeating an enemy.</summary>
 public record Finisher

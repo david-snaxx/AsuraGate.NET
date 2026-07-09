@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a PvP rank tier milestone, defining the title and finisher awarded across a range of PvP rank numbers.</summary>
 public record PvpRank

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the metadata for a GW2 API key or subtoken, including its granted permission scopes.</summary>
 public record TokenInfo

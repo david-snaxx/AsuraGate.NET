@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a top-level achievement group that organizes achievement categories (e.g., "Heart of Thorns", "General").</summary>
 public record AchievementGroup

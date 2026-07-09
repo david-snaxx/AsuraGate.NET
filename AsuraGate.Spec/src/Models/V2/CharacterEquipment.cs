@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the full equipment loadout of a character, spanning all equipment tabs.</summary>
 public record CharacterEquipment
@@ -29,7 +29,7 @@ public record EquipmentItem
     [JsonPropertyName("upgrades")]
     public int[] Upgrades { get; init; } = [];
 
-    /// <summary>Applied cosmetic skin ID; resolvable to a <see cref="Model.Skin"/>; null if no skin is applied.</summary>
+    /// <summary>Applied cosmetic skin ID; resolvable to a <see cref="V2.Skin"/>; null if no skin is applied.</summary>
     [JsonPropertyName("skin")]
     public int? Skin { get; init; }
 

@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a story season (e.g., a Living World season or expansion story arc) in GW2.</summary>
 public record StorySeason

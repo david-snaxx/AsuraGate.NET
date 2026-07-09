@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a static WvW objective (camp, tower, keep, castle, etc.) on one of the eternal battlegrounds maps.</summary>
 public record WvwObjective

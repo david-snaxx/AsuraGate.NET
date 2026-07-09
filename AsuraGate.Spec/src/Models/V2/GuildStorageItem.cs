@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents an item stored in the guild's decoration storage (homestead decorations collected by the guild).</summary>
 public record GuildStorageItem

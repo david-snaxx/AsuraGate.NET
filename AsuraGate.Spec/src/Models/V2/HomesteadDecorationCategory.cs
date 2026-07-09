@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a category that groups homestead decorations in the decoration panel.</summary>
 public record HomesteadDecorationCategory

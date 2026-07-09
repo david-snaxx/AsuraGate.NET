@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a PvP battle hero — a cosmetic avatar used in structured PvP matches.</summary>
 public record PvpHero

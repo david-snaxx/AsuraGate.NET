@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a ranked PvP league season, including its division structure, rank definitions, and leaderboard configuration.</summary>
 public record PvpSeason

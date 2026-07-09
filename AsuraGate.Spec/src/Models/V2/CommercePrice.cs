@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the current buy and sell order price summary for a tradeable item on the Trading Post.</summary>
 public record CommercePrice

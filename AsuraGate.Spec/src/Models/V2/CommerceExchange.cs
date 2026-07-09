@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents the current gem-to-coin (or coin-to-gem) exchange rate from the Gem Store.</summary>
 public record CommerceExchange

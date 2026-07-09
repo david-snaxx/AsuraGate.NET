@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a skiff skin, a cosmetic customization for the Skiff mount introduced in the End of Dragons expansion.</summary>
 public record Skiff

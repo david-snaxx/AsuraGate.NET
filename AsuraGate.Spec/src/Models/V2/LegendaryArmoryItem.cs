@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace AsuraGate.Fetch.Model;
+namespace AsuraGate.Spec.Models.V2;
 
 /// <summary>Represents a legendary item that can be registered in the account's Legendary Armory for shared use across characters.</summary>
 public record LegendaryArmoryItem
