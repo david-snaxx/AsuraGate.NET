@@ -12,6 +12,14 @@ public static class ClientMixins
         };
     }
 
+    public static IExecutableGw2ApiRequest<TModel> GetObject<TModel>(this IGetsSingleNoId<TModel> request)
+    {
+        return new ExecutableGw2ApiRequest<TModel>
+        {
+            BaseRequest = request
+        };
+    }
+
     public static IExecutableGw2ApiRequest<IEnumerable<TModel>> GetBulk<TModel, TId>(
         this IGetsBulk<TModel, TId> request, IEnumerable<TId> ids)
     {
