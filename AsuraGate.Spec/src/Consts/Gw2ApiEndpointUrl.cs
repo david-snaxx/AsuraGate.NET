@@ -92,6 +92,7 @@ public static class Gw2ApiEndpointUrl
     public const string CommerceTransactionsHistoryBuys = Base + "/v2/commerce/transactions/history/buys";
     public const string CommerceTransactionsHistorySells = Base + "/v2/commerce/transactions/history/sells";
     public const string Continent = Base + "/v2/continents";
+    public const string ContinentFloor = Base + "/v2/continents/{id}/floors";
     public const string CreateSubtoken = Base + "/v2/createsubtoken";
     public const string Currency = Base + "/v2/currencies";
     public const string DailyCrafting = Base + "/v2/dailycrafting";
