@@ -25,7 +25,7 @@ public record Account
     [JsonPropertyName("guilds")]
     public string[] Guilds { get; init; } = [];
 
-    /// <summary>List of guild IDs where this account holds a leader role (requires guilds scope).</summary>
+    /// <summary>List of guild IDs where this account holds a leader role (requires "guilds" scope).</summary>
     [JsonPropertyName("guild_leader")]
     public string[] GuildLeader { get; init; } = [];
 

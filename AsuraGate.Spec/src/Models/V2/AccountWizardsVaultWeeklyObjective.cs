@@ -5,11 +5,11 @@ namespace AsuraGate.Spec.Models.V2;
 /// <summary>Represents the authenticated account's weekly Wizard's Vault objective progress and meta reward state.</summary>
 public record AccountWizardsVaultWeekly
 {
-    /// <summary>Current progress toward the weekly meta reward threshold.</summary>
+    /// <summary>Current progress toward the weekly meta-reward threshold.</summary>
     [JsonPropertyName("meta_progress_current")]
     public required int MetaProgressCurrent { get; init; }
 
-    /// <summary>Total astral acclaim required to earn the weekly meta reward.</summary>
+    /// <summary>Total astral acclaim required to earn the weekly meta-reward.</summary>
     [JsonPropertyName("meta_progress_complete")]
     public required int MetaProgressComplete { get; init; }
 
