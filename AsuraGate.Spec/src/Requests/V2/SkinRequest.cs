@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class SkinRequest :
+public sealed class SkinRequest :
     IGetsSingle<Skin, int>,
     IGetsBulk<Skin, int>,
     IGetsAll<Skin>,

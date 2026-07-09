@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Wvw;
 
-public class WvwRankRequest :
+public sealed class WvwRankRequest :
     IGetsSingle<WvwRank, int>,
     IGetsBulk<WvwRank, int>,
     IGetsAll<WvwRank>,

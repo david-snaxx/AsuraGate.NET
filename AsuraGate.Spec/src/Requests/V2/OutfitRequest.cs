@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class OutfitRequest :
+public sealed class OutfitRequest :
     IGetsSingle<Outfit, int>,
     IGetsBulk<Outfit, int>,
     IGetsAll<Outfit>,

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class MasteryRequest :
+public sealed class MasteryRequest :
     IGetsSingle<Mastery, int>,
     IGetsBulk<Mastery, int>,
     IGetsAll<Mastery>,

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class NoveltyRequest :
+public sealed class NoveltyRequest :
     IGetsSingle<Novelty, int>,
     IGetsBulk<Novelty, int>,
     IGetsAll<Novelty>,

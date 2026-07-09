@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class MiniRequest :
+public sealed class MiniRequest :
     IGetsSingle<Mini, int>,
     IGetsBulk<Mini, int>,
     IGetsAll<Mini>,

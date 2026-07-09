@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Character;
 
-public class CharacterBuildTabRequest :
+public sealed class CharacterBuildTabRequest :
     IGetsSingle<CommerceTransaction, int>,
     IGetsBulk<CommerceTransaction, int>,
     IGetsAll<CommerceTransaction>,

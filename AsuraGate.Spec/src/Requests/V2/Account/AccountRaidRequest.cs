@@ -3,7 +3,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountRaidRequest :
+public sealed class AccountRaidRequest :
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountRaid;

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Home;
 
-public class HomeCatRequest :
+public sealed class HomeCatRequest :
     IGetsSingle<HomeCat, int>,
     IGetsBulk<HomeCat, int>,
     IGetsAll<HomeCat>,

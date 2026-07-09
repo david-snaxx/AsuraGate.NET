@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountBuildStorageRequest :
+public sealed class AccountBuildStorageRequest :
     IGetsSingle<AccountBuildStorageTemplate, string>,
     IGetsBulk<AccountBuildStorageTemplate, string>,
     IGetsAll<AccountBuildStorageTemplate>

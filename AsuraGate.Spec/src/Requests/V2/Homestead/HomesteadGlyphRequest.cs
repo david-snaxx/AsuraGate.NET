@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Homestead;
 
-public class HomesteadGlyphRequest :
+public sealed class HomesteadGlyphRequest :
     IGetsSingle<HomesteadGlyph, string>,
     IGetsBulk<HomesteadGlyph, string>,
     IGetsAll<HomesteadGlyph>,

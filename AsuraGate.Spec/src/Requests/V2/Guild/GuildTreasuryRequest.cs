@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Guild;
 
-public class GuildTreasuryRequest :
+public sealed class GuildTreasuryRequest :
     IGetsSingleNoId<IEnumerable<GuildTreasuryItem>>
 {
     public string EndpointUrl { get; }

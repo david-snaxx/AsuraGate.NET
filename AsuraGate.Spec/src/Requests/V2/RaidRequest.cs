@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class RaidRequest :
+public sealed class RaidRequest :
     IGetsSingle<Raid, string>,
     IGetsBulk<Raid, string>,
     IGetsAll<Raid>,

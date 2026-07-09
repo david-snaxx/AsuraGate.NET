@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class JadeBotRequest :
+public sealed class JadeBotRequest :
     IGetsSingle<JadeBot, int>,
     IGetsBulk<JadeBot, int>,
     IGetsAll<JadeBot>,

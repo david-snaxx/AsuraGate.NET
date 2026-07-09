@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class QuagganRequest :
+public sealed class QuagganRequest :
     IGetsSingle<Quaggan, string>,
     IGetsBulk<Quaggan, string>,
     IGetsAll<Quaggan>,

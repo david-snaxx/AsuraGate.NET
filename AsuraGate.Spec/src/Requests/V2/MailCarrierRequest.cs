@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class MailCarrierRequest :
+public sealed class MailCarrierRequest :
     IGetsSingle<MailCarrier, int>,
     IGetsBulk<MailCarrier, int>,
     IGetsAll<MailCarrier>,

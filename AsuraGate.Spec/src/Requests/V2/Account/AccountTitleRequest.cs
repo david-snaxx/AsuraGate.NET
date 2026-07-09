@@ -3,7 +3,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountTitleRequest :
+public sealed class AccountTitleRequest :
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountTitle;

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Pvp;
 
-public class PvpHeroRequest :
+public sealed class PvpHeroRequest :
     IGetsSingle<PvpHero, string>,
     IGetsBulk<PvpHero, string>,
     IGetsAll<PvpHero>,

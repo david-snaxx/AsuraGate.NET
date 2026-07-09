@@ -3,7 +3,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Guild;
 
-public class GuildOwnedUpgradesRequest :
+public sealed class GuildOwnedUpgradesRequest :
     IGetsIds<int>
 {
     public string EndpointUrl { get; }

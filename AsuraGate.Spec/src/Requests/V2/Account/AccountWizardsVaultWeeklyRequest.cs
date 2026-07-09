@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountWizardsVaultWeeklyRequest :
+public sealed class AccountWizardsVaultWeeklyRequest :
     IGetsSingleNoId<AccountWizardsVaultWeekly>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountWizardsVaultWeekly;

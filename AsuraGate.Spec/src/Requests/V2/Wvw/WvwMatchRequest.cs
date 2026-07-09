@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Wvw;
 
-public class WvwMatchRequest :
+public sealed class WvwMatchRequest :
     IGetsSingle<WvwMatch, string>,
     IGetsIds<string>
 {

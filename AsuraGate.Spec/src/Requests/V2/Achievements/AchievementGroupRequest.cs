@@ -1,9 +1,10 @@
 ﻿using AsuraGate.Spec.Consts;
 using AsuraGate.Spec.Models.V2;
+using AsuraGate.Spec.Requests.Components;
 
-namespace AsuraGate.Spec.Requests.Components;
+namespace AsuraGate.Spec.Requests.V2.Achievements;
 
-public class AchievementGroupRequest :
+public sealed class AchievementGroupRequest :
     IGetsSingle<AchievementGroup, string>,
     IGetsBulk<AchievementGroup, string>,
     IGetsAll<AchievementGroup>,

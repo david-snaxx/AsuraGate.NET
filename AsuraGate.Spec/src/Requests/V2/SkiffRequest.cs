@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class SkiffRequest :
+public sealed class SkiffRequest :
     IGetsSingle<Skiff, int>,
     IGetsBulk<Skiff, int>,
     IGetsAll<Skiff>,

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Pvp;
 
-public class PvpGameRequest :
+public sealed class PvpGameRequest :
     IGetsSingle<PvpGame, string>,
     IGetsBulk<PvpGame, string>,
     IGetsAll<PvpGame>,

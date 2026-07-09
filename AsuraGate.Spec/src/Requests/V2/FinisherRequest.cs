@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class FinisherRequest :
+public sealed class FinisherRequest :
     IGetsSingle<Finisher, int>,
     IGetsBulk<Finisher, int>,
     IGetsAll<Finisher>,

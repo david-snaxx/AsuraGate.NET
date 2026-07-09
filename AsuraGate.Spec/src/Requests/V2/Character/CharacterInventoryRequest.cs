@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Character;
 
-public class CharacterInventoryRequest :
+public sealed class CharacterInventoryRequest :
     IGetsSingleNoId<CharacterInventory>
 {
     public string EndpointUrl { get; }

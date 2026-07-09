@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class GliderRequest :
+public sealed class GliderRequest :
     IGetsSingle<Glider, int>,
     IGetsBulk<Glider, int>,
     IGetsAll<Glider>,

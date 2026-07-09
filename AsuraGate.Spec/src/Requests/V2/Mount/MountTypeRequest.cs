@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Mount;
 
-public class MountTypeRequest :
+public sealed class MountTypeRequest :
     IGetsSingle<MountType, string>,
     IGetsBulk<MountType, string>,
     IGetsAll<MountType>,

@@ -3,7 +3,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountHomeNodeRequest :
+public sealed class AccountHomeNodeRequest :
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountHomeNode;

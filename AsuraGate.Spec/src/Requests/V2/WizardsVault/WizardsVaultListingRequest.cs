@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.WizardsVault;
 
-public class WizardsVaultListingRequest :
+public sealed class WizardsVaultListingRequest :
     IGetsSingle<WizardsVaultListing, int>,
     IGetsBulk<WizardsVaultListing, int>,
     IGetsAll<WizardsVaultListing>,

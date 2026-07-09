@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountInventoryRequest :
+public sealed class AccountInventoryRequest :
     IGetsSingle<AccountSharedInventoryItem, int>,
     IGetsBulk<AccountSharedInventoryItem, int>,
     IGetsAll<AccountSharedInventoryItem>

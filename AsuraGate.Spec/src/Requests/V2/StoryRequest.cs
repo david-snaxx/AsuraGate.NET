@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class StoryRequest :
+public sealed class StoryRequest :
     IGetsSingle<Story, int>,
     IGetsBulk<Story, int>,
     IGetsAll<Story>,

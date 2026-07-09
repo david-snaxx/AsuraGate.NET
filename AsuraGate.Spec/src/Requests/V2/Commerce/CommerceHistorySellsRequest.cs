@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Commerce;
 
-public class CommerceHistorySellsRequest :
+public sealed class CommerceHistorySellsRequest :
     IGetsSingle<CommerceTransaction, int>,
     IGetsBulk<CommerceTransaction, int>,
     IGetsAll<CommerceTransaction>,

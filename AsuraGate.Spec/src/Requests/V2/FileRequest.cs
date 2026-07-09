@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class FileRequest :
+public sealed class FileRequest :
     IGetsSingle<ApiFile, string>,
     IGetsBulk<ApiFile, string>,
     IGetsAll<ApiFile>,

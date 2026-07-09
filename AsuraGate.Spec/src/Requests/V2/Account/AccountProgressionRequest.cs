@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountProgressionRequest :
+public sealed class AccountProgressionRequest :
     IGetsAll<AccountProgression>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountProgression;

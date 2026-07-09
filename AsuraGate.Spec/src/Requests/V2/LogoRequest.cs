@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class LogoRequest :
+public sealed class LogoRequest :
     IGetsSingle<Logo, string>,
     IGetsBulk<Logo, string>,
     IGetsAll<Logo>,

@@ -3,7 +3,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Character;
 
-public class CharacterRecipesRequest :
+public sealed class CharacterRecipesRequest :
     IGetsIds<int>
 {
     public string EndpointUrl { get; }

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Guild;
 
-public class GuildStorageRequest :
+public sealed class GuildStorageRequest :
     IGetsSingleNoId<IEnumerable<GuildStorageItem>>
 {
     public string EndpointUrl { get; }

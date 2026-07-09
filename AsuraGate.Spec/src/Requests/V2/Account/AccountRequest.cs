@@ -3,7 +3,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountRequest :
+public sealed class AccountRequest :
     IGetsSingleNoId<Models.V2.Account>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Account;

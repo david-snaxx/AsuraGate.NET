@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class WorldRequest :
+public sealed class WorldRequest :
     IGetsSingle<World, int>,
     IGetsBulk<World, int>,
     IGetsAll<World>,

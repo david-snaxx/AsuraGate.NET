@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Backstory;
 
-public class BackstoryAnswerRequest :
+public sealed class BackstoryAnswerRequest :
     IGetsSingle<BackstoryAnswer, string>,
     IGetsBulk<BackstoryAnswer, string>,
     IGetsAll<BackstoryAnswer>,

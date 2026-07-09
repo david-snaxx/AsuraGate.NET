@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Mount;
 
-public class MountSkinRequest :
+public sealed class MountSkinRequest :
     IGetsSingle<MountSkin, int>,
     IGetsBulk<MountSkin, int>,
     IGetsAll<MountSkin>,

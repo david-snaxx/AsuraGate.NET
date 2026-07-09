@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Pvp;
 
-public class PvpStatsRequest :
+public sealed class PvpStatsRequest :
     IGetsSingleNoId<PvpStats>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.PvpStat;

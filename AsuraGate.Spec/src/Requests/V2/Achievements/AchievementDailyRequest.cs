@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Achievements;
 
-public class AchievementDailyRequest :
+public sealed class AchievementDailyRequest :
     IGetsSingleNoId<AchievementDaily>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AchievementsDaily;

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountWalletRequest :
+public sealed class AccountWalletRequest :
     IGetsSingle<AccountCurrency, int>,
     IGetsBulk<AccountCurrency, int>,
     IGetsAll<AccountCurrency>

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class PetRequest :
+public sealed class PetRequest :
     IGetsSingle<Pet, int>,
     IGetsBulk<Pet, int>,
     IGetsAll<Pet>,

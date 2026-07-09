@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class ItemRequest :
+public sealed class ItemRequest :
     IGetsSingle<Item, int>,
     IGetsBulk<Item, int>,
     IGetsAll<Item>,

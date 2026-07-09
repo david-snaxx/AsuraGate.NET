@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Wvw;
 
-public class WvwObjectiveRequest :
+public sealed class WvwObjectiveRequest :
     IGetsSingle<WvwObjective, string>,
     IGetsBulk<WvwObjective, string>,
     IGetsAll<WvwObjective>,

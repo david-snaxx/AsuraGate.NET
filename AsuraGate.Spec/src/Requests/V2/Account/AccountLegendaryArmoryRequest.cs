@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountLegendaryArmoryRequest :
+public sealed class AccountLegendaryArmoryRequest :
     IGetsAll<AccountLegendaryItem>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountLegendaryArmory;

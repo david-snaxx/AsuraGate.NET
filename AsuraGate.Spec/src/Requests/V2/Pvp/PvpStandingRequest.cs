@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Pvp;
 
-public class PvpStandingRequest :
+public sealed class PvpStandingRequest :
     IGetsSingleNoId<PvpStanding>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.PvpStanding;

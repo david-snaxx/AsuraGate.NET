@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountMasteryRequest :
+public sealed class AccountMasteryRequest :
     IGetsAll<AccountMastery>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountMastery;

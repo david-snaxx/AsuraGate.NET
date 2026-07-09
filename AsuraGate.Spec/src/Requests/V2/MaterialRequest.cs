@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class MaterialRequest :
+public sealed class MaterialRequest :
     IGetsSingle<MaterialCategory, int>,
     IGetsBulk<MaterialCategory, int>,
     IGetsAll<MaterialCategory>,

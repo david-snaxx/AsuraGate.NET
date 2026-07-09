@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountFinisherRequest :
+public sealed class AccountFinisherRequest :
     IGetsSingle<AccountFinisher, int>,
     IGetsBulk<AccountFinisher, int>,
     IGetsAll<AccountFinisher>

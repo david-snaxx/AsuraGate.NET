@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class EmoteRequest :
+public sealed class EmoteRequest :
     IGetsSingle<Emote, int>,
     IGetsBulk<Emote, int>,
     IGetsAll<Emote>,

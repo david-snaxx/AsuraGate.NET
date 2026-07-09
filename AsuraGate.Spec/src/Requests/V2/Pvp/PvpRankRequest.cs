@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Pvp;
 
-public class PvpRankRequest :
+public sealed class PvpRankRequest :
     IGetsSingle<PvpRank, int>,
     IGetsBulk<PvpRank, int>,
     IGetsAll<PvpRank>,

@@ -3,7 +3,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Wvw;
 
-public class WvwEuGuildsRequest :
+public sealed class WvwEuGuildsRequest :
     IGetsSingleNoId<IDictionary<string, string>>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WvwGuildEu;

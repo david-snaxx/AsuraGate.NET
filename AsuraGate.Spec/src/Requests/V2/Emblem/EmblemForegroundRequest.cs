@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Emblem;
 
-public class EmblemForegroundRequest :
+public sealed class EmblemForegroundRequest :
     IGetsSingle<EmblemComponent, int>,
     IGetsBulk<EmblemComponent, int>,
     IGetsAll<EmblemComponent>,

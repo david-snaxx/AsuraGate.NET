@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Account;
 
-public class AccountHomesteadDecorationRequest :
+public sealed class AccountHomesteadDecorationRequest :
     IGetsSingle<AccountHomesteadDecoration, int>,
     IGetsBulk<AccountHomesteadDecoration, int>,
     IGetsAll<AccountHomesteadDecoration>

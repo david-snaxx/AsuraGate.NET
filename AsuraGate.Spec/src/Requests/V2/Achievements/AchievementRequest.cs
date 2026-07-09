@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Achievements;
 
-public class AchievementRequest :
+public sealed class AchievementRequest :
     IGetsSingle<Achievement, int>,
     IGetsBulk<Achievement, int>,
     IGetsAll<Achievement>,

@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class DungeonRequest :
+public sealed class DungeonRequest :
     IGetsSingle<Dungeon, string>,
     IGetsBulk<Dungeon, string>,
     IGetsAll<Dungeon>,

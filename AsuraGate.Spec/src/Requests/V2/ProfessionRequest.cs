@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class ProfessionRequest :
+public sealed class ProfessionRequest :
     IGetsSingle<Profession, string>,
     IGetsBulk<Profession, string>,
     IGetsAll<Profession>,

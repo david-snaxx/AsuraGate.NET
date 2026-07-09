@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Character;
 
-public class CharacterEquipmentTabRequest :
+public sealed class CharacterEquipmentTabRequest :
     IGetsSingle<CharacterEquipmentTab, int>,
     IGetsBulk<CharacterEquipmentTab, int>,
     IGetsAll<CharacterEquipmentTab>,

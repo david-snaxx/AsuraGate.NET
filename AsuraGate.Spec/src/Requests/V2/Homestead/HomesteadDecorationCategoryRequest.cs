@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Homestead;
 
-public class HomesteadDecorationCategoryRequest :
+public sealed class HomesteadDecorationCategoryRequest :
     IGetsSingle<HomesteadDecorationCategory, int>,
     IGetsBulk<HomesteadDecorationCategory, int>,
     IGetsAll<HomesteadDecorationCategory>,

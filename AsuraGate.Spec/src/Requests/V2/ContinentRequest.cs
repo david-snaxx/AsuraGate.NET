@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2;
 
-public class ContinentRequest :
+public sealed class ContinentRequest :
     IGetsSingle<Continent, int>,
     IGetsBulk<Continent, int>,
     IGetsAll<Continent>,

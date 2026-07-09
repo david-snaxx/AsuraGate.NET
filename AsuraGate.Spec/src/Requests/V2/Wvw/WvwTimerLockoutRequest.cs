@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.Wvw;
 
-public class WvwTimerLockoutRequest :
+public sealed class WvwTimerLockoutRequest :
     IGetsSingleNoId<WvwTimer>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WvwTimersLockout;
