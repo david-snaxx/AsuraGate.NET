@@ -5,4 +5,7 @@
 /// </summary>
 /// <typeparam name="TModel">The GW2 API model type returned by this endpoint.</typeparam>
 /// <typeparam name="TId">The ID type for this endpoint; typically a string or integer.</typeparam>
-public interface IGetsSingle<TModel, TId> : IGw2ApiRequest<TModel>;
+public interface IGetsSingle<TModel, TId> : IGw2ApiRequest<TModel>
+{
+    string SingleIdParamName => "id";
+}

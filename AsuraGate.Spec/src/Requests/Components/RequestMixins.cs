@@ -8,7 +8,7 @@ public static class ClientMixins
         return new ExecutableGw2ApiRequest<TModel>
         {
             BaseRequest = request, 
-            ExtraQueryParameters = [new KeyValuePair<string, string>("id", id.ToString()!)]
+            ExtraQueryParameters = [new KeyValuePair<string, string>(request.SingleIdParamName, id.ToString()!)]
         };
     }
 
@@ -27,7 +27,7 @@ public static class ClientMixins
         return new ExecutableGw2ApiRequest<IEnumerable<TModel>>
         {
             BaseRequest = request, 
-            ExtraQueryParameters = [new KeyValuePair<string, string>("ids", string.Join(",", ids))]
+            ExtraQueryParameters = [new KeyValuePair<string, string>(request.BulkIdParamName, string.Join(",", ids))]
         };
     }
 

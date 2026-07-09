@@ -86,7 +86,11 @@ public static class Gw2ApiEndpointUrl
     public const string CommercePrice = Base + "/v2/commerce/pricing";
     public const string CommerceTransaction = Base + "/v2/commerce/transactions";
     public const string CommerceTransactionsCurrent = Base + "/v2/commerce/transactions/current";
+    public const string CommerceTransactionsCurrentBuys = Base + "/v2/commerce/transactions/current/buys";
+    public const string CommerceTransactionsCurrentSells = Base + "/v2/commerce/transactions/current/sells";
     public const string CommerceTransactionsHistory = Base + "/v2/commerce/transactions/history";
+    public const string CommerceTransactionsHistoryBuys = Base + "/v2/commerce/transactions/history/buys";
+    public const string CommerceTransactionsHistorySells = Base + "/v2/commerce/transactions/history/sells";
     public const string Continent = Base + "/v2/continents";
     public const string CreateSubtoken = Base + "/v2/createsubtoken";
     public const string Currency = Base + "/v2/currencies";
