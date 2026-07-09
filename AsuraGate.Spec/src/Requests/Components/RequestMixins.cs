@@ -1,4 +1,4 @@
-﻿namespace AsuraGate.Gateway.Requests.Components;
+﻿namespace AsuraGate.Spec.Requests.Components;
 
 public static class ClientMixins
 {

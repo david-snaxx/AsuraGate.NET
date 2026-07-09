@@ -1,4 +1,4 @@
-﻿namespace AsuraGate.Gateway.Requests.Components;
+﻿namespace AsuraGate.Spec.Requests.Components;
 
 /// <summary>
 /// Represents a request capability signaling that the request can fetch for all valid IDs for the given endpoint.

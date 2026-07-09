@@ -12,6 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="src\Requests\V2\" />
+      <Folder Include="src\" />
     </ItemGroup>
 </Project>

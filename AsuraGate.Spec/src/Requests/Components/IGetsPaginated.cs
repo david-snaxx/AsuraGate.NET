@@ -1,4 +1,4 @@
-﻿namespace AsuraGate.Gateway.Requests.Components;
+﻿namespace AsuraGate.Spec.Requests.Components;
 
 /// <summary>
 /// Represents a request capability signaling that the request can fetch for a paginated set of resources from the given endpoint.
