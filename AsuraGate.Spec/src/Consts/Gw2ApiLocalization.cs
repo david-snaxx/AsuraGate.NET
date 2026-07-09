@@ -1,4 +1,4 @@
-﻿namespace AsuraGate.Fetch.Constant;
+﻿namespace AsuraGate.Spec.Consts;
 
 /// <summary>
 /// Defines string constants for GW2 API supported languages.
