@@ -5,9 +5,9 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Home;
 
 public class HomeCatRequest :
-    IGetsSingle<CommerceTransaction, int>,
-    IGetsBulk<CommerceTransaction, int>,
-    IGetsAll<CommerceTransaction>,
+    IGetsSingle<HomeCat, int>,
+    IGetsBulk<HomeCat, int>,
+    IGetsAll<HomeCat>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.HomeCat;
