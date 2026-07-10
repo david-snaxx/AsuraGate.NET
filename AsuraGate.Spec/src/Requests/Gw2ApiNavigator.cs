@@ -103,6 +103,7 @@ public class Gw2ApiNavigator
                 public static CharacterSabRequest Sab(string characterName) => new(characterName);
                 public static CharacterSkillsRequest Skills(string characterName) => new(characterName);
                 public static CharacterSpecializationsRequest Specializations(string characterName) => new(characterName);
+                public static CharacterTrainingRequest Training(string characterName) => new(characterName);
             }
 
             public static class Commerce
@@ -190,6 +191,7 @@ public class Gw2ApiNavigator
                 public static WvwTimerTeamAssignmentRequest TimerTeamAssignment => new();
                 public static WvwEuGuildsRequest EuGuilds => new();
                 public static WvwNaGuildsRequest NaGuilds => new();
+                public static WvwUpgradeRequest Upgrade => new();
             }
             
             public static BuildRequest Build => new();
