@@ -1,5 +1,6 @@
 ﻿using AsuraGate.Spec.Consts;
 using AsuraGate.Spec.Models.V2;
+using AsuraGate.Spec.Models.V2.WizardsVault;
 using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Spec.Requests.V2.WizardsVault;

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.Spec", "AsuraGate
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.Gateway", "AsuraGate.Gateway\AsuraGate.Gateway.csproj", "{17F66960-76F0-4E5B-AF8A-9998C63C6B80}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.StaticCache", "AsuraGate.StaticCache\AsuraGate.StaticCache.csproj", "{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

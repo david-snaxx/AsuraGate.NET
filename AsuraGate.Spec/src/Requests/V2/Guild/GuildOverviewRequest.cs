@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Guild;
 
 public sealed class GuildOverviewRequest :
-    IGetsSingleNoId<Models.V2.Guild>
+    IGetsSingleNoId<Models.V2.Guild.Guild>
 {
     public string EndpointUrl { get; }
     public bool IsAuthenticated { get; } = true;
