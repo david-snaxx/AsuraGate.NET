@@ -14,6 +14,6 @@ public sealed class GuildOverviewRequest :
     {
         if (string.IsNullOrWhiteSpace(guildId))
             throw new ArgumentException("Guild ID cannot be null or empty.", nameof(guildId));
-        EndpointUrl = Gw2ApiEndpointUrl.Guild.Replace("{id}", Uri.EscapeDataString(guildId));
+        EndpointUrl = Gw2ApiEndpointUrl.GuildOverview.Replace("{id}", Uri.EscapeDataString(guildId));
     }
 }

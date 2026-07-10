@@ -12,5 +12,5 @@ public sealed class PvpSeasonRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.PvpSeason;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

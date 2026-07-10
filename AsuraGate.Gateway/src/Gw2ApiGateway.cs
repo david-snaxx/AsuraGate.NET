@@ -10,12 +10,7 @@ public class Gw2ApiGateway
     private string SchemaVersion { get; }
     private readonly Gw2ApiService _gw2ApiService = Gw2ApiService.Instance;
 
-    public Gw2ApiGateway(string apiKey)
-        : this(apiKey, Gw2ApiLocalization.English, Gw2ApiSchemaVersion.Latest)
-    {
-    }
-
-    public Gw2ApiGateway(string apiKey, string localization, string schemaVersion)
+    public Gw2ApiGateway(string apiKey, string localization = Gw2ApiLocalization.English, string schemaVersion = Gw2ApiSchemaVersion.Latest)
     {
         ApiKey = apiKey;
         Localization = localization;

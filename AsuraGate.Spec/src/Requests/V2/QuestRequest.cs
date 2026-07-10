@@ -12,5 +12,5 @@ public sealed class QuestRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Quest;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

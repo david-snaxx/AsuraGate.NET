@@ -12,5 +12,5 @@ public sealed class CurrencyRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Currency;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

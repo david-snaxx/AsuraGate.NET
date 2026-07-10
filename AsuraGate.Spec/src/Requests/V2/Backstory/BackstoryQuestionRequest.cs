@@ -12,5 +12,5 @@ public sealed class BackstoryQuestionRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.BackstoryQuestion;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

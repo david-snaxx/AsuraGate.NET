@@ -12,5 +12,5 @@ public sealed class GuildUpgradesRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.GuildUpgrade;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

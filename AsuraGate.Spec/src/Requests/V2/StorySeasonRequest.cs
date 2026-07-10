@@ -12,5 +12,5 @@ public sealed class StorySeasonRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.StorySeason;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

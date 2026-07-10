@@ -12,5 +12,5 @@ public sealed class GliderRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Glider;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

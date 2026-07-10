@@ -12,5 +12,5 @@ public sealed class SkillRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Skill;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

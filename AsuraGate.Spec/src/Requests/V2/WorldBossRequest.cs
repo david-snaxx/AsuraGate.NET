@@ -8,5 +8,5 @@ public sealed class WorldBossRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WorldBoss;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

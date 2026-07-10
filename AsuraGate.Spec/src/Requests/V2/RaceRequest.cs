@@ -12,5 +12,5 @@ public sealed class RaceRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Race;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

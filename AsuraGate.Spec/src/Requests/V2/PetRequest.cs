@@ -12,5 +12,5 @@ public sealed class PetRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Pet;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

@@ -12,5 +12,5 @@ public sealed class JadeBotRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.JadeBot;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

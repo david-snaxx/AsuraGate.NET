@@ -12,5 +12,5 @@ public sealed class WvwAbilityRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WvwAbility;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

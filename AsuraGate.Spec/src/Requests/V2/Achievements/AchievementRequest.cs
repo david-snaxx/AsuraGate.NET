@@ -12,5 +12,5 @@ public sealed class AchievementRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Achievement;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

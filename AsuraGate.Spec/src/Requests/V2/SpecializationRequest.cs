@@ -12,5 +12,5 @@ public sealed class SpecializationRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Specialization;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

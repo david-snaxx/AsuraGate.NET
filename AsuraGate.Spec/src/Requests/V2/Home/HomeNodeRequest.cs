@@ -8,5 +8,5 @@ public sealed class HomeNodeRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.HomeNode;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

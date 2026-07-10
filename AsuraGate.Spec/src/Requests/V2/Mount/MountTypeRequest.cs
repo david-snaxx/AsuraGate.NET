@@ -12,5 +12,5 @@ public sealed class MountTypeRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.MountType;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

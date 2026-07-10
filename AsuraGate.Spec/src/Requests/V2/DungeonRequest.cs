@@ -12,5 +12,5 @@ public sealed class DungeonRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Dungeon;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

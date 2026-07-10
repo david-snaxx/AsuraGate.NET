@@ -12,5 +12,5 @@ public sealed class RaidRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Raid;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

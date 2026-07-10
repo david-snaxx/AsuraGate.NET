@@ -12,5 +12,5 @@ public sealed class StoryRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Story;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

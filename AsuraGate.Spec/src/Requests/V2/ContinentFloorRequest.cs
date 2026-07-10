@@ -12,7 +12,7 @@ public sealed class ContinentFloorRequest :
 {
     public string EndpointUrl { get; }
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
     
     public ContinentFloorRequest(int continentId)
     {

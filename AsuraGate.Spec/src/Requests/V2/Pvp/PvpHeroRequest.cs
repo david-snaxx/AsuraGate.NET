@@ -12,5 +12,5 @@ public sealed class PvpHeroRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.PvpHero;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

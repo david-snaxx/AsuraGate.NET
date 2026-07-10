@@ -12,5 +12,5 @@ public sealed class MapRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Map;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

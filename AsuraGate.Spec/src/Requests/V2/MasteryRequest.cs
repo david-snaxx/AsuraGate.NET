@@ -12,5 +12,5 @@ public sealed class MasteryRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Mastery;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

@@ -12,5 +12,5 @@ public sealed class MailCarrierRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.MailCarrier;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

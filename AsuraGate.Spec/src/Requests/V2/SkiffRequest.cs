@@ -12,5 +12,5 @@ public sealed class SkiffRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Skiff;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

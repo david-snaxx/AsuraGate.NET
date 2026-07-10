@@ -8,5 +8,5 @@ public sealed class DailyCraftingRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.DailyCrafting;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

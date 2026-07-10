@@ -12,5 +12,5 @@ public sealed class ItemRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Item;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

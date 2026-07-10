@@ -12,5 +12,5 @@ public sealed class TraitRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Trait;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }

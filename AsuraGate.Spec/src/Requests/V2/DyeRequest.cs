@@ -12,5 +12,5 @@ public sealed class DyeRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Dye;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }
