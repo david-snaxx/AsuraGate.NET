@@ -1,7 +1,14 @@
+using System.Net.Http.Headers;
 using System.Text.Json;
 using AsuraGate.Spec.Requests.Components;
 
 namespace AsuraGate.Gateway;
+
+/// <summary>
+/// Global, per-caller values that apply to every request regardless of endpoint shape.
+/// Sent as headers so they never become part of the request URI.
+/// </summary>
+public sealed record Gw2ApiRequestContext(string? ApiKey = null, string? Localization = null, string? SchemaVersion = null);
 
 public class Gw2ApiService
 {
@@ -16,18 +23,20 @@ public class Gw2ApiService
 
     public async Task<TModel?> GetAsync<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
+        Gw2ApiRequestContext? context = null,
         CancellationToken cancellationToken = default)
     {
-        if (request.IsGetAllRequest) return await HandleGetAllRequest(request, cancellationToken);
+        if (request.IsGetAllRequest) return await HandleGetAllRequest(request, context, cancellationToken);
 
         int idCount = request.IdValues.Count();
-        if (idCount == 1) return await HandleSingleRequest(request, cancellationToken);
-        if (idCount > 1) return await HandleBulkRequest(request, request.IdValues, request.IdParamKey, cancellationToken);
-        return await HandleNoIdRequest(request, cancellationToken);
+        if (idCount == 1) return await HandleSingleRequest(request, context, cancellationToken);
+        if (idCount > 1) return await HandleBulkRequest(request, request.IdValues, request.IdParamKey, context, cancellationToken);
+        return await HandleNoIdRequest(request, context, cancellationToken);
     }
 
     private async Task<TModel?> HandleSingleRequest<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
+        Gw2ApiRequestContext? context,
         CancellationToken cancellationToken = default)
     {
         TId firstId = request.IdValues.First();
@@ -36,22 +45,24 @@ public class Gw2ApiService
 
         IEnumerable<KeyValuePair<string, string>> queryParams = request.ExtraQueryParams.Union([idParam]);
         Uri uri = BuildUri(request.BaseRequest.EndpointUrl, queryParams);
-        return await FetchOneAsync<TModel>(uri, cancellationToken);
+        return await FetchOneAsync<TModel>(uri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, cancellationToken);
     }
 
     // Requests that need no ID at all (e.g. GetObject, GetPage, GuildMixins.Search, CommerceMixins.Calculate)
     private async Task<TModel?> HandleNoIdRequest<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
+        Gw2ApiRequestContext? context,
         CancellationToken cancellationToken = default)
     {
         Uri uri = BuildUri(request.BaseRequest.EndpointUrl, request.ExtraQueryParams);
-        return await FetchOneAsync<TModel>(uri, cancellationToken);
+        return await FetchOneAsync<TModel>(uri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, cancellationToken);
     }
 
     private async Task<TModel?> HandleBulkRequest<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
         IEnumerable<TId> idValues,
         string idParamKey,
+        Gw2ApiRequestContext? context,
         CancellationToken cancellationToken = default)
     {
         List<Uri> uris = idValues.Chunk(200)
@@ -60,25 +71,28 @@ public class Gw2ApiService
                 request.ExtraQueryParams.Union([new KeyValuePair<string, string>(idParamKey, string.Join(",", idBatch))])))
             .ToList();
 
-        return await FetchAndMergeAsync<TModel>(uris, cancellationToken);
+        return await FetchAndMergeAsync<TModel>(uris, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, cancellationToken);
     }
 
     private async Task<TModel?> HandleGetAllRequest<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
+        Gw2ApiRequestContext? context,
         CancellationToken cancellationToken = default)
     {
         // Calling the endpoint with no id params returns just the list of all valid ids;
         // the full objects have to be fetched afterwards via a chunked bulk request.
         Uri idsUri = BuildUri(request.BaseRequest.EndpointUrl, request.ExtraQueryParams);
-        IEnumerable<TId>? ids = await FetchOneAsync<IEnumerable<TId>>(idsUri, cancellationToken);
+        IEnumerable<TId>? ids = await FetchOneAsync<IEnumerable<TId>>(
+            idsUri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, cancellationToken);
         if (ids is null) return default;
 
-        return await HandleBulkRequest(request, ids, "ids", cancellationToken);
+        return await HandleBulkRequest(request, ids, "ids", context, cancellationToken);
     }
 
-    private async Task<TModel?> FetchOneAsync<TModel>(Uri uri, CancellationToken cancellationToken)
+    private async Task<TModel?> FetchOneAsync<TModel>(
+        Uri uri, bool isAuthenticated, bool isLocalized, Gw2ApiRequestContext? context, CancellationToken cancellationToken)
     {
-        HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
+        HttpRequestMessage requestMessage = BuildRequestMessage(uri, isAuthenticated, isLocalized, context);
         HttpResponseMessage response = await ExecuteHttpRequestAsync(requestMessage, cancellationToken);
         response.EnsureSuccessStatusCode();
         return await JsonSerializer.DeserializeAsync<TModel>(
@@ -87,12 +101,14 @@ public class Gw2ApiService
 
     // Each uri returns its own JSON array (the GW2 API caps id lists at 200 per call); when more than
     // one batch is needed the arrays are concatenated before being deserialized as a single TModel.
-    private async Task<TModel?> FetchAndMergeAsync<TModel>(List<Uri> uris, CancellationToken cancellationToken)
+    private async Task<TModel?> FetchAndMergeAsync<TModel>(
+        List<Uri> uris, bool isAuthenticated, bool isLocalized, Gw2ApiRequestContext? context, CancellationToken cancellationToken)
     {
         if (uris.Count == 0) return await DeserializeAsync<TModel>("[]", cancellationToken);
-        if (uris.Count == 1) return await FetchOneAsync<TModel>(uris[0], cancellationToken);
+        if (uris.Count == 1) return await FetchOneAsync<TModel>(uris[0], isAuthenticated, isLocalized, context, cancellationToken);
 
-        IEnumerable<HttpRequestMessage> requests = uris.Select(uri => new HttpRequestMessage(HttpMethod.Get, uri));
+        IEnumerable<HttpRequestMessage> requests = uris.Select(uri =>
+            BuildRequestMessage(uri, isAuthenticated, isLocalized, context));
         HttpResponseMessage[] responses = await Task.WhenAll(requests.Select(r => ExecuteHttpRequestAsync(r, cancellationToken)));
 
         List<JsonElement> mergedElements = new List<JsonElement>();
@@ -129,6 +145,23 @@ public class Gw2ApiService
             $"{baseUrl}?{string.Join("&", queryParams.Select(qp =>
                 $"{Uri.EscapeDataString(qp.Key)}={Uri.EscapeDataString(qp.Value)}"))}"
         );
+    }
+
+    private HttpRequestMessage BuildRequestMessage(Uri uri, bool isAuthenticated, bool isLocalized, Gw2ApiRequestContext? context)
+    {
+        HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, uri);
+        if (context is null) return requestMessage;
+
+        if (isAuthenticated && !string.IsNullOrEmpty(context.ApiKey))
+            requestMessage.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.ApiKey);
+
+        if (isLocalized && !string.IsNullOrEmpty(context.Localization))
+            requestMessage.Headers.AcceptLanguage.Add(new StringWithQualityHeaderValue(context.Localization));
+
+        if (!string.IsNullOrEmpty(context.SchemaVersion))
+            requestMessage.Headers.Add("X-Schema-Version", context.SchemaVersion);
+
+        return requestMessage;
     }
 
     private async Task<HttpResponseMessage> ExecuteHttpRequestAsync(HttpRequestMessage requestMessage,
