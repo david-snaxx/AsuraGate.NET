@@ -1,7 +1,10 @@
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using AsuraGate.Spec.Requests.Components;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace AsuraGate.Gateway;
 
@@ -36,19 +39,55 @@ public class Gw2ApiService
     public async Task<TModel?> GetAsync<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
         Gw2ApiRequestContext? context = null,
+        ILogger? logger = null,
         CancellationToken cancellationToken = default)
     {
-        if (request.IsGetAllRequest) return await HandleGetAllRequest(request, context, cancellationToken);
+        logger ??= NullLogger.Instance;
+        string endpoint = request.BaseRequest.EndpointUrl;
+        Stopwatch stopwatch = Stopwatch.StartNew();
 
-        int idCount = request.IdValues.Count();
-        if (idCount == 1) return await HandleSingleRequest(request, context, cancellationToken);
-        if (idCount > 1) return await HandleBulkRequest(request, request.IdValues, request.IdParamKey, context, cancellationToken);
-        return await HandleNoIdRequest(request, context, cancellationToken);
+        try
+        {
+            TModel? result;
+            if (request.IsGetAllRequest)
+            {
+                logger.LogInformation("Starting get-all request for {Endpoint}", endpoint);
+                result = await HandleGetAllRequest(request, context, logger, cancellationToken);
+            }
+            else
+            {
+                int idCount = request.IdValues.Count();
+                if (idCount == 1)
+                {
+                    logger.LogInformation("Starting single request for {Endpoint}", endpoint);
+                    result = await HandleSingleRequest(request, context, logger, cancellationToken);
+                }
+                else if (idCount > 1)
+                {
+                    logger.LogInformation("Starting bulk request for {Endpoint} ({IdCount} ids)", endpoint, idCount);
+                    result = await HandleBulkRequest(request, request.IdValues, request.IdParamKey, context, logger, cancellationToken);
+                }
+                else
+                {
+                    logger.LogInformation("Starting no-id request for {Endpoint}", endpoint);
+                    result = await HandleNoIdRequest(request, context, logger, cancellationToken);
+                }
+            }
+
+            logger.LogInformation("Completed request for {Endpoint} in {ElapsedMs}ms", endpoint, stopwatch.ElapsedMilliseconds);
+            return result;
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Request for {Endpoint} failed after {ElapsedMs}ms", endpoint, stopwatch.ElapsedMilliseconds);
+            throw;
+        }
     }
 
     private async Task<TModel?> HandleSingleRequest<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
         Gw2ApiRequestContext? context,
+        ILogger logger,
         CancellationToken cancellationToken = default)
     {
         TId firstId = request.IdValues.First();
@@ -57,17 +96,18 @@ public class Gw2ApiService
 
         IEnumerable<KeyValuePair<string, string>> queryParams = request.ExtraQueryParams.Union([idParam]);
         Uri uri = BuildUri(request.BaseRequest.EndpointUrl, queryParams);
-        return await FetchOneAsync<TModel>(uri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, cancellationToken);
+        return await FetchOneAsync<TModel>(uri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, logger, cancellationToken);
     }
 
     // Requests that need no ID at all (e.g. GetObject, GetPage, GuildMixins.Search, CommerceMixins.Calculate)
     private async Task<TModel?> HandleNoIdRequest<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
         Gw2ApiRequestContext? context,
+        ILogger logger,
         CancellationToken cancellationToken = default)
     {
         Uri uri = BuildUri(request.BaseRequest.EndpointUrl, request.ExtraQueryParams);
-        return await FetchOneAsync<TModel>(uri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, cancellationToken);
+        return await FetchOneAsync<TModel>(uri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, logger, cancellationToken);
     }
 
     private async Task<TModel?> HandleBulkRequest<TModel, TId>(
@@ -75,6 +115,7 @@ public class Gw2ApiService
         IEnumerable<TId> idValues,
         string idParamKey,
         Gw2ApiRequestContext? context,
+        ILogger logger,
         CancellationToken cancellationToken = default)
     {
         List<Uri> uris = idValues.Chunk(200)
@@ -83,29 +124,41 @@ public class Gw2ApiService
                 request.ExtraQueryParams.Union([new KeyValuePair<string, string>(idParamKey, string.Join(",", idBatch))])))
             .ToList();
 
-        return await FetchAndMergeAsync<TModel>(uris, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, cancellationToken);
+        logger.LogInformation("Bulk request for {Endpoint} split into {ChunkCount} chunk(s) of up to 200 ids",
+            request.BaseRequest.EndpointUrl, uris.Count);
+
+        return await FetchAndMergeAsync<TModel>(uris, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, logger, cancellationToken);
     }
 
     private async Task<TModel?> HandleGetAllRequest<TModel, TId>(
         IExecutableGw2ApiRequest<TModel, TId> request,
         Gw2ApiRequestContext? context,
+        ILogger logger,
         CancellationToken cancellationToken = default)
     {
         // Calling the endpoint with no id params returns just the list of all valid ids;
         // the full objects have to be fetched afterwards via a chunked bulk request.
+        logger.LogInformation("Fetching all ids for {Endpoint} before bulk-fetching objects", request.BaseRequest.EndpointUrl);
         Uri idsUri = BuildUri(request.BaseRequest.EndpointUrl, request.ExtraQueryParams);
         IEnumerable<TId>? ids = await FetchOneAsync<IEnumerable<TId>>(
-            idsUri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, cancellationToken);
-        if (ids is null) return default;
+            idsUri, request.BaseRequest.IsAuthenticated, request.BaseRequest.IsLocalized, context, logger, cancellationToken);
+        if (ids is null)
+        {
+            logger.LogWarning("Id list for {Endpoint} came back null; returning default", request.BaseRequest.EndpointUrl);
+            return default;
+        }
 
-        return await HandleBulkRequest(request, ids, "ids", context, cancellationToken);
+        List<TId> idList = ids.ToList();
+        logger.LogInformation("Retrieved {IdCount} ids for {Endpoint}", idList.Count, request.BaseRequest.EndpointUrl);
+
+        return await HandleBulkRequest(request, idList, "ids", context, logger, cancellationToken);
     }
 
     private async Task<TModel?> FetchOneAsync<TModel>(
-        Uri uri, bool isAuthenticated, bool isLocalized, Gw2ApiRequestContext? context, CancellationToken cancellationToken)
+        Uri uri, bool isAuthenticated, bool isLocalized, Gw2ApiRequestContext? context, ILogger logger, CancellationToken cancellationToken)
     {
         HttpResponseMessage response = await ExecuteHttpRequestAsync(
-            () => BuildRequestMessage(uri, isAuthenticated, isLocalized, context), cancellationToken);
+            () => BuildRequestMessage(uri, isAuthenticated, isLocalized, context), uri, logger, cancellationToken);
         response.EnsureSuccessStatusCode();
         return await JsonSerializer.DeserializeAsync<TModel>(
             await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
@@ -114,13 +167,17 @@ public class Gw2ApiService
     // Each uri returns its own JSON array (the GW2 API caps id lists at 200 per call); when more than
     // one batch is needed the arrays are concatenated before being deserialized as a single TModel.
     private async Task<TModel?> FetchAndMergeAsync<TModel>(
-        List<Uri> uris, bool isAuthenticated, bool isLocalized, Gw2ApiRequestContext? context, CancellationToken cancellationToken)
+        List<Uri> uris, bool isAuthenticated, bool isLocalized, Gw2ApiRequestContext? context, ILogger logger, CancellationToken cancellationToken)
     {
-        if (uris.Count == 0) return await DeserializeAsync<TModel>("[]", cancellationToken);
-        if (uris.Count == 1) return await FetchOneAsync<TModel>(uris[0], isAuthenticated, isLocalized, context, cancellationToken);
+        if (uris.Count == 0)
+        {
+            logger.LogInformation("No ids to fetch; returning an empty result");
+            return await DeserializeAsync<TModel>("[]", cancellationToken);
+        }
+        if (uris.Count == 1) return await FetchOneAsync<TModel>(uris[0], isAuthenticated, isLocalized, context, logger, cancellationToken);
 
         HttpResponseMessage[] responses = await Task.WhenAll(uris.Select(uri =>
-            ExecuteHttpRequestAsync(() => BuildRequestMessage(uri, isAuthenticated, isLocalized, context), cancellationToken)));
+            ExecuteHttpRequestAsync(() => BuildRequestMessage(uri, isAuthenticated, isLocalized, context), uri, logger, cancellationToken)));
 
         List<JsonElement> mergedElements = new List<JsonElement>();
         foreach (HttpResponseMessage response in responses)
@@ -130,6 +187,9 @@ public class Gw2ApiService
                 await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
             mergedElements.AddRange(document.RootElement.EnumerateArray().Select(e => e.Clone()));
         }
+
+        logger.LogInformation("Merged {ChunkCount} chunk response(s) into {ElementCount} total element(s)",
+            responses.Length, mergedElements.Count);
 
         using MemoryStream stream = new MemoryStream();
         using (Utf8JsonWriter writer = new Utf8JsonWriter(stream))
@@ -176,12 +236,20 @@ public class Gw2ApiService
     }
 
     private async Task<HttpResponseMessage> ExecuteHttpRequestAsync(
-        Func<HttpRequestMessage> requestFactory, CancellationToken cancellationToken)
+        Func<HttpRequestMessage> requestFactory, Uri uri, ILogger logger, CancellationToken cancellationToken)
     {
+        int available = _concurrencyLimiter.CurrentCount;
+        Stopwatch waitStopwatch = Stopwatch.StartNew();
+        if (available == 0)
+            logger.LogInformation("All {MaxConcurrentRequests} request slots busy; queuing {Uri}", MaxConcurrentRequests, uri);
+
         await _concurrencyLimiter.WaitAsync(cancellationToken);
         try
         {
-            return await SendWithRetryAsync(requestFactory, cancellationToken);
+            if (waitStopwatch.ElapsedMilliseconds > 10)
+                logger.LogInformation("{Uri} waited {WaitMs}ms for a free request slot", uri, waitStopwatch.ElapsedMilliseconds);
+
+            return await SendWithRetryAsync(requestFactory, uri, logger, cancellationToken);
         }
         finally
         {
@@ -190,33 +258,72 @@ public class Gw2ApiService
     }
 
     private async Task<HttpResponseMessage> SendWithRetryAsync(
-        Func<HttpRequestMessage> requestFactory, CancellationToken cancellationToken)
+        Func<HttpRequestMessage> requestFactory, Uri uri, ILogger logger, CancellationToken cancellationToken)
     {
         for (int attempt = 0; ; attempt++)
         {
+            Stopwatch attemptStopwatch = Stopwatch.StartNew();
+            logger.LogInformation("Sending GET {Uri} (attempt {Attempt}/{MaxAttempts})", uri, attempt + 1, MaxRetries + 1);
+
             HttpResponseMessage response;
             try
             {
                 response = await _httpClient.SendAsync(requestFactory(), cancellationToken);
             }
-            catch (HttpRequestException) when (attempt < MaxRetries)
+            catch (HttpRequestException ex) when (attempt < MaxRetries)
             {
-                await DelayBeforeRetryAsync(attempt, cancellationToken);
+                TimeSpan delay = GetRetryDelay(attempt);
+                logger.LogWarning(ex, "Network error sending {Uri} after {ElapsedMs}ms (attempt {Attempt}); retrying in {DelayMs}ms",
+                    uri, attemptStopwatch.ElapsedMilliseconds, attempt + 1, delay.TotalMilliseconds);
+                await Task.Delay(delay, cancellationToken);
                 continue;
             }
 
-            bool isRetryable = response.StatusCode == HttpStatusCode.TooManyRequests || (int)response.StatusCode >= 500;
-            if (!isRetryable || attempt >= MaxRetries) return response;
+            if (response.StatusCode == HttpStatusCode.TooManyRequests)
+            {
+                if (attempt >= MaxRetries)
+                {
+                    logger.LogError("Rate limit hit for {Uri} and retries exhausted after {Attempts} attempt(s), {ElapsedMs}ms",
+                        uri, attempt + 1, attemptStopwatch.ElapsedMilliseconds);
+                    return response;
+                }
+                TimeSpan delay = GetRetryDelay(attempt);
+                logger.LogWarning("Rate limit (429) hit for {Uri} (attempt {Attempt}); backing off {DelayMs}ms before retry",
+                    uri, attempt + 1, delay.TotalMilliseconds);
+                response.Dispose();
+                await Task.Delay(delay, cancellationToken);
+                continue;
+            }
 
-            response.Dispose();
-            await DelayBeforeRetryAsync(attempt, cancellationToken);
+            if ((int)response.StatusCode >= 500 && attempt < MaxRetries)
+            {
+                TimeSpan delay = GetRetryDelay(attempt);
+                logger.LogWarning("Server error {StatusCode} for {Uri} after {ElapsedMs}ms (attempt {Attempt}); retrying in {DelayMs}ms",
+                    (int)response.StatusCode, uri, attemptStopwatch.ElapsedMilliseconds, attempt + 1, delay.TotalMilliseconds);
+                response.Dispose();
+                await Task.Delay(delay, cancellationToken);
+                continue;
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                logger.LogInformation("Succeeded {StatusCode} for {Uri} in {ElapsedMs}ms (attempt {Attempt})",
+                    (int)response.StatusCode, uri, attemptStopwatch.ElapsedMilliseconds, attempt + 1);
+            }
+            else
+            {
+                logger.LogError("Failed {StatusCode} for {Uri} after {ElapsedMs}ms (attempt {Attempt}, not retrying)",
+                    (int)response.StatusCode, uri, attemptStopwatch.ElapsedMilliseconds, attempt + 1);
+            }
+
+            return response;
         }
     }
 
-    private static async Task DelayBeforeRetryAsync(int attempt, CancellationToken cancellationToken)
+    private static TimeSpan GetRetryDelay(int attempt)
     {
         TimeSpan delay = BaseRetryDelay * Math.Pow(2, attempt);
         TimeSpan jitter = TimeSpan.FromMilliseconds(Random.Shared.Next(0, 250));
-        await Task.Delay(delay + jitter, cancellationToken);
+        return delay + jitter;
     }
 }
