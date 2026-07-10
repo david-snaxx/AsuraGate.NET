@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using AsuraGate.Spec.Requests.Components;
@@ -15,6 +16,17 @@ public class Gw2ApiService
     private static readonly Lazy<Gw2ApiService> _instance = new(() => new Gw2ApiService());
     public static Gw2ApiService Instance => _instance.Value;
     private readonly HttpClient _httpClient;
+
+    // GW2's rate limit is a token bucket: 300 burst, refilling at 5/sec (see API:Best_practices).
+    // A bulk/get-all request can fan out into hundreds of chunk requests fired at once; without a
+    // cap here that burst blows straight through the bucket and comes back as a wall of 429s.
+    private const int MaxConcurrentRequests = 10;
+    private readonly SemaphoreSlim _concurrencyLimiter = new(MaxConcurrentRequests);
+
+    // GW2 does not document a Retry-After header on 429s, so retries use blind exponential
+    // backoff (with jitter to avoid every stalled request retrying in lockstep) instead.
+    private const int MaxRetries = 5;
+    private static readonly TimeSpan BaseRetryDelay = TimeSpan.FromSeconds(1);
 
     private Gw2ApiService()
     {
@@ -92,8 +104,8 @@ public class Gw2ApiService
     private async Task<TModel?> FetchOneAsync<TModel>(
         Uri uri, bool isAuthenticated, bool isLocalized, Gw2ApiRequestContext? context, CancellationToken cancellationToken)
     {
-        HttpRequestMessage requestMessage = BuildRequestMessage(uri, isAuthenticated, isLocalized, context);
-        HttpResponseMessage response = await ExecuteHttpRequestAsync(requestMessage, cancellationToken);
+        HttpResponseMessage response = await ExecuteHttpRequestAsync(
+            () => BuildRequestMessage(uri, isAuthenticated, isLocalized, context), cancellationToken);
         response.EnsureSuccessStatusCode();
         return await JsonSerializer.DeserializeAsync<TModel>(
             await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
@@ -107,9 +119,8 @@ public class Gw2ApiService
         if (uris.Count == 0) return await DeserializeAsync<TModel>("[]", cancellationToken);
         if (uris.Count == 1) return await FetchOneAsync<TModel>(uris[0], isAuthenticated, isLocalized, context, cancellationToken);
 
-        IEnumerable<HttpRequestMessage> requests = uris.Select(uri =>
-            BuildRequestMessage(uri, isAuthenticated, isLocalized, context));
-        HttpResponseMessage[] responses = await Task.WhenAll(requests.Select(r => ExecuteHttpRequestAsync(r, cancellationToken)));
+        HttpResponseMessage[] responses = await Task.WhenAll(uris.Select(uri =>
+            ExecuteHttpRequestAsync(() => BuildRequestMessage(uri, isAuthenticated, isLocalized, context), cancellationToken)));
 
         List<JsonElement> mergedElements = new List<JsonElement>();
         foreach (HttpResponseMessage response in responses)
@@ -164,9 +175,48 @@ public class Gw2ApiService
         return requestMessage;
     }
 
-    private async Task<HttpResponseMessage> ExecuteHttpRequestAsync(HttpRequestMessage requestMessage,
-        CancellationToken cancellationToken)
+    private async Task<HttpResponseMessage> ExecuteHttpRequestAsync(
+        Func<HttpRequestMessage> requestFactory, CancellationToken cancellationToken)
     {
-        return await _httpClient.SendAsync(requestMessage, cancellationToken);
+        await _concurrencyLimiter.WaitAsync(cancellationToken);
+        try
+        {
+            return await SendWithRetryAsync(requestFactory, cancellationToken);
+        }
+        finally
+        {
+            _concurrencyLimiter.Release();
+        }
+    }
+
+    private async Task<HttpResponseMessage> SendWithRetryAsync(
+        Func<HttpRequestMessage> requestFactory, CancellationToken cancellationToken)
+    {
+        for (int attempt = 0; ; attempt++)
+        {
+            HttpResponseMessage response;
+            try
+            {
+                response = await _httpClient.SendAsync(requestFactory(), cancellationToken);
+            }
+            catch (HttpRequestException) when (attempt < MaxRetries)
+            {
+                await DelayBeforeRetryAsync(attempt, cancellationToken);
+                continue;
+            }
+
+            bool isRetryable = response.StatusCode == HttpStatusCode.TooManyRequests || (int)response.StatusCode >= 500;
+            if (!isRetryable || attempt >= MaxRetries) return response;
+
+            response.Dispose();
+            await DelayBeforeRetryAsync(attempt, cancellationToken);
+        }
+    }
+
+    private static async Task DelayBeforeRetryAsync(int attempt, CancellationToken cancellationToken)
+    {
+        TimeSpan delay = BaseRetryDelay * Math.Pow(2, attempt);
+        TimeSpan jitter = TimeSpan.FromMilliseconds(Random.Shared.Next(0, 250));
+        await Task.Delay(delay + jitter, cancellationToken);
     }
 }

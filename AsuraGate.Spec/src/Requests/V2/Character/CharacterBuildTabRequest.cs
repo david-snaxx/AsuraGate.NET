@@ -5,10 +5,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Character;
 
 public sealed class CharacterBuildTabRequest :
-    IGetsSingle<CommerceTransaction, int>,
-    IGetsBulk<CommerceTransaction, int>,
-    IGetsAll<CommerceTransaction>,
-    IGetsIds<int>
+    IGetsSingleNoId<CharacterBuildTab>
 {
     public string EndpointUrl { get; }
     public bool IsAuthenticated { get; } = true;

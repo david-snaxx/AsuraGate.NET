@@ -62,8 +62,8 @@ public static class Gw2ApiEndpointUrl
     public const string BackstoryQuestion = Base + "/v2/backstory/questions";
     public const string Build = Base + "/v2/build";
     public const string Characters = Base + "/v2/characters";
-    public const string CharactersBackstory = Base + "/v2/characters//{id}backstory";
-    public const string CharactersBuildTab = Base + "/v2/characters//{id}buildtabs";
+    public const string CharactersBackstory = Base + "/v2/characters/{id}/backstory";
+    public const string CharactersBuildTab = Base + "/v2/characters/{id}/buildtabs";
     public const string CharactersCore = Base + "/v2/characters/{id}/core";
     public const string CharactersCrafting = Base + "/v2/characters/{id}/crafting";
     public const string CharactersEquipment = Base + "/v2/characters/{id}/equipment";
