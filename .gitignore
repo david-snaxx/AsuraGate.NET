@@ -1,0 +1,38 @@
+﻿##   JetBrains Rider / IntelliJ Specific Caches   ##
+.idea/
+*.ihp
+*.ids
+*.ipr
+*.iws
+*.impl
+*.com.jetbrains.rider.vcs.config.xml
+
+##   User-specific / Local Layout Configurations (Do Not Commit)   ##
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/contentModel.xml
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.xml
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+
+##   Rider / Resharper Build Artifacts   ##
+_ReSharper*/
+*.sln.DotSettings.user
+
+##   Build Outputs & Compilations   ##
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+##   OS Generated Files (Optional but Recommended)   ##
+.DS_Store
+Thumbs.db
+
+/AsuraGate.StaticCache.Tests/AsuraGate.StaticCache.Tests.csproj
