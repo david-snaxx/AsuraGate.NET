@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "US6HVNuOXgY=",
+  "dgSpecHash": "fX3cAYmujHk=",
   "success": true,
-  "projectFilePath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+  "projectFilePath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\snaxx\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\10.0.9\\microsoft.bcl.asyncinterfaces.10.0.9.nupkg.sha512",
     "C:\\Users\\snaxx\\.nuget\\packages\\polysharp\\1.16.0\\polysharp.1.16.0.nupkg.sha512",

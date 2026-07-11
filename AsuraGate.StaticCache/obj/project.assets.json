@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {
       "sqlite-net-pcl/1.9.172": {
@@ -153,6 +153,16 @@
         "runtime": {
           "lib/net6.0/SQLitePCLRaw.provider.e_sqlite3.dll": {}
         }
+      },
+      "AsuraGate.Spec/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v10.0",
+        "compile": {
+          "bin/placeholder/AsuraGate.Spec.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/AsuraGate.Spec.dll": {}
+        }
       }
     }
   },
@@ -260,10 +270,16 @@
         "sqlitepclraw.provider.e_sqlite3.2.1.2.nupkg.sha512",
         "sqlitepclraw.provider.e_sqlite3.nuspec"
       ]
+    },
+    "AsuraGate.Spec/1.0.0": {
+      "type": "project",
+      "path": "../AsuraGate.Spec/AsuraGate.Spec.csproj",
+      "msbuildProject": "../AsuraGate.Spec/AsuraGate.Spec.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
+      "AsuraGate.Spec >= 1.0.0",
       "sqlite-net-pcl >= 1.9.172"
     ]
   },
@@ -273,11 +289,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.StaticCache\\AsuraGate.StaticCache.csproj",
+      "projectUniqueName": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.StaticCache\\AsuraGate.StaticCache.csproj",
       "projectName": "AsuraGate.StaticCache",
-      "projectPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.StaticCache\\AsuraGate.StaticCache.csproj",
+      "projectPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.StaticCache\\AsuraGate.StaticCache.csproj",
       "packagesPath": "C:\\Users\\snaxx\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.StaticCache\\obj\\",
+      "outputPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.StaticCache\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\snaxx\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -290,8 +306,13 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj": {
+              "projectPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -308,6 +329,7 @@
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "sqlite-net-pcl": {
