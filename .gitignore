@@ -35,4 +35,4 @@ _ReSharper*/
 .DS_Store
 Thumbs.db
 
-/AsuraGate.StaticCache.Tests/AsuraGate.StaticCache.Tests.csproj
+*.db
