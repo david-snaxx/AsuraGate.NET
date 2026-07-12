@@ -172,6 +172,9 @@
         }
       },
       "AsuraGate.Spec/1.0.0": {
+        "dependencies": {
+          "sqlite-net-pcl": "1.9.172"
+        },
         "runtime": {
           "AsuraGate.Spec.dll": {
             "assemblyVersion": "1.0.0.0",

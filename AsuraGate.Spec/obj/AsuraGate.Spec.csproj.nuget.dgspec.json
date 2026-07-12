@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj": {}
+    "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj": {}
   },
   "projects": {
-    "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj": {
+    "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+        "projectUniqueName": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
         "projectName": "AsuraGate.Spec",
-        "projectPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+        "projectPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
         "packagesPath": "C:\\Users\\snaxx\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\obj\\",
+        "outputPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\obj\\",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "configFilePaths": [
@@ -26,12 +26,10 @@
         },
         "frameworks": {
           "net10.0": {
-            "framework": "net10.0",
             "targetAlias": "net10.0",
             "projectReferences": {}
           },
           "netstandard2.1": {
-            "framework": "netstandard2.1",
             "targetAlias": "netstandard2.1",
             "projectReferences": {}
           }
@@ -50,13 +48,16 @@
       },
       "frameworks": {
         "net10.0": {
-          "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
             "PolySharp": {
               "suppressParent": "All",
               "target": "Package",
               "version": "[1.16.0, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [
@@ -352,7 +353,6 @@
           }
         },
         "netstandard2.1": {
-          "framework": "netstandard2.1",
           "targetAlias": "netstandard2.1",
           "dependencies": {
             "PolySharp": {
@@ -363,6 +363,10 @@
             "System.Text.Json": {
               "target": "Package",
               "version": "[10.0.9, )"
+            },
+            "sqlite-net-pcl": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [
