@@ -15,224 +15,347 @@ using AsuraGate.Spec.Requests.V2.Wvw;
 
 namespace AsuraGate.Spec.Requests;
 
-public static class Gw2ApiNavigator
+public sealed class Gw2ApiNavigator
 {
-    
-    public static class Api
+    private static readonly Lazy<Gw2ApiNavigator> _instance = new(() => new Gw2ApiNavigator());
+
+    private Gw2ApiNavigator()
     {
-        public static class VersionTwo
-        {
-            public static class Account
-            {
-                public static AccountRequest Root => new();
-                public static AccountAchievementsRequest Achievements => new();
-                public static AccountBankRequest Bank => new();
-                public static AccountBuildStorageRequest BuildStorage => new();
-                public static AccountDailyCraftingRequest DailyCrafting => new();
-                public static AccountDungeonRequest Dungeon => new();
-                public static AccountDyeRequest Dye => new();
-                public static AccountEmoteRequest Emote => new();
-                public static AccountFinisherRequest Finisher => new();
-                public static AccountGliderRequest Glider => new();
-                public static AccountHomeCatRequest HomeCat => new();
-                public static AccountHomeNodeRequest HomeNode => new();
-                public static AccountHomesteadDecorationRequest HomesteadDecoration => new();
-                public static AccountHomesteadGlyphRequest HomesteadGlyph => new();
-                public static AccountInventoryRequest Inventory => new();
-                public static AccountJadeBotRequest JadeBot => new();
-                public static AccountLegendaryArmoryRequest LegendaryArmory => new();
-                public static AccountLuckRequest Luck => new();
-                public static AccountMailCarrierRequest MailCarrier => new();
-                public static AccountMapChestRequest MapChest => new();
-                public static AccountMasteryPointsRequest MasteryPoints => new();
-                public static AccountMasteryRequest Mastery => new();
-                public static AccountMaterialRequest Material => new();
-                public static AccountMiniRequest Mini => new();
-                public static AccountMountSkinRequest MountSkin => new();
-                public static AccountMountTypeRequest MountType => new();
-                public static AccountNoveltyRequest Novelty => new();
-                public static AccountOutfitRequest Outfit => new();
-                public static AccountProgressionRequest Progression => new();
-                public static AccountPvpHeroRequest PvpHero => new();
-                public static AccountRaidRequest Raid => new();
-                public static AccountRecipeRequest Recipe => new();
-                public static AccountSkiffRequest Skiff => new();
-                public static AccountSkinRequest Skin => new();
-                public static AccountTitleRequest Title => new();
-                public static AccountWalletRequest Wallet => new();
-                public static AccountWizardsVaultDailyRequest WizardsVaultDaily => new();
-                public static AccountWizardsVaultListingRequest WizardsVaultListing => new();
-                public static AccountWizardsVaultSpecialRequest WizardsVaultSpecial => new();
-                public static AccountWizardsVaultWeeklyRequest WizardsVaultWeekly => new();
-                public static AccountWorldBossRequest WorldBoss => new();
-                public static AccountWvwRequest Wvw => new();
-            }
-
-            public static class Achievements
-            {
-                public static AchievementRequest Root => new();
-                public static AchievementCategoryRequest Category => new();
-                public static AchievementDailyRequest Daily => new();
-                public static AchievementDailyTomorrowRequest DailyTomorrow => new();
-                public static AchievementGroupRequest Group => new();
-            }
-
-            public static class Backstory
-            {
-                public static BackstoryAnswerRequest Answer => new();
-                public static BackstoryQuestionRequest Question => new();
-            }
-
-            public static class Characters
-            {
-                public static CharactersRequest Root => new();
-                public static CharacterBackstoryRequest Backstory(string characterName) => new(characterName);
-                public static CharacterBuildTabRequest BuildTab(string characterName) => new(characterName);
-                public static CharacterCoreRequest CharacterCore(string characterName) => new(characterName);
-                public static CharacterCraftingRequest Crafting(string characterName) => new(characterName);
-                public static CharacterEquipmentRequest Equipment(string characterName) => new(characterName);
-                public static CharacterEquipmentTabRequest EquipmentTab(string characterName) => new(characterName);
-                public static CharacterHeroPointsRequest HeroPoints(string characterName) => new(characterName);
-                public static CharacterInventoryRequest Inventory(string characterName) => new(characterName);
-                public static CharacterQuestRequest Quest(string characterName) => new(characterName);
-                public static CharacterRecipesRequest Recipes(string characterName) => new(characterName);
-                public static CharacterSabRequest Sab(string characterName) => new(characterName);
-                public static CharacterSkillsRequest Skills(string characterName) => new(characterName);
-                public static CharacterSpecializationsRequest Specializations(string characterName) => new(characterName);
-                public static CharacterTrainingRequest Training(string characterName) => new(characterName);
-            }
-
-            public static class Commerce
-            {
-                public static CommerceCurrentBuysRequest CurrentBuys => new();
-                public static CommerceCurrentSellsRequest CurrentSells => new();
-                public static CommerceDeliveryRequest Delivery => new();
-                public static CommerceExchangeCoinsRequest ExchangeCoins => new();
-                public static CommerceExchangeGemsRequest ExchangeGems => new();
-                public static CommerceHistoryBuysRequest HistoryBuys => new();
-                public static CommerceHistorySellsRequest HistorySells => new();
-                public static CommerceListingRequest Listing => new();
-                public static CommercePriceRequest Price => new();
-            }
-
-            public static class Emblems
-            {
-                public static EmblemBackgroundRequest Background => new();
-                public static EmblemForegroundRequest Foreground => new();
-            }
-
-            public static class Guild
-            {
-                public static GuildLogRequest Log(string guildId) => new(guildId);
-                public static GuildMemberRequest Member(string guildId) => new(guildId);
-                public static GuildOverviewRequest Overview(string guildId) => new(guildId);
-                public static GuildOwnedUpgradesRequest OwnedUpgrades(string guildId) => new(guildId);
-                public static GuildRankRequest Rank(string guildId) => new(guildId);
-                public static GuildStashRequest Stash(string guildId) => new(guildId);
-                public static GuildStorageRequest Storage(string guildId) => new(guildId);
-                public static GuildTeamRequest Team(string guildId) => new(guildId);
-                public static GuildTreasuryRequest Treasury(string guildId) => new(guildId);
-                public static GuildPermissionRequest Permission => new();
-                public static GuildSearchRequest Search => new();
-                public static GuildUpgradesRequest Upgrades => new();
-            }
-
-            public static class Home
-            {
-                public static HomeCatRequest Cat => new();
-                public static HomeNodeRequest Node => new();
-            }
-
-            public static class Homestead
-            {
-                public static HomesteadDecorationCategoryRequest DecorationCategory => new();
-                public static HomesteadDecorationRequest Decoration => new();
-                public static HomesteadGlyphRequest Glyph => new();
-            }
-
-            public static class Mounts
-            {
-                public static MountSkinRequest Skin => new();
-                public static MountTypeRequest Type => new();
-            }
-
-            public static class Pvp
-            {
-                public static PvpAmuletRequest Amulet => new();
-                public static PvpGameRequest Game => new();
-                public static PvpHeroRequest Hero => new();
-                public static PvpRankRequest Rank => new();
-                public static PvpSeasonRequest Season => new();
-                public static PvpStandingRequest Standing => new();
-                public static PvpStatsRequest Stats => new();
-            }
-
-            public static class WizardsVault
-            {
-                public static WizardsVaultRequest Root => new();
-                public static WizardsVaultListingRequest Listing => new();
-                public static WizardsVaultObjectiveRequest Objective => new();
-            }
-
-            public static class WvW
-            {
-                public static WvwAbilityRequest Ability => new();
-                public static WvwMatchRequest Match => new();
-                public static WvwMatchWorldOverviewRequest MatchWorldOverview => new();
-                public static WvwMatchWorldScoresRequest MatchWorldScores => new();
-                public static WvwMatchWorldStatsRequest MatchWorldStats => new();
-                public static WvwRankRequest Rank => new();
-                public static WvwObjectiveRequest Objective => new();
-                public static WvwTimerLockoutRequest TimerLockout => new();
-                public static WvwTimerTeamAssignmentRequest TimerTeamAssignment => new();
-                public static WvwEuGuildsRequest EuGuilds => new();
-                public static WvwNaGuildsRequest NaGuilds => new();
-                public static WvwUpgradeRequest Upgrade => new();
-            }
-            
-            public static BuildRequest Build => new();
-            public static ContinentFloorRequest ContinentFloor(int continentId) => new(continentId);
-            public static ContinentRequest Continent => new();
-            public static CurrencyRequest Currency => new();
-            public static DailyCraftingRequest DailyCrafting => new();
-            public static DungeonRequest Dungeon => new();
-            public static DyeRequest Dye => new();
-            public static EmoteRequest Emote => new();
-            public static FileRequest File => new();
-            public static FinisherRequest Finisher => new();
-            public static GliderRequest Glider => new();
-            public static ItemRequest Item => new();
-            public static ItemStatRequest ItemStat => new();
-            public static JadeBotRequest JadeBot => new();
-            public static LegendaryArmoryRequest LegendaryArmory => new();
-            public static LegendRequest Legend => new();
-            public static LogoRequest Logo => new();
-            public static MailCarrierRequest MailCarrier => new();
-            public static MapChestRequest MapChest => new();
-            public static MapRequest Map => new();
-            public static MasteryRequest Mastery => new();
-            public static MaterialRequest Material => new();
-            public static MiniRequest Mini => new();
-            public static NoveltyRequest Novelty => new();
-            public static OutfitRequest Outfit => new();
-            public static PetRequest Pet => new();
-            public static ProfessionRequest Profession => new();
-            public static QuagganRequest Quaggan => new();
-            public static QuestRequest Quest => new();
-            public static RaceRequest Race => new();
-            public static RaidRequest Raid => new();
-            public static RecipeRequest Recipe => new();
-            public static SkiffRequest Skiff => new();
-            public static SkillRequest Skill => new();
-            public static SkinRequest Skin => new();
-            public static SpecializationRequest Specialization => new();
-            public static StoryRequest Story => new();
-            public static StorySeasonRequest StorySeason => new();
-            public static TitleRequest Title => new();
-            public static TokenInfoRequest TokenInfo => new();
-            public static TraitRequest Trait => new();
-            public static WorldBossRequest WorldBoss => new();
-            public static WorldRequest World => new();
-        }
     }
+
+    public static Gw2ApiNavigator Instance => _instance.Value;
+
+    public Api Api => new();
+}
+
+public sealed class Api
+{
+    public VersionTwo VersionTwo => new();
+}
+
+public sealed class VersionTwo
+{
+    // branches
+    public Account Account => new();
+    public Achievements Achievements => new();
+    public Backstory Backstory => new();
+    public Characters Characters => new();
+    public Commerce Commerce => new();
+    public Emblems Emblems => new();
+    public Guild Guild => new();
+    public Home Home => new();
+    public Homestead Homestead => new();
+    public Mounts Mounts => new();
+    public Pvp Pvp => new();
+    public WizardsVault WizardsVault => new();
+    public WvW WvW => new();
+    
+    // leaves
+    public BuildRequest Build => new();
+    public ContinentRequest Continent => new();
+    public CurrencyRequest Currency => new();
+    public DailyCraftingRequest DailyCrafting => new();
+    public DungeonRequest Dungeon => new();
+    public DyeRequest Dye => new();
+    public EmoteRequest Emote => new();
+    public FileRequest File => new();
+    public FinisherRequest Finisher => new();
+    public GliderRequest Glider => new();
+    public ItemRequest Item => new();
+    public ItemStatRequest ItemStat => new();
+    public JadeBotRequest JadeBot => new();
+    public LegendaryArmoryRequest LegendaryArmory => new();
+    public LegendRequest Legend => new();
+    public LogoRequest Logo => new();
+    public MailCarrierRequest MailCarrier => new();
+    public MapChestRequest MapChest => new();
+    public MapRequest Map => new();
+    public MasteryRequest Mastery => new();
+    public MaterialRequest Material => new();
+    public MiniRequest Mini => new();
+    public NoveltyRequest Novelty => new();
+    public OutfitRequest Outfit => new();
+    public PetRequest Pet => new();
+    public ProfessionRequest Profession => new();
+    public QuagganRequest Quaggan => new();
+    public QuestRequest Quest => new();
+    public RaceRequest Race => new();
+    public RaidRequest Raid => new();
+    public RecipeRequest Recipe => new();
+    public SkiffRequest Skiff => new();
+    public SkillRequest Skill => new();
+    public SkinRequest Skin => new();
+    public SpecializationRequest Specialization => new();
+    public StoryRequest Story => new();
+    public StorySeasonRequest StorySeason => new();
+    public TitleRequest Title => new();
+    public TokenInfoRequest TokenInfo => new();
+    public TraitRequest Trait => new();
+    public WorldBossRequest WorldBoss => new();
+    public WorldRequest World => new();
+
+    public ContinentFloorRequest ContinentFloor(int continentId)
+    {
+        return new ContinentFloorRequest(continentId);
+    }
+}
+
+public sealed class Account
+{
+    public AccountRequest Root => new();
+    public AccountAchievementsRequest Achievements => new();
+    public AccountBankRequest Bank => new();
+    public AccountBuildStorageRequest BuildStorage => new();
+    public AccountDailyCraftingRequest DailyCrafting => new();
+    public AccountDungeonRequest Dungeon => new();
+    public AccountDyeRequest Dye => new();
+    public AccountEmoteRequest Emote => new();
+    public AccountFinisherRequest Finisher => new();
+    public AccountGliderRequest Glider => new();
+    public AccountHomeCatRequest HomeCat => new();
+    public AccountHomeNodeRequest HomeNode => new();
+    public AccountHomesteadDecorationRequest HomesteadDecoration => new();
+    public AccountHomesteadGlyphRequest HomesteadGlyph => new();
+    public AccountInventoryRequest Inventory => new();
+    public AccountJadeBotRequest JadeBot => new();
+    public AccountLegendaryArmoryRequest LegendaryArmory => new();
+    public AccountLuckRequest Luck => new();
+    public AccountMailCarrierRequest MailCarrier => new();
+    public AccountMapChestRequest MapChest => new();
+    public AccountMasteryPointsRequest MasteryPoints => new();
+    public AccountMasteryRequest Mastery => new();
+    public AccountMaterialRequest Material => new();
+    public AccountMiniRequest Mini => new();
+    public AccountMountSkinRequest MountSkin => new();
+    public AccountMountTypeRequest MountType => new();
+    public AccountNoveltyRequest Novelty => new();
+    public AccountOutfitRequest Outfit => new();
+    public AccountProgressionRequest Progression => new();
+    public AccountPvpHeroRequest PvpHero => new();
+    public AccountRaidRequest Raid => new();
+    public AccountRecipeRequest Recipe => new();
+    public AccountSkiffRequest Skiff => new();
+    public AccountSkinRequest Skin => new();
+    public AccountTitleRequest Title => new();
+    public AccountWalletRequest Wallet => new();
+    public AccountWizardsVaultDailyRequest WizardsVaultDaily => new();
+    public AccountWizardsVaultListingRequest WizardsVaultListing => new();
+    public AccountWizardsVaultSpecialRequest WizardsVaultSpecial => new();
+    public AccountWizardsVaultWeeklyRequest WizardsVaultWeekly => new();
+    public AccountWorldBossRequest WorldBoss => new();
+    public AccountWvwRequest Wvw => new();
+}
+
+public sealed class Achievements
+{
+    public AchievementRequest Root => new();
+    public AchievementCategoryRequest Category => new();
+    public AchievementDailyRequest Daily => new();
+    public AchievementDailyTomorrowRequest DailyTomorrow => new();
+    public AchievementGroupRequest Group => new();
+}
+
+public sealed class Backstory
+{
+    public BackstoryAnswerRequest Answer => new();
+    public BackstoryQuestionRequest Question => new();
+}
+
+public sealed class Characters
+{
+    public CharactersRequest Root => new();
+
+    public CharacterBackstoryRequest Backstory(string characterName)
+    {
+        return new CharacterBackstoryRequest(characterName);
+    }
+
+    public CharacterBuildTabRequest BuildTab(string characterName)
+    {
+        return new CharacterBuildTabRequest(characterName);
+    }
+
+    public CharacterCoreRequest CharacterCore(string characterName)
+    {
+        return new CharacterCoreRequest(characterName);
+    }
+
+    public CharacterCraftingRequest Crafting(string characterName)
+    {
+        return new CharacterCraftingRequest(characterName);
+    }
+
+    public CharacterEquipmentRequest Equipment(string characterName)
+    {
+        return new CharacterEquipmentRequest(characterName);
+    }
+
+    public CharacterEquipmentTabRequest EquipmentTab(string characterName)
+    {
+        return new CharacterEquipmentTabRequest(characterName);
+    }
+
+    public CharacterHeroPointsRequest HeroPoints(string characterName)
+    {
+        return new CharacterHeroPointsRequest(characterName);
+    }
+
+    public CharacterInventoryRequest Inventory(string characterName)
+    {
+        return new CharacterInventoryRequest(characterName);
+    }
+
+    public CharacterQuestRequest Quest(string characterName)
+    {
+        return new CharacterQuestRequest(characterName);
+    }
+
+    public CharacterRecipesRequest Recipes(string characterName)
+    {
+        return new CharacterRecipesRequest(characterName);
+    }
+
+    public CharacterSabRequest Sab(string characterName)
+    {
+        return new CharacterSabRequest(characterName);
+    }
+
+    public CharacterSkillsRequest Skills(string characterName)
+    {
+        return new CharacterSkillsRequest(characterName);
+    }
+
+    public CharacterSpecializationsRequest Specializations(string characterName)
+    {
+        return new CharacterSpecializationsRequest(characterName);
+    }
+
+    public CharacterTrainingRequest Training(string characterName)
+    {
+        return new CharacterTrainingRequest(characterName);
+    }
+}
+
+public sealed class Commerce
+{
+    public CommerceCurrentBuysRequest CurrentBuys => new();
+    public CommerceCurrentSellsRequest CurrentSells => new();
+    public CommerceDeliveryRequest Delivery => new();
+    public CommerceExchangeCoinsRequest ExchangeCoins => new();
+    public CommerceExchangeGemsRequest ExchangeGems => new();
+    public CommerceHistoryBuysRequest HistoryBuys => new();
+    public CommerceHistorySellsRequest HistorySells => new();
+    public CommerceListingRequest Listing => new();
+    public CommercePriceRequest Price => new();
+}
+
+public sealed class Emblems
+{
+    public EmblemBackgroundRequest Background => new();
+    public EmblemForegroundRequest Foreground => new();
+}
+
+public sealed class Guild
+{
+    public GuildPermissionRequest Permission => new();
+    public GuildSearchRequest Search => new();
+    public GuildUpgradesRequest Upgrades => new();
+
+    public GuildLogRequest Log(string guildId)
+    {
+        return new GuildLogRequest(guildId);
+    }
+
+    public GuildMemberRequest Member(string guildId)
+    {
+        return new GuildMemberRequest(guildId);
+    }
+
+    public GuildOverviewRequest Overview(string guildId)
+    {
+        return new GuildOverviewRequest(guildId);
+    }
+
+    public GuildOwnedUpgradesRequest OwnedUpgrades(string guildId)
+    {
+        return new GuildOwnedUpgradesRequest(guildId);
+    }
+
+    public GuildRankRequest Rank(string guildId)
+    {
+        return new GuildRankRequest(guildId);
+    }
+
+    public GuildStashRequest Stash(string guildId)
+    {
+        return new GuildStashRequest(guildId);
+    }
+
+    public GuildStorageRequest Storage(string guildId)
+    {
+        return new GuildStorageRequest(guildId);
+    }
+
+    public GuildTeamRequest Team(string guildId)
+    {
+        return new GuildTeamRequest(guildId);
+    }
+
+    public GuildTreasuryRequest Treasury(string guildId)
+    {
+        return new GuildTreasuryRequest(guildId);
+    }
+}
+
+public sealed class Home
+{
+    public HomeCatRequest Cat => new();
+    public HomeNodeRequest Node => new();
+}
+
+public sealed class Homestead
+{
+    public HomesteadDecorationCategoryRequest DecorationCategory => new();
+    public HomesteadDecorationRequest Decoration => new();
+    public HomesteadGlyphRequest Glyph => new();
+}
+
+public sealed class Mounts
+{
+    public MountSkinRequest Skin => new();
+    public MountTypeRequest Type => new();
+}
+
+public sealed class Pvp
+{
+    public PvpAmuletRequest Amulet => new();
+    public PvpGameRequest Game => new();
+    public PvpHeroRequest Hero => new();
+    public PvpRankRequest Rank => new();
+    public PvpSeasonRequest Season => new();
+    public PvpStandingRequest Standing => new();
+    public PvpStatsRequest Stats => new();
+}
+
+public sealed class WizardsVault
+{
+    public WizardsVaultRequest Root => new();
+    public WizardsVaultListingRequest Listing => new();
+    public WizardsVaultObjectiveRequest Objective => new();
+}
+
+public sealed class WvW
+{
+    public WvwAbilityRequest Ability => new();
+    public WvwMatchRequest Match => new();
+    public WvwMatchWorldOverviewRequest MatchWorldOverview => new();
+    public WvwMatchWorldScoresRequest MatchWorldScores => new();
+    public WvwMatchWorldStatsRequest MatchWorldStats => new();
+    public WvwRankRequest Rank => new();
+    public WvwObjectiveRequest Objective => new();
+    public WvwTimerLockoutRequest TimerLockout => new();
+    public WvwTimerTeamAssignmentRequest TimerTeamAssignment => new();
+    public WvwEuGuildsRequest EuGuilds => new();
+    public WvwNaGuildsRequest NaGuilds => new();
+    public WvwUpgradeRequest Upgrade => new();
 }

@@ -11,7 +11,7 @@ AsuraGateService asuraGate = new AsuraGateService(
     Gw2ApiSchemaVersion.Latest);
 
 var items = await asuraGate.Gw2ApiGateway.FetchAsync(
-    Gw2ApiNavigator.Api.VersionTwo.Emote.GetAll());
+    asuraGate.Gw2ApiNavigator.Api.VersionTwo.Emote.GetAll());
 
 foreach (var item in items)
 {
