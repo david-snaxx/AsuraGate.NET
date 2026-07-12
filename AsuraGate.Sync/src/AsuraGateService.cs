@@ -5,7 +5,7 @@ using AsuraGate.StaticCache;
 
 namespace AsuraGate.Sync;
 
-public class AsuraGateService
+public class AsuraGateService : IAsyncDisposable
 {
     public Gw2ApiGateway Gw2ApiGateway { get; }
     public Gw2ApiStaticCacheDatabase Gw2ApiStaticCacheDatabase { get; }
@@ -18,5 +18,10 @@ public class AsuraGateService
             defaultSchemaVersion?.ToString() ?? Gw2ApiSchemaVersion.Latest);
         Gw2ApiStaticCacheDatabase = new Gw2ApiStaticCacheDatabase(staticCacheDatabasePath);
         Gw2ApiStaticCacheDatabase.Initialize().Wait();
+    }
+    
+    public async ValueTask DisposeAsync()
+    {
+        await Gw2ApiStaticCacheDatabase.DisposeAsync();
     }
 }

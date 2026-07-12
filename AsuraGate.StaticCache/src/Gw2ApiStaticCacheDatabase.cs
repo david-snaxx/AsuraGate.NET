@@ -15,13 +15,18 @@ namespace AsuraGate.StaticCache;
 /// Owns the single SQLite connection backing the static API data cache. Repositories use
 /// <see cref="Connection"/> directly rather than opening their own connections.
 /// </summary>
-public class Gw2ApiStaticCacheDatabase
+public class Gw2ApiStaticCacheDatabase : IAsyncDisposable
 {
     public SQLiteAsyncConnection Connection { get; }
 
     public Gw2ApiStaticCacheDatabase(string databasePath)
     {
         Connection = new SQLiteAsyncConnection(databasePath);
+    }
+    
+    public async ValueTask DisposeAsync()
+    {
+        await Connection.CloseAsync();
     }
 
     public async Task Initialize()
