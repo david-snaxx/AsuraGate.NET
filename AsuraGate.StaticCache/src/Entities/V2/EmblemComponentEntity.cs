@@ -3,14 +3,26 @@ using SQLite;
 namespace AsuraGate.StaticCache.Entities.V2;
 
 /// <summary>
-/// SQLite table for <see cref="AsuraGate.Spec.Models.V2.EmblemComponent"/>.
+/// SQLite table for <see cref="AsuraGate.Spec.Models.V2.EmblemComponent"/>. Shared by both
+/// /v2/emblem/background and /v2/emblem/foreground, which return the same shape but each restart
+/// their own id sequence - callers must supply which <see cref="Slot"/> ("background"/"foreground")
+/// a given component came from, since <c>ComponentId</c> alone isn't unique across both.
 /// </summary>
 [Table("emblem_components")]
 public class EmblemComponentEntity
 {
-    [PrimaryKey]
+    [PrimaryKey, AutoIncrement]
     [Column("id")]
     public int Id { get; set; }
+
+    [NotNull]
+    [Indexed]
+    [Column("slot")]
+    public string Slot { get; set; } = string.Empty;
+
+    [NotNull]
+    [Column("component_id")]
+    public int ComponentId { get; set; }
 }
 
 /// <summary>Layer image URL within an <see cref="EmblemComponentEntity"/>.</summary>
@@ -23,8 +35,12 @@ public class EmblemComponentLayerEntity
 
     [NotNull]
     [Indexed]
-    [Column("emblem_component_id")]
-    public int EmblemComponentId { get; set; }
+    [Column("slot")]
+    public string Slot { get; set; } = string.Empty;
+
+    [NotNull]
+    [Column("component_id")]
+    public int ComponentId { get; set; }
 
     [NotNull]
     [Column("order_index")]

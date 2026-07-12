@@ -5,22 +5,24 @@ namespace AsuraGate.StaticCache.Mappers.V2;
 
 public static class EmblemComponentMapper
 {
-    public static EmblemComponentEntity ToEmblemComponentEntity(EmblemComponent emblemComponent) => new EmblemComponentEntity()
+    public static EmblemComponentEntity ToEmblemComponentEntity(string slot, EmblemComponent emblemComponent) => new EmblemComponentEntity()
     {
-        Id = emblemComponent.Id
+        Slot = slot,
+        ComponentId = emblemComponent.Id
     };
 
-    public static IEnumerable<EmblemComponentLayerEntity> ToLayerEntities(EmblemComponent emblemComponent) =>
+    public static IEnumerable<EmblemComponentLayerEntity> ToLayerEntities(string slot, EmblemComponent emblemComponent) =>
         emblemComponent.Layers.Select((layer, index) => new EmblemComponentLayerEntity()
         {
-            EmblemComponentId = emblemComponent.Id,
+            Slot = slot,
+            ComponentId = emblemComponent.Id,
             OrderIndex = index,
             Layer = layer
         });
 
     public static EmblemComponent ToModel(EmblemComponentEntity entity, IEnumerable<EmblemComponentLayerEntity> layerEntities) => new EmblemComponent()
     {
-        Id = entity.Id,
+        Id = entity.ComponentId,
         Layers = layerEntities.OrderBy(layer => layer.OrderIndex).Select(layer => layer.Layer).ToArray()
     };
 }
