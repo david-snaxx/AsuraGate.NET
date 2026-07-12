@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class MiniRequest :
     IGetsSingle<Mini, int>,
     IGetsBulk<Mini, int>,
-    IGetsAll<Mini>,
+    IGetsAll<Mini, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Mini;

@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class PetRequest :
     IGetsSingle<Pet, int>,
     IGetsBulk<Pet, int>,
-    IGetsAll<Pet>,
+    IGetsAll<Pet, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Pet;

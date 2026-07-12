@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Account;
 public sealed class AccountBuildStorageRequest :
     IGetsSingle<AccountBuildStorageTemplate, string>,
     IGetsBulk<AccountBuildStorageTemplate, string>,
-    IGetsAll<AccountBuildStorageTemplate>
+    IGetsAll<AccountBuildStorageTemplate, string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountBuildStorage;
     public bool IsAuthenticated { get; } = true;

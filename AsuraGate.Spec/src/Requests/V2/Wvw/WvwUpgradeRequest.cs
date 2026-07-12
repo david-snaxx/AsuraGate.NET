@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Wvw;
 public class WvwUpgradeRequest :
     IGetsSingle<WvwUpgrade, int>,
     IGetsBulk<WvwUpgrade, int>,
-    IGetsAll<WvwUpgrade>,
+    IGetsAll<WvwUpgrade, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WvwUpgrade;

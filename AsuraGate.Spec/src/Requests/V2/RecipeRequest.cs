@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class RecipeRequest :
     IGetsSingle<Recipe, int>,
     IGetsBulk<Recipe, int>,
-    IGetsAll<Recipe>,
+    IGetsAll<Recipe, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Recipe;

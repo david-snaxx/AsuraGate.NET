@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class TraitRequest :
     IGetsSingle<Trait, int>,
     IGetsBulk<Trait, int>,
-    IGetsAll<Trait>,
+    IGetsAll<Trait, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Trait;

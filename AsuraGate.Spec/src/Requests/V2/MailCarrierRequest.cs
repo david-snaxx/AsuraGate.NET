@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class MailCarrierRequest :
     IGetsSingle<MailCarrier, int>,
     IGetsBulk<MailCarrier, int>,
-    IGetsAll<MailCarrier>,
+    IGetsAll<MailCarrier, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.MailCarrier;

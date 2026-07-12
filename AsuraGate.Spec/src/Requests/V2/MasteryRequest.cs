@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class MasteryRequest :
     IGetsSingle<Mastery, int>,
     IGetsBulk<Mastery, int>,
-    IGetsAll<Mastery>,
+    IGetsAll<Mastery, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Mastery;

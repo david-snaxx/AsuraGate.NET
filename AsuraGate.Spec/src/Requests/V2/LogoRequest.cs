@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class LogoRequest :
     IGetsSingle<Logo, string>,
     IGetsBulk<Logo, string>,
-    IGetsAll<Logo>,
+    IGetsAll<Logo, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Logo;

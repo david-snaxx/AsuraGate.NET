@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class QuagganRequest :
     IGetsSingle<Quaggan, string>,
     IGetsBulk<Quaggan, string>,
-    IGetsAll<Quaggan>,
+    IGetsAll<Quaggan, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Quaggan;

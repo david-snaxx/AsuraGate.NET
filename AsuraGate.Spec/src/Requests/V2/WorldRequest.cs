@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class WorldRequest :
     IGetsSingle<World, int>,
     IGetsBulk<World, int>,
-    IGetsAll<World>,
+    IGetsAll<World, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.World;

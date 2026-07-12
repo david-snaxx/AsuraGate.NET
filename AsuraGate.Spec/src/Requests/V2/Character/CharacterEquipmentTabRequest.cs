@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Character;
 public sealed class CharacterEquipmentTabRequest :
     IGetsSingle<CharacterEquipmentTab, int>,
     IGetsBulk<CharacterEquipmentTab, int>,
-    IGetsAll<CharacterEquipmentTab>,
+    IGetsAll<CharacterEquipmentTab, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; }

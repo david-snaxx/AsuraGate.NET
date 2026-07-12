@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class ProfessionRequest :
     IGetsSingle<Profession, string>,
     IGetsBulk<Profession, string>,
-    IGetsAll<Profession>,
+    IGetsAll<Profession, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Profession;

@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class SkiffRequest :
     IGetsSingle<Skiff, int>,
     IGetsBulk<Skiff, int>,
-    IGetsAll<Skiff>,
+    IGetsAll<Skiff, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Skiff;

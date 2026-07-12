@@ -5,10 +5,10 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2;
 
 public sealed class EmoteRequest :
-    IGetsSingle<Emote, int>,
-    IGetsBulk<Emote, int>,
-    IGetsAll<Emote>,
-    IGetsIds<int>
+    IGetsSingle<Emote, string>,
+    IGetsBulk<Emote, string>,
+    IGetsAll<Emote, string>,
+    IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Emote;
     public bool IsAuthenticated { get; } = false;

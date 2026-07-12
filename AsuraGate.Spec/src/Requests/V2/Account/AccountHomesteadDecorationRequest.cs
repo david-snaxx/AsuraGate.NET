@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Account;
 public sealed class AccountHomesteadDecorationRequest :
     IGetsSingle<AccountHomesteadDecoration, int>,
     IGetsBulk<AccountHomesteadDecoration, int>,
-    IGetsAll<AccountHomesteadDecoration>
+    IGetsAll<AccountHomesteadDecoration, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountHomesteadDecoration;
     public bool IsAuthenticated { get; } = true;

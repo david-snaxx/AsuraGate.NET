@@ -6,7 +6,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Account;
 
 public sealed class AccountMasteryRequest :
-    IGetsAll<AccountMastery>
+    IGetsAll<AccountMastery, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountMastery;
     public bool IsAuthenticated { get; } = true;

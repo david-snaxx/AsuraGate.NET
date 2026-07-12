@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Pvp;
 public sealed class PvpSeasonRequest :
     IGetsSingle<PvpSeason, string>,
     IGetsBulk<PvpSeason, string>,
-    IGetsAll<PvpSeason>,
+    IGetsAll<PvpSeason, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.PvpSeason;

@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class RaceRequest :
     IGetsSingle<Race, string>,
     IGetsBulk<Race, string>,
-    IGetsAll<Race>,
+    IGetsAll<Race, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Race;

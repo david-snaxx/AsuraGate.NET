@@ -15,12 +15,8 @@ using AsuraGate.Spec.Requests.V2.Wvw;
 
 namespace AsuraGate.Spec.Requests;
 
-public class Gw2ApiNavigator
+public static class Gw2ApiNavigator
 {
-    private static readonly Lazy<Gw2ApiNavigator> _instance = new(() => new Gw2ApiNavigator());
-    public static Gw2ApiNavigator Instance => _instance.Value;
-    
-    private Gw2ApiNavigator() {}
     
     public static class Api
     {

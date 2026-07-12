@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class SpecializationRequest :
     IGetsSingle<Specialization, int>,
     IGetsBulk<Specialization, int>,
-    IGetsAll<Specialization>,
+    IGetsAll<Specialization, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Specialization;

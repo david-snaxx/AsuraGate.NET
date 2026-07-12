@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Commerce;
 public sealed class CommerceCurrentBuysRequest :
     IGetsSingle<CommerceTransaction, int>,
     IGetsBulk<CommerceTransaction, int>,
-    IGetsAll<CommerceTransaction>,
+    IGetsAll<CommerceTransaction, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.CommerceTransactionsCurrentBuys;

@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class RaidRequest :
     IGetsSingle<Raid, string>,
     IGetsBulk<Raid, string>,
-    IGetsAll<Raid>,
+    IGetsAll<Raid, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Raid;

@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2.Emblem;
 public sealed class EmblemForegroundRequest :
     IGetsSingle<EmblemComponent, int>,
     IGetsBulk<EmblemComponent, int>,
-    IGetsAll<EmblemComponent>,
+    IGetsAll<EmblemComponent, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.EmblemForeground;

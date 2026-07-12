@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Homestead;
 public sealed class HomesteadDecorationCategoryRequest :
     IGetsSingle<HomesteadDecorationCategory, int>,
     IGetsBulk<HomesteadDecorationCategory, int>,
-    IGetsAll<HomesteadDecorationCategory>,
+    IGetsAll<HomesteadDecorationCategory, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.HomesteadDecorationCategory;

@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class CurrencyRequest :
     IGetsSingle<Currency, int>,
     IGetsBulk<Currency, int>,
-    IGetsAll<Currency>,
+    IGetsAll<Currency, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Currency;

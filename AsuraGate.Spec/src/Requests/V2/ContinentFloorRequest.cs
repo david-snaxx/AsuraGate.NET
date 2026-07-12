@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class ContinentFloorRequest :
     IGetsSingle<ContinentFloor, int>,
     IGetsBulk<ContinentFloor, int>,
-    IGetsAll<ContinentFloor>,
+    IGetsAll<ContinentFloor, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; }

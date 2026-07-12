@@ -6,7 +6,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Account;
 
 public sealed class AccountMaterialRequest :
-    IGetsAll<AccountMaterial>
+    IGetsAll<AccountMaterial, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountMaterial;
     public bool IsAuthenticated { get; } = true;

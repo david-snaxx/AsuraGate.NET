@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2.Home;
 public sealed class HomeCatRequest :
     IGetsSingle<HomeCat, int>,
     IGetsBulk<HomeCat, int>,
-    IGetsAll<HomeCat>,
+    IGetsAll<HomeCat, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.HomeCat;

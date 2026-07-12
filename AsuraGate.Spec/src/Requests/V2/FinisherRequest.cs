@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class FinisherRequest :
     IGetsSingle<Finisher, int>,
     IGetsBulk<Finisher, int>,
-    IGetsAll<Finisher>,
+    IGetsAll<Finisher, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Finisher;

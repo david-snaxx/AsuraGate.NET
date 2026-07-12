@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class MaterialRequest :
     IGetsSingle<MaterialCategory, int>,
     IGetsBulk<MaterialCategory, int>,
-    IGetsAll<MaterialCategory>,
+    IGetsAll<MaterialCategory, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Material;

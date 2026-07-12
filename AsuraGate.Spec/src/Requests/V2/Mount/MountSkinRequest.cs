@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Mount;
 public sealed class MountSkinRequest :
     IGetsSingle<MountSkin, int>,
     IGetsBulk<MountSkin, int>,
-    IGetsAll<MountSkin>,
+    IGetsAll<MountSkin, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.MountSkin;

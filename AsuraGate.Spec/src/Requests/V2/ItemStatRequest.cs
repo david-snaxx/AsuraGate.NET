@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class ItemStatRequest :
     IGetsSingle<ItemStat, int>,
     IGetsBulk<ItemStat, int>,
-    IGetsAll<ItemStat>,
+    IGetsAll<ItemStat, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.ItemStat;

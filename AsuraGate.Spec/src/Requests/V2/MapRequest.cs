@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class MapRequest :
     IGetsSingle<GameMap, int>,
     IGetsBulk<GameMap, int>,
-    IGetsAll<GameMap>,
+    IGetsAll<GameMap, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Map;

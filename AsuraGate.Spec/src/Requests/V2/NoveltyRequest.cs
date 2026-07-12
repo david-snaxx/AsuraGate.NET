@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class NoveltyRequest :
     IGetsSingle<Novelty, int>,
     IGetsBulk<Novelty, int>,
-    IGetsAll<Novelty>,
+    IGetsAll<Novelty, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Novelty;

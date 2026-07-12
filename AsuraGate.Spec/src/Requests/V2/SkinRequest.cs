@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class SkinRequest :
     IGetsSingle<Skin, int>,
     IGetsBulk<Skin, int>,
-    IGetsAll<Skin>,
+    IGetsAll<Skin, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Skin;

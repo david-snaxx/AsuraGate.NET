@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class FileRequest :
     IGetsSingle<ApiFile, string>,
     IGetsBulk<ApiFile, string>,
-    IGetsAll<ApiFile>,
+    IGetsAll<ApiFile, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.File;

@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class OutfitRequest :
     IGetsSingle<Outfit, int>,
     IGetsBulk<Outfit, int>,
-    IGetsAll<Outfit>,
+    IGetsAll<Outfit, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Outfit;

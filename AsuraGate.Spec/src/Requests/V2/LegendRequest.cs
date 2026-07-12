@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class LegendRequest :
     IGetsSingle<Legend, string>,
     IGetsBulk<Legend, string>,
-    IGetsAll<Legend>,
+    IGetsAll<Legend, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Legend;

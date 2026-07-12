@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class ContinentRequest :
     IGetsSingle<Continent, int>,
     IGetsBulk<Continent, int>,
-    IGetsAll<Continent>,
+    IGetsAll<Continent, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Continent;

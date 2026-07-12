@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Account;
 public sealed class AccountInventoryRequest :
     IGetsSingle<AccountSharedInventoryItem, int>,
     IGetsBulk<AccountSharedInventoryItem, int>,
-    IGetsAll<AccountSharedInventoryItem>
+    IGetsAll<AccountSharedInventoryItem, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountInventory;
     public bool IsAuthenticated { get; } = true;

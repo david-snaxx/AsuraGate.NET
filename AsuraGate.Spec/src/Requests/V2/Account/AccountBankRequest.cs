@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Account;
 public sealed class AccountBankRequest :
     IGetsSingle<AccountBankItem, int>,
     IGetsBulk<AccountBankItem, int>,
-    IGetsAll<AccountBankItem>,
+    IGetsAll<AccountBankItem, int>,
     IPaginated<AccountBankItem>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountBank;

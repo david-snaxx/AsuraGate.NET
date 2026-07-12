@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Backstory;
 public sealed class BackstoryQuestionRequest :
     IGetsSingle<BackstoryQuestion, int>,
     IGetsBulk<BackstoryQuestion, int>,
-    IGetsAll<BackstoryQuestion>,
+    IGetsAll<BackstoryQuestion, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.BackstoryQuestion;

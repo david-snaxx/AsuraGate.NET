@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class JadeBotRequest :
     IGetsSingle<JadeBot, int>,
     IGetsBulk<JadeBot, int>,
-    IGetsAll<JadeBot>,
+    IGetsAll<JadeBot, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.JadeBot;

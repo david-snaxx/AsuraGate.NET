@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Guild;
 public sealed class GuildUpgradesRequest :
     IGetsSingle<GuildUpgrade, int>,
     IGetsBulk<GuildUpgrade, int>,
-    IGetsAll<GuildUpgrade>,
+    IGetsAll<GuildUpgrade, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.GuildUpgrade;

@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Account;
 public sealed class AccountFinisherRequest :
     IGetsSingle<AccountFinisher, int>,
     IGetsBulk<AccountFinisher, int>,
-    IGetsAll<AccountFinisher>
+    IGetsAll<AccountFinisher, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountFinisher;
     public bool IsAuthenticated { get; } = true;

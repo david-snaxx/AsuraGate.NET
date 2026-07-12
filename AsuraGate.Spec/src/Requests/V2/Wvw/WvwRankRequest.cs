@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Wvw;
 public sealed class WvwRankRequest :
     IGetsSingle<WvwRank, int>,
     IGetsBulk<WvwRank, int>,
-    IGetsAll<WvwRank>,
+    IGetsAll<WvwRank, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WvwRank;

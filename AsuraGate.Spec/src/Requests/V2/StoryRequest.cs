@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class StoryRequest :
     IGetsSingle<Story, int>,
     IGetsBulk<Story, int>,
-    IGetsAll<Story>,
+    IGetsAll<Story, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Story;

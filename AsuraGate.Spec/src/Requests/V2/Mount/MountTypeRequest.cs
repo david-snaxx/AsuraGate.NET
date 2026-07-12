@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Mount;
 public sealed class MountTypeRequest :
     IGetsSingle<MountType, string>,
     IGetsBulk<MountType, string>,
-    IGetsAll<MountType>,
+    IGetsAll<MountType, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.MountType;

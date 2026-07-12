@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Account;
 public sealed class AccountAchievementsRequest :
     IGetsSingle<AccountAchievement, int>,
     IGetsBulk<AccountAchievement, int>,
-    IGetsAll<AccountAchievement>
+    IGetsAll<AccountAchievement, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountAchievement;
     public bool IsAuthenticated { get; } = true;

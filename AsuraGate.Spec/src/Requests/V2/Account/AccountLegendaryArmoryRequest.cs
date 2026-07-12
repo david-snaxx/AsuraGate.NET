@@ -6,7 +6,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Account;
 
 public sealed class AccountLegendaryArmoryRequest :
-    IGetsAll<AccountLegendaryItem>
+    IGetsAll<AccountLegendaryItem, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountLegendaryArmory;
     public bool IsAuthenticated { get; } = true;

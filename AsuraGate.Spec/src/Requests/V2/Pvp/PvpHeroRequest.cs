@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Pvp;
 public sealed class PvpHeroRequest :
     IGetsSingle<PvpHero, string>,
     IGetsBulk<PvpHero, string>,
-    IGetsAll<PvpHero>,
+    IGetsAll<PvpHero, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.PvpHero;

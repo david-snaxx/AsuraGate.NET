@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class LegendaryArmoryRequest :
     IGetsSingle<LegendaryArmoryItem, int>,
     IGetsBulk<LegendaryArmoryItem, int>,
-    IGetsAll<LegendaryArmoryItem>,
+    IGetsAll<LegendaryArmoryItem, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.LegendaryArmory;

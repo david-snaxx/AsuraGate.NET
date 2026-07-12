@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class DungeonRequest :
     IGetsSingle<Dungeon, string>,
     IGetsBulk<Dungeon, string>,
-    IGetsAll<Dungeon>,
+    IGetsAll<Dungeon, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Dungeon;

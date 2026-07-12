@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Pvp;
 public sealed class PvpRankRequest :
     IGetsSingle<PvpRank, int>,
     IGetsBulk<PvpRank, int>,
-    IGetsAll<PvpRank>,
+    IGetsAll<PvpRank, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.PvpRank;

@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class DyeRequest :
     IGetsSingle<Dye, int>,
     IGetsBulk<Dye, int>,
-    IGetsAll<Dye>,
+    IGetsAll<Dye, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Dye;

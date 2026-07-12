@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.WizardsVault;
 public sealed class WizardsVaultObjectiveRequest :
     IGetsSingle<WizardsVaultObjective, int>,
     IGetsBulk<WizardsVaultObjective, int>,
-    IGetsAll<WizardsVaultObjective>,
+    IGetsAll<WizardsVaultObjective, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WizardsVaultObjective;

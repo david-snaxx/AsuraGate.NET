@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class TitleRequest :
     IGetsSingle<Title, int>,
     IGetsBulk<Title, int>,
-    IGetsAll<Title>,
+    IGetsAll<Title, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Title;

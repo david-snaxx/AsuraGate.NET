@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class SkillRequest :
     IGetsSingle<Skill, int>,
     IGetsBulk<Skill, int>,
-    IGetsAll<Skill>,
+    IGetsAll<Skill, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Skill;

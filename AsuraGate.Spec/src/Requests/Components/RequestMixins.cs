@@ -41,7 +41,7 @@ public static class ClientMixins
         };
     }
 
-    public static IExecutableGw2ApiRequest<IEnumerable<TModel>, TId> GetAll<TModel, TId>(this IGetsAll<TModel> request)
+    public static IExecutableGw2ApiRequest<IEnumerable<TModel>, TId> GetAll<TModel, TId>(this IGetsAll<TModel, TId> request)
     {
         return new ExecutableGw2ApiRequest<IEnumerable<TModel>, TId>()
         {

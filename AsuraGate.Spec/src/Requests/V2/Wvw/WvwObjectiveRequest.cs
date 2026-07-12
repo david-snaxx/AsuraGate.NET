@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Wvw;
 public sealed class WvwObjectiveRequest :
     IGetsSingle<WvwObjective, string>,
     IGetsBulk<WvwObjective, string>,
-    IGetsAll<WvwObjective>,
+    IGetsAll<WvwObjective, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WvwObjective;

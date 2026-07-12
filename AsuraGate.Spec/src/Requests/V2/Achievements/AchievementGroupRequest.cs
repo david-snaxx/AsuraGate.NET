@@ -8,7 +8,7 @@ namespace AsuraGate.Spec.Requests.V2.Achievements;
 public sealed class AchievementGroupRequest :
     IGetsSingle<AchievementGroup, string>,
     IGetsBulk<AchievementGroup, string>,
-    IGetsAll<AchievementGroup>,
+    IGetsAll<AchievementGroup, string>,
     IGetsIds<string>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AchievementGroup;

@@ -6,7 +6,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Account;
 
 public sealed class AccountProgressionRequest :
-    IGetsAll<AccountProgression>
+    IGetsAll<AccountProgression, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountProgression;
     public bool IsAuthenticated { get; } = true;

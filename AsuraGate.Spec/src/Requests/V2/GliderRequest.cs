@@ -7,7 +7,7 @@ namespace AsuraGate.Spec.Requests.V2;
 public sealed class GliderRequest :
     IGetsSingle<Glider, int>,
     IGetsBulk<Glider, int>,
-    IGetsAll<Glider>,
+    IGetsAll<Glider, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.Glider;
