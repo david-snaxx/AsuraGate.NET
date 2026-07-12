@@ -247,8 +247,10 @@ public class Gw2ApiService
         try
         {
             if (waitStopwatch.ElapsedMilliseconds > 10)
-                logger.LogInformation("{Uri} waited {WaitMs}ms for a free request slot", uri, waitStopwatch.ElapsedMilliseconds);
-
+            {
+                logger.LogInformation("{Uri} waited {WaitMs}ms for a free request slot", uri.GetLeftPart(UriPartial.Path), waitStopwatch.ElapsedMilliseconds);
+                logger.LogDebug("Full request URL: {Url}", uri);
+            }
             return await SendWithRetryAsync(requestFactory, uri, logger, cancellationToken);
         }
         finally
@@ -263,8 +265,8 @@ public class Gw2ApiService
         for (int attempt = 0; ; attempt++)
         {
             Stopwatch attemptStopwatch = Stopwatch.StartNew();
-            logger.LogInformation("Sending GET {Uri} (attempt {Attempt}/{MaxAttempts})", uri, attempt + 1, MaxRetries + 1);
-
+            logger.LogInformation("Sending GET {Uri} (attempt {Attempt}/{MaxAttempts})", uri.GetLeftPart(UriPartial.Path), attempt + 1, MaxRetries + 1);
+            logger.LogDebug("Full request URL: {Url}", uri);
             HttpResponseMessage response;
             try
             {
@@ -308,7 +310,8 @@ public class Gw2ApiService
             if (response.IsSuccessStatusCode)
             {
                 logger.LogInformation("Succeeded {StatusCode} for {Uri} in {ElapsedMs}ms (attempt {Attempt})",
-                    (int)response.StatusCode, uri, attemptStopwatch.ElapsedMilliseconds, attempt + 1);
+                    (int)response.StatusCode, uri.GetLeftPart(UriPartial.Path), attemptStopwatch.ElapsedMilliseconds, attempt + 1);
+                logger.LogDebug("Full request URL: {Url}", uri);
             }
             else
             {

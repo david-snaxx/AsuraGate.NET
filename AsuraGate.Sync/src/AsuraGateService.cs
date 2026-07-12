@@ -31,9 +31,9 @@ public class AsuraGateService : IAsyncDisposable
         await Gw2ApiStaticCacheDatabase.DisposeAsync();
     }
     
-    public static async Task<AsuraGateService> CreateAsync(string gw2ApiKey, string staticCacheDatabasePath, string defaultLocalization, string defaultSchemaVersion)
+    public static async Task<AsuraGateService> CreateAsync(string gw2ApiKey, string staticCacheDatabasePath, string defaultLocalization, string defaultSchemaVersion, ILogger? logger = null)
     {
-        var service = new AsuraGateService(gw2ApiKey, staticCacheDatabasePath, defaultLocalization, defaultSchemaVersion);
+        var service = new AsuraGateService(gw2ApiKey, staticCacheDatabasePath, defaultLocalization, defaultSchemaVersion, logger);
         await service.Gw2ApiStaticCacheDatabase.Initialize();
         return service;
     }

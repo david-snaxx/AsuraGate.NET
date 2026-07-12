@@ -8,11 +8,12 @@ using Microsoft.Extensions.Logging;
 
 using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 ILogger logger = loggerFactory.CreateLogger<Gw2ApiGateway>();
-await using var asuraGate = await AsuraGateService.CreateAsync(
+var asuraGate = await AsuraGateService.CreateAsync(
     "33D87A53-5244-5342-B864-80279DC25775350E691B-B958-4D0E-9938-E8AE9C0D5EC6",
     "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Test\\gw2cache.db",
     Gw2ApiLocalization.English,
-    Gw2ApiSchemaVersion.Latest);
+    Gw2ApiSchemaVersion.Latest,
+    logger);
 var request = asuraGate.Gw2ApiNavigator
     .Api
     .VersionTwo
