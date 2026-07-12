@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AsuraGate.StaticCache")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5919da8cbf516ae203dd97e9228829f8b8e1353b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23c89a39e9de2a40424ba8d24f4224ca4e1edf50")]
 [assembly: System.Reflection.AssemblyProductAttribute("AsuraGate.StaticCache")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AsuraGate.StaticCache")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

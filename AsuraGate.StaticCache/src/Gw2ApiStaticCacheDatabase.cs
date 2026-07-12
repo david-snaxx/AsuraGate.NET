@@ -1,5 +1,7 @@
 ﻿using SQLite;
+using AsuraGate.StaticCache.Entities;
 using AsuraGate.StaticCache.Entities.V2;
+using AsuraGate.StaticCache.Entities.V2.Achievements;
 using AsuraGate.StaticCache.Entities.V2.Backstory;
 using AsuraGate.StaticCache.Entities.V2.Guild;
 using AsuraGate.StaticCache.Entities.V2.Homestead;
@@ -24,6 +26,8 @@ public class Gw2ApiStaticCacheDatabase
 
     public async Task Initialize()
     {
+        await Connection.CreateTableAsync<CacheMetaEntity>();
+
         // from root /v2/
         await Connection.CreateTableAsync<ApiFileEntity>();
         await Connection.CreateTableAsync<BuildEntity>();
@@ -41,6 +45,7 @@ public class Gw2ApiStaticCacheDatabase
         await Connection.CreateTableAsync<ContinentFloorSectorBoundsPointEntity>();
         await Connection.CreateTableAsync<ContinentFloorAdventureEntity>();
         await Connection.CreateTableAsync<ContinentFloorMasteryPointEntity>();
+        await Connection.CreateTableAsync<CurrencyEntity>();
         await Connection.CreateTableAsync<DungeonEntity>();
         await Connection.CreateTableAsync<DungeonPathEntity>();
         await Connection.CreateTableAsync<DyeEntity>();
@@ -80,6 +85,7 @@ public class Gw2ApiStaticCacheDatabase
         await Connection.CreateTableAsync<LegendaryArmoryItemEntity>();
         await Connection.CreateTableAsync<LegendEntity>();
         await Connection.CreateTableAsync<LegendUtilityEntity>();
+        await Connection.CreateTableAsync<LogoEntity>();
         await Connection.CreateTableAsync<MailCarrierEntity>();
         await Connection.CreateTableAsync<MailCarrierUnlockItemEntity>();
         await Connection.CreateTableAsync<MailCarrierFlagEntity>();
@@ -143,6 +149,21 @@ public class Gw2ApiStaticCacheDatabase
         await Connection.CreateTableAsync<TraitSkillEntity>();
         await Connection.CreateTableAsync<TraitSkillFactEntity>();
         await Connection.CreateTableAsync<WorldEntity>();
+
+        // from /v2/achievements
+        await Connection.CreateTableAsync<AchievementEntity>();
+        await Connection.CreateTableAsync<AchievementFlagEntity>();
+        await Connection.CreateTableAsync<AchievementTierEntity>();
+        await Connection.CreateTableAsync<AchievementPrerequisiteEntity>();
+        await Connection.CreateTableAsync<AchievementRewardEntity>();
+        await Connection.CreateTableAsync<AchievementBitEntity>();
+        await Connection.CreateTableAsync<AchievementCategoryEntity>();
+        await Connection.CreateTableAsync<AchievementCategoryAchievementEntity>();
+        await Connection.CreateTableAsync<AchievementCategoryAchievementFlagEntity>();
+        await Connection.CreateTableAsync<AchievementDailyEntity>();
+        await Connection.CreateTableAsync<AchievementDailyEntryEntity>();
+        await Connection.CreateTableAsync<AchievementGroupEntity>();
+        await Connection.CreateTableAsync<AchievementGroupCategoryEntity>();
 
         // from /v2/backstory
         await Connection.CreateTableAsync<BackstoryAnswerEntity>();
