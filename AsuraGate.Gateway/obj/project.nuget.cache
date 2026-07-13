@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AQhwMr9pzXE=",
+  "dgSpecHash": "iY0CmqNYKRQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
+  "projectFilePath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\snaxx\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\10.0.9\\microsoft.extensions.dependencyinjection.abstractions.10.0.9.nupkg.sha512",
     "C:\\Users\\snaxx\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\10.0.9\\microsoft.extensions.logging.abstractions.10.0.9.nupkg.sha512",
@@ -17,9 +17,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
-      "projectPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
+      "projectPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
+      "filePath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
         "net10.0"

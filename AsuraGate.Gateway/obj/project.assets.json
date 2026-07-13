@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
     "net10.0": {
       "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.9": {
@@ -430,11 +430,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
+      "projectUniqueName": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
       "projectName": "AsuraGate.Gateway",
-      "projectPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
+      "projectPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Gateway\\AsuraGate.Gateway.csproj",
       "packagesPath": "C:\\Users\\snaxx\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Gateway\\obj\\",
+      "outputPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Gateway\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\snaxx\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -447,10 +447,11 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {
-            "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj": {
-              "projectPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj"
+            "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj": {
+              "projectPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj"
             }
           }
         }
@@ -469,6 +470,7 @@
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "Microsoft.Extensions.Logging.Abstractions": {

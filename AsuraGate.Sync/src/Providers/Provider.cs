@@ -6,7 +6,7 @@ using AsuraGate.StaticCache.Repositories;
 
 namespace AsuraGate.Sync.Providers;
 
-internal class Provider<TModel, TId, TRepository, TRequest>
+public class Provider<TModel, TId, TRepository, TRequest>
     where TRepository : IStaticCacheRepository<TModel, TId>
     where TRequest : IGetsSingle<TModel, TId>, IGetsBulk<TModel, TId>, IGetsAll<TModel, TId>, IGetsIds<TId>
 {
