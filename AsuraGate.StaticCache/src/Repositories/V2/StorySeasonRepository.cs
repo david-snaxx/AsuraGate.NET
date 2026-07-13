@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2;
 
 namespace AsuraGate.StaticCache.Repositories.V2;
 
-public class StorySeasonRepository
+public class StorySeasonRepository :
+    IStaticCacheRepository<StorySeason, string>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

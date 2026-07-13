@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2.Homestead;
 
 namespace AsuraGate.StaticCache.Repositories.V2.Homestead;
 
-public class HomesteadDecorationCategoryRepository
+public class HomesteadDecorationCategoryRepository :
+    IStaticCacheRepository<HomesteadDecorationCategory, int>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

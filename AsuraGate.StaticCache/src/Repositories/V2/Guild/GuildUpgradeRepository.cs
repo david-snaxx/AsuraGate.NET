@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2.Guild;
 
 namespace AsuraGate.StaticCache.Repositories.V2.Guild;
 
-public class GuildUpgradeRepository
+public class GuildUpgradeRepository :
+    IStaticCacheRepository<GuildUpgrade, int>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

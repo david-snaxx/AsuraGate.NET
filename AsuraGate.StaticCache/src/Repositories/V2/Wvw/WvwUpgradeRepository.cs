@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2.Wvw;
 
 namespace AsuraGate.StaticCache.Repositories.V2.Wvw;
 
-public class WvwUpgradeRepository
+public class WvwUpgradeRepository :
+    IStaticCacheRepository<WvwUpgrade, int>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

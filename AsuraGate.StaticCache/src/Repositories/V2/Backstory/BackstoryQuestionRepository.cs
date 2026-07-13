@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2.Backstory;
 
 namespace AsuraGate.StaticCache.Repositories.V2.Backstory;
 
-public class BackstoryQuestionRepository
+public class BackstoryQuestionRepository :
+    IStaticCacheRepository<BackstoryQuestion, int>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

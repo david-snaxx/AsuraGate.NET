@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2.Achievements;
 
 namespace AsuraGate.StaticCache.Repositories.V2.Achievements;
 
-public class AchievementRepository
+public class AchievementRepository :
+    IStaticCacheRepository<Achievement, int>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

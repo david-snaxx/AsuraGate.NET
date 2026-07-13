@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2;
 
 namespace AsuraGate.StaticCache.Repositories.V2;
 
-public class MiniRepository
+public class MiniRepository :
+    IStaticCacheRepository<Mini, int>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

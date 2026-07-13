@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2;
 
 namespace AsuraGate.StaticCache.Repositories.V2;
 
-public class DungeonRepository
+public class DungeonRepository :
+    IStaticCacheRepository<Dungeon, string>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

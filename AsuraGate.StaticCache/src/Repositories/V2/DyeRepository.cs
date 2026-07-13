@@ -5,7 +5,8 @@ using SQLite;
 
 namespace AsuraGate.StaticCache.Repositories.V2;
 
-public class DyeRepository
+public class DyeRepository :
+    IStaticCacheRepository<Dye, int>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

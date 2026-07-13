@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2;
 
 namespace AsuraGate.StaticCache.Repositories.V2;
 
-public class SkinRepository
+public class SkinRepository :
+    IStaticCacheRepository<Skin, int>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

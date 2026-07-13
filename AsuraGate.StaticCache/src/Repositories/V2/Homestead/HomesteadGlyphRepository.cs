@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2.Homestead;
 
 namespace AsuraGate.StaticCache.Repositories.V2.Homestead;
 
-public class HomesteadGlyphRepository
+public class HomesteadGlyphRepository :
+    IStaticCacheRepository<HomesteadGlyph, string>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 

@@ -4,7 +4,8 @@ using AsuraGate.StaticCache.Mappers.V2.Pvp;
 
 namespace AsuraGate.StaticCache.Repositories.V2.Pvp;
 
-public class PvpHeroRepository
+public class PvpHeroRepository :
+    IStaticCacheRepository<PvpHero, string>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 
