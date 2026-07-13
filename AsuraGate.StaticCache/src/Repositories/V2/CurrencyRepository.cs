@@ -36,6 +36,9 @@ public class CurrencyRepository :
         return entities.Select(CurrencyMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<CurrencyEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Currency currency) => UpsertAllAsync([currency]);
 
     public Task UpsertAllAsync(IEnumerable<Currency> currencies) => _database.Connection.RunInTransactionAsync(connection =>

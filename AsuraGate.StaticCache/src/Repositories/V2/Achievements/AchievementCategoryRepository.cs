@@ -61,6 +61,9 @@ public class AchievementCategoryRepository :
             flagEntities.Where(flag => flag.CategoryId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<AchievementCategoryEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(AchievementCategory category) => UpsertAllAsync([category]);
 
     public Task UpsertAllAsync(IEnumerable<AchievementCategory> categories) => _database.Connection.RunInTransactionAsync(connection =>

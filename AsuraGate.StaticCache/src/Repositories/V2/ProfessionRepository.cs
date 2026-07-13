@@ -128,6 +128,9 @@ public class ProfessionRepository :
             weaponSkillEntities.Where(skill => skill.ProfessionId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<ProfessionEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Profession profession) => UpsertAllAsync([profession]);
 
     public Task UpsertAllAsync(IEnumerable<Profession> professions) => _database.Connection.RunInTransactionAsync(connection =>

@@ -36,6 +36,9 @@ public class WorldRepository :
         return entities.Select(WorldMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<WorldEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(World world) => UpsertAllAsync([world]);
 
     public Task UpsertAllAsync(IEnumerable<World> worlds) => _database.Connection.RunInTransactionAsync(connection =>

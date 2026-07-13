@@ -61,6 +61,9 @@ public class MountTypeRepository :
             skillEntities.Where(skill => skill.MountTypeId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<MountTypeEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(MountType mountType) => UpsertAllAsync([mountType]);
 
     public Task UpsertAllAsync(IEnumerable<MountType> mountTypes) => _database.Connection.RunInTransactionAsync(connection =>

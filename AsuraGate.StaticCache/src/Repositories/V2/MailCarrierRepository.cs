@@ -61,6 +61,9 @@ public class MailCarrierRepository :
             flagEntities.Where(flag => flag.MailCarrierId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<MailCarrierEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(MailCarrier mailCarrier) => UpsertAllAsync([mailCarrier]);
 
     public Task UpsertAllAsync(IEnumerable<MailCarrier> mailCarriers) => _database.Connection.RunInTransactionAsync(connection =>

@@ -49,6 +49,9 @@ public class WvwAbilityRepository :
         return entities.Select(entity => WvwAbilityMapper.ToModel(entity, rankEntities.Where(rank => rank.WvwAbilityId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<WvwAbilityEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(WvwAbility ability) => UpsertAllAsync([ability]);
 
     public Task UpsertAllAsync(IEnumerable<WvwAbility> abilities) => _database.Connection.RunInTransactionAsync(connection =>

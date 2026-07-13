@@ -49,6 +49,9 @@ public class GameMapRepository :
         return entities.Select(entity => GameMapMapper.ToModel(entity, floorEntities.Where(floor => floor.GameMapId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<GameMapEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(GameMap gameMap) => UpsertAllAsync([gameMap]);
 
     public Task UpsertAllAsync(IEnumerable<GameMap> gameMaps) => _database.Connection.RunInTransactionAsync(connection =>

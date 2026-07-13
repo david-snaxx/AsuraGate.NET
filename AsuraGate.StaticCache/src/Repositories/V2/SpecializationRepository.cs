@@ -49,6 +49,9 @@ public class SpecializationRepository :
         return entities.Select(entity => SpecializationMapper.ToModel(entity, traitEntities.Where(trait => trait.SpecializationId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<SpecializationEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Specialization specialization) => UpsertAllAsync([specialization]);
 
     public Task UpsertAllAsync(IEnumerable<Specialization> specializations) => _database.Connection.RunInTransactionAsync(connection =>

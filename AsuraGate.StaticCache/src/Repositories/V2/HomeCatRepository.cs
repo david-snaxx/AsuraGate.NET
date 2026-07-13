@@ -36,6 +36,9 @@ public class HomeCatRepository :
         return entities.Select(HomeCatMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<HomeCatEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(HomeCat homeCat) => UpsertAllAsync([homeCat]);
 
     public Task UpsertAllAsync(IEnumerable<HomeCat> homeCats) => _database.Connection.RunInTransactionAsync(connection =>

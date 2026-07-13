@@ -36,6 +36,9 @@ public class MiniRepository :
         return entities.Select(MiniMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<MiniEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Mini mini) => UpsertAllAsync([mini]);
 
     public Task UpsertAllAsync(IEnumerable<Mini> minis) => _database.Connection.RunInTransactionAsync(connection =>

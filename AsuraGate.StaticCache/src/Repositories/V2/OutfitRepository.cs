@@ -49,6 +49,9 @@ public class OutfitRepository :
         return entities.Select(entity => OutfitMapper.ToModel(entity, unlockItemEntities.Where(item => item.OutfitId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<OutfitEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Outfit outfit) => UpsertAllAsync([outfit]);
 
     public Task UpsertAllAsync(IEnumerable<Outfit> outfits) => _database.Connection.RunInTransactionAsync(connection =>

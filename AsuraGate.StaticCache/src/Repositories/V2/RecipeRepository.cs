@@ -77,6 +77,9 @@ public class RecipeRepository :
             guildIngredientEntities.Where(ingredient => ingredient.RecipeId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<RecipeEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Recipe recipe) => UpsertAllAsync([recipe]);
 
     public Task UpsertAllAsync(IEnumerable<Recipe> recipes) => _database.Connection.RunInTransactionAsync(connection =>

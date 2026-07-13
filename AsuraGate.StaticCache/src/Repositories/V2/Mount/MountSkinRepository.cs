@@ -49,6 +49,9 @@ public class MountSkinRepository :
         return entities.Select(entity => MountSkinMapper.ToModel(entity, dyeSlotEntities.Where(slot => slot.MountSkinId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<MountSkinEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(MountSkin mountSkin) => UpsertAllAsync([mountSkin]);
 
     public Task UpsertAllAsync(IEnumerable<MountSkin> mountSkins) => _database.Connection.RunInTransactionAsync(connection =>

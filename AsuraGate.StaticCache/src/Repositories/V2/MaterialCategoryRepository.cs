@@ -49,6 +49,9 @@ public class MaterialCategoryRepository :
         return entities.Select(entity => MaterialCategoryMapper.ToModel(entity, itemEntities.Where(item => item.MaterialCategoryId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<MaterialCategoryEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(MaterialCategory materialCategory) => UpsertAllAsync([materialCategory]);
 
     public Task UpsertAllAsync(IEnumerable<MaterialCategory> materialCategories) => _database.Connection.RunInTransactionAsync(connection =>

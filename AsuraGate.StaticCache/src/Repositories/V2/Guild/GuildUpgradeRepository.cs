@@ -61,6 +61,9 @@ public class GuildUpgradeRepository :
             costEntities.Where(cost => cost.GuildUpgradeId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<GuildUpgradeEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(GuildUpgrade upgrade) => UpsertAllAsync([upgrade]);
 
     public Task UpsertAllAsync(IEnumerable<GuildUpgrade> upgrades) => _database.Connection.RunInTransactionAsync(connection =>

@@ -36,6 +36,9 @@ public class HomesteadDecorationCategoryRepository :
         return entities.Select(HomesteadDecorationCategoryMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<HomesteadDecorationCategoryEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(HomesteadDecorationCategory category) => UpsertAllAsync([category]);
 
     public Task UpsertAllAsync(IEnumerable<HomesteadDecorationCategory> categories) => _database.Connection.RunInTransactionAsync(connection =>

@@ -52,6 +52,9 @@ public class DyeRepository :
         return entities.Select(entity => DyeMapper.ToModel(entity, categoryEntities.Where(category => category.DyeId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<DyeEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public async Task<IEnumerable<Dye>> GetByCategoryAsync(string category)
     {
         var matchingCategoryEntities = await _database.Connection.Table<DyeCategoryEntity>().Where(c => c.Category == category).ToListAsync();

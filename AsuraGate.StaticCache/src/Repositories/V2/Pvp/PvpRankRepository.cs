@@ -49,6 +49,9 @@ public class PvpRankRepository :
         return entities.Select(entity => PvpRankMapper.ToModel(entity, levelEntities.Where(level => level.PvpRankId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<PvpRankEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(PvpRank rank) => UpsertAllAsync([rank]);
 
     public Task UpsertAllAsync(IEnumerable<PvpRank> ranks) => _database.Connection.RunInTransactionAsync(connection =>

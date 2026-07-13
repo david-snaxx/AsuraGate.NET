@@ -49,6 +49,9 @@ public class ContinentRepository :
         return entities.Select(entity => ContinentMapper.ToModel(entity, floorIdEntities.Where(floor => floor.ContinentId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<ContinentEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Continent continent) => UpsertAllAsync([continent]);
 
     public Task UpsertAllAsync(IEnumerable<Continent> continents) => _database.Connection.RunInTransactionAsync(connection =>

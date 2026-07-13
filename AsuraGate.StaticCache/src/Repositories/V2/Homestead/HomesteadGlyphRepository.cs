@@ -36,6 +36,9 @@ public class HomesteadGlyphRepository :
         return entities.Select(HomesteadGlyphMapper.ToModel);
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<HomesteadGlyphEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(HomesteadGlyph glyph) => UpsertAllAsync([glyph]);
 
     public Task UpsertAllAsync(IEnumerable<HomesteadGlyph> glyphs) => _database.Connection.RunInTransactionAsync(connection =>

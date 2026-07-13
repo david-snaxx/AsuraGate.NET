@@ -182,6 +182,9 @@ public class ItemRepository :
             upgradeComponentBonusEntities.Where(bonus => bonus.ItemId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<ItemEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Item item) => UpsertAllAsync([item]);
 
     public Task UpsertAllAsync(IEnumerable<Item> items) => _database.Connection.RunInTransactionAsync(connection =>

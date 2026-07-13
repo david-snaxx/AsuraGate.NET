@@ -36,6 +36,9 @@ public class GuildPermissionRepository :
         return entities.Select(GuildPermissionMapper.ToModel);
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<GuildPermissionEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(GuildPermission permission) => UpsertAllAsync([permission]);
 
     public Task UpsertAllAsync(IEnumerable<GuildPermission> permissions) => _database.Connection.RunInTransactionAsync(connection =>

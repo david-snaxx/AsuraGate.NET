@@ -49,6 +49,9 @@ public class NoveltyRepository :
         return entities.Select(entity => NoveltyMapper.ToModel(entity, unlockItemEntities.Where(item => item.NoveltyId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<NoveltyEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Novelty novelty) => UpsertAllAsync([novelty]);
 
     public Task UpsertAllAsync(IEnumerable<Novelty> novelties) => _database.Connection.RunInTransactionAsync(connection =>

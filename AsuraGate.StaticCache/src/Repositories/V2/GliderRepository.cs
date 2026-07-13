@@ -61,6 +61,9 @@ public class GliderRepository :
             defaultDyeEntities.Where(dye => dye.GliderId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<GliderEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Glider glider) => UpsertAllAsync([glider]);
 
     public Task UpsertAllAsync(IEnumerable<Glider> gliders) => _database.Connection.RunInTransactionAsync(connection =>

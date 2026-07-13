@@ -49,6 +49,9 @@ public class StoryJournalEntryRepository :
         return entities.Select(entity => StoryJournalEntryMapper.ToModel(entity, goalEntities.Where(goal => goal.StoryJournalEntryId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<StoryJournalEntryEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(StoryJournalEntry entry) => UpsertAllAsync([entry]);
 
     public Task UpsertAllAsync(IEnumerable<StoryJournalEntry> entries) => _database.Connection.RunInTransactionAsync(connection =>

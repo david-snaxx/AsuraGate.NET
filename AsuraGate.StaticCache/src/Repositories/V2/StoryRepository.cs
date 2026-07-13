@@ -69,6 +69,9 @@ public class StoryRepository :
             flagEntities.Where(flag => flag.StoryId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<StoryEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Story story) => UpsertAllAsync([story]);
 
     public Task UpsertAllAsync(IEnumerable<Story> stories) => _database.Connection.RunInTransactionAsync(connection =>

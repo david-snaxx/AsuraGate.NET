@@ -49,6 +49,9 @@ public class StorySeasonRepository :
         return entities.Select(entity => StorySeasonMapper.ToModel(entity, storyEntities.Where(story => story.StorySeasonId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<StorySeasonEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(StorySeason storySeason) => UpsertAllAsync([storySeason]);
 
     public Task UpsertAllAsync(IEnumerable<StorySeason> storySeasons) => _database.Connection.RunInTransactionAsync(connection =>

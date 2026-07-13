@@ -36,6 +36,9 @@ public class JadeBotRepository :
         return entities.Select(JadeBotMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<JadeBotEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(JadeBot jadeBot) => UpsertAllAsync([jadeBot]);
 
     public Task UpsertAllAsync(IEnumerable<JadeBot> jadeBots) => _database.Connection.RunInTransactionAsync(connection =>

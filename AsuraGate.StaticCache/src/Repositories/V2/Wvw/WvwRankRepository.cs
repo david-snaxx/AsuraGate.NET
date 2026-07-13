@@ -36,6 +36,9 @@ public class WvwRankRepository :
         return entities.Select(WvwRankMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<WvwRankEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(WvwRank rank) => UpsertAllAsync([rank]);
 
     public Task UpsertAllAsync(IEnumerable<WvwRank> ranks) => _database.Connection.RunInTransactionAsync(connection =>

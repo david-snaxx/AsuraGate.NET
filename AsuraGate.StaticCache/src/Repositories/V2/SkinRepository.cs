@@ -78,6 +78,9 @@ public class SkinRepository :
             defaultDyeSlotEntities.Where(slot => slot.SkinId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<SkinEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Skin skin) => UpsertAllAsync([skin]);
 
     public Task UpsertAllAsync(IEnumerable<Skin> skins) => _database.Connection.RunInTransactionAsync(connection =>

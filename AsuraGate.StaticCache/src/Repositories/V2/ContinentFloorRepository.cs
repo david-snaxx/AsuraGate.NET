@@ -189,6 +189,9 @@ public class ContinentFloorRepository :
         });
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<ContinentFloorEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(ContinentFloor floor) => UpsertAllAsync([floor]);
 
     public Task UpsertAllAsync(IEnumerable<ContinentFloor> floors) => _database.Connection.RunInTransactionAsync(connection =>

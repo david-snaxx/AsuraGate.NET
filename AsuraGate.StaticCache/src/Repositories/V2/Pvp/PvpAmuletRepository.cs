@@ -49,6 +49,9 @@ public class PvpAmuletRepository :
         return entities.Select(entity => PvpAmuletMapper.ToModel(entity, attributeEntities.Where(attribute => attribute.PvpAmuletId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<PvpAmuletEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(PvpAmulet amulet) => UpsertAllAsync([amulet]);
 
     public Task UpsertAllAsync(IEnumerable<PvpAmulet> amulets) => _database.Connection.RunInTransactionAsync(connection =>

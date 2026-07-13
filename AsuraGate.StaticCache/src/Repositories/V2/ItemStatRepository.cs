@@ -49,6 +49,9 @@ public class ItemStatRepository :
         return entities.Select(entity => ItemStatMapper.ToModel(entity, attributeEntities.Where(attribute => attribute.ItemStatId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<ItemStatEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(ItemStat itemStat) => UpsertAllAsync([itemStat]);
 
     public Task UpsertAllAsync(IEnumerable<ItemStat> itemStats) => _database.Connection.RunInTransactionAsync(connection =>

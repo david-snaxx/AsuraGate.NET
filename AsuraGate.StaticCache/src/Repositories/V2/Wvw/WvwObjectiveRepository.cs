@@ -36,6 +36,9 @@ public class WvwObjectiveRepository :
         return entities.Select(WvwObjectiveMapper.ToModel);
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<WvwObjectiveEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(WvwObjective objective) => UpsertAllAsync([objective]);
 
     public Task UpsertAllAsync(IEnumerable<WvwObjective> objectives) => _database.Connection.RunInTransactionAsync(connection =>

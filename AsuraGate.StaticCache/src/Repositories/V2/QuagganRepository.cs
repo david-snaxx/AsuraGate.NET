@@ -36,6 +36,9 @@ public class QuagganRepository :
         return entities.Select(QuagganMapper.ToModel);
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<QuagganEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Quaggan quaggan) => UpsertAllAsync([quaggan]);
 
     public Task UpsertAllAsync(IEnumerable<Quaggan> quaggans) => _database.Connection.RunInTransactionAsync(connection =>

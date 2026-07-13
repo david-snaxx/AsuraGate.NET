@@ -61,6 +61,9 @@ public class EmoteRepository :
             unlockItemEntities.Where(item => item.EmoteId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<EmoteEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Emote emote) => UpsertAllAsync([emote]);
 
     public Task UpsertAllAsync(IEnumerable<Emote> emotes) => _database.Connection.RunInTransactionAsync(connection =>

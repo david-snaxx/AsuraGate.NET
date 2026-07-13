@@ -49,6 +49,9 @@ public class MasteryRepository :
         return entities.Select(entity => MasteryMapper.ToModel(entity, levelEntities.Where(level => level.MasteryId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<MasteryEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Mastery mastery) => UpsertAllAsync([mastery]);
 
     public Task UpsertAllAsync(IEnumerable<Mastery> masteries) => _database.Connection.RunInTransactionAsync(connection =>

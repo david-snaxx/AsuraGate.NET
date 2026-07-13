@@ -49,6 +49,9 @@ public class FinisherRepository :
         return entities.Select(entity => FinisherMapper.ToModel(entity, unlockItemEntities.Where(item => item.FinisherId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<FinisherEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Finisher finisher) => UpsertAllAsync([finisher]);
 
     public Task UpsertAllAsync(IEnumerable<Finisher> finishers) => _database.Connection.RunInTransactionAsync(connection =>

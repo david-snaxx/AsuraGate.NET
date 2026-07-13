@@ -36,6 +36,9 @@ public class LegendaryArmoryItemRepository :
         return entities.Select(LegendaryArmoryItemMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<LegendaryArmoryItemEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(LegendaryArmoryItem item) => UpsertAllAsync([item]);
 
     public Task UpsertAllAsync(IEnumerable<LegendaryArmoryItem> items) => _database.Connection.RunInTransactionAsync(connection =>

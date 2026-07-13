@@ -49,6 +49,9 @@ public class DungeonRepository :
         return entities.Select(entity => DungeonMapper.ToModel(entity, pathEntities.Where(path => path.DungeonId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<DungeonEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Dungeon dungeon) => UpsertAllAsync([dungeon]);
 
     public Task UpsertAllAsync(IEnumerable<Dungeon> dungeons) => _database.Connection.RunInTransactionAsync(connection =>

@@ -36,6 +36,9 @@ public class LogoRepository :
         return entities.Select(LogoMapper.ToModel);
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<LogoEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Logo logo) => UpsertAllAsync([logo]);
 
     public Task UpsertAllAsync(IEnumerable<Logo> logos) => _database.Connection.RunInTransactionAsync(connection =>

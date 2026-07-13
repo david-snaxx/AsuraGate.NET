@@ -61,6 +61,9 @@ public class BackstoryAnswerRepository :
             raceEntities.Where(race => race.BackstoryAnswerId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<BackstoryAnswerEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(BackstoryAnswer answer) => UpsertAllAsync([answer]);
 
     public Task UpsertAllAsync(IEnumerable<BackstoryAnswer> answers) => _database.Connection.RunInTransactionAsync(connection =>

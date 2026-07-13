@@ -49,6 +49,9 @@ public class LegendRepository :
         return entities.Select(entity => LegendMapper.ToModel(entity, utilityEntities.Where(utility => utility.LegendId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<LegendEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Legend legend) => UpsertAllAsync([legend]);
 
     public Task UpsertAllAsync(IEnumerable<Legend> legends) => _database.Connection.RunInTransactionAsync(connection =>

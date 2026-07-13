@@ -36,6 +36,9 @@ public class BuildRepository :
         return entities.Select(BuildMapper.ToModel);
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<BuildEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Build build) => UpsertAllAsync([build]);
 
     public Task UpsertAllAsync(IEnumerable<Build> builds) => _database.Connection.RunInTransactionAsync(connection =>

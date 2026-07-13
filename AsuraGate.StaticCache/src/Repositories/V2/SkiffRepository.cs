@@ -49,6 +49,9 @@ public class SkiffRepository :
         return entities.Select(entity => SkiffMapper.ToModel(entity, dyeSlotEntities.Where(slot => slot.SkiffId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<SkiffEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Skiff skiff) => UpsertAllAsync([skiff]);
 
     public Task UpsertAllAsync(IEnumerable<Skiff> skiffs) => _database.Connection.RunInTransactionAsync(connection =>

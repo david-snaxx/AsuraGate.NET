@@ -86,6 +86,9 @@ public class SkillRepository :
             factEntities.Where(fact => fact.SkillId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<SkillEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Skill skill) => UpsertAllAsync([skill]);
 
     public Task UpsertAllAsync(IEnumerable<Skill> skills) => _database.Connection.RunInTransactionAsync(connection =>

@@ -61,6 +61,9 @@ public class RaidRepository :
             eventEntities.Where(@event => @event.RaidId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<RaidEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Raid raid) => UpsertAllAsync([raid]);
 
     public Task UpsertAllAsync(IEnumerable<Raid> raids) => _database.Connection.RunInTransactionAsync(connection =>

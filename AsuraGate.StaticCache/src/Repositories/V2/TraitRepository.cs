@@ -70,6 +70,9 @@ public class TraitRepository :
             skillFactEntities.Where(fact => fact.TraitId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<TraitEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Trait trait) => UpsertAllAsync([trait]);
 
     public Task UpsertAllAsync(IEnumerable<Trait> traits) => _database.Connection.RunInTransactionAsync(connection =>

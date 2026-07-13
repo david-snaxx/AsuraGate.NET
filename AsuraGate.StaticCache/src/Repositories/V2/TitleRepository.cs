@@ -49,6 +49,9 @@ public class TitleRepository :
         return entities.Select(entity => TitleMapper.ToModel(entity, achievementEntities.Where(achievement => achievement.TitleId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<TitleEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Title title) => UpsertAllAsync([title]);
 
     public Task UpsertAllAsync(IEnumerable<Title> titles) => _database.Connection.RunInTransactionAsync(connection =>

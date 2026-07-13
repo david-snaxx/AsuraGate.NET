@@ -69,6 +69,9 @@ public class PvpHeroRepository :
         });
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<PvpHeroEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(PvpHero hero) => UpsertAllAsync([hero]);
 
     public Task UpsertAllAsync(IEnumerable<PvpHero> heroes) => _database.Connection.RunInTransactionAsync(connection =>

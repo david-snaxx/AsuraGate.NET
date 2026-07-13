@@ -69,6 +69,9 @@ public class BackstoryQuestionRepository :
             professionEntities.Where(profession => profession.BackstoryQuestionId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<BackstoryQuestionEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(BackstoryQuestion question) => UpsertAllAsync([question]);
 
     public Task UpsertAllAsync(IEnumerable<BackstoryQuestion> questions) => _database.Connection.RunInTransactionAsync(connection =>

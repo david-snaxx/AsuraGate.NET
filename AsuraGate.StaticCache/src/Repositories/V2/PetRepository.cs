@@ -49,6 +49,9 @@ public class PetRepository :
         return entities.Select(entity => PetMapper.ToModel(entity, skillEntities.Where(skill => skill.PetId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<PetEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Pet pet) => UpsertAllAsync([pet]);
 
     public Task UpsertAllAsync(IEnumerable<Pet> pets) => _database.Connection.RunInTransactionAsync(connection =>

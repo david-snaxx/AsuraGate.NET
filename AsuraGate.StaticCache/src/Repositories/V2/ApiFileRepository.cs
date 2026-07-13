@@ -36,6 +36,9 @@ public class ApiFileRepository :
         return entities.Select(ApiFileMapper.ToModel);
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<ApiFileEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(ApiFile apiFile) => UpsertAllAsync([apiFile]);
 
     public Task UpsertAllAsync(IEnumerable<ApiFile> apiFiles) => _database.Connection.RunInTransactionAsync(connection =>

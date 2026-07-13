@@ -61,6 +61,9 @@ public class WvwUpgradeRepository :
             itemEntities.Where(item => item.WvwUpgradeId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<WvwUpgradeEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(WvwUpgrade upgrade) => UpsertAllAsync([upgrade]);
 
     public Task UpsertAllAsync(IEnumerable<WvwUpgrade> upgrades) => _database.Connection.RunInTransactionAsync(connection =>

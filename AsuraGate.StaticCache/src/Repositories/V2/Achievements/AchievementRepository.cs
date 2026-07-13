@@ -86,6 +86,9 @@ public class AchievementRepository :
             bitEntities.Where(bit => bit.AchievementId == entity.Id)));
     }
 
+    public async Task<IEnumerable<int>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<AchievementEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(Achievement achievement) => UpsertAllAsync([achievement]);
 
     public Task UpsertAllAsync(IEnumerable<Achievement> achievements) => _database.Connection.RunInTransactionAsync(connection =>

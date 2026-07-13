@@ -49,6 +49,9 @@ public class AchievementGroupRepository :
         return entities.Select(entity => AchievementGroupMapper.ToModel(entity, categoryEntities.Where(category => category.AchievementGroupId == entity.Id)));
     }
 
+    public async Task<IEnumerable<string>> GetCachedIdsAsync() =>
+        (await _database.Connection.Table<AchievementGroupEntity>().ToListAsync()).Select(entity => entity.Id);
+
     public Task UpsertAsync(AchievementGroup group) => UpsertAllAsync([group]);
 
     public Task UpsertAllAsync(IEnumerable<AchievementGroup> groups) => _database.Connection.RunInTransactionAsync(connection =>
