@@ -36,3 +36,6 @@ _ReSharper*/
 Thumbs.db
 
 *.db
+
+install.cmd
+.idea
