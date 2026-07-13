@@ -26,6 +26,21 @@ public class StoryJournalEntryRepository :
         return StoryJournalEntryMapper.ToModel(entity, goalEntities);
     }
 
+    public async Task<IEnumerable<StoryJournalEntry>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<StoryJournalEntryEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var goalEntities = await _database.Connection
+            .Table<StoryGoalEntity>()
+            .Where(goal => idList.Contains(goal.StoryJournalEntryId))
+            .ToListAsync();
+
+        return entities.Select(entity => StoryJournalEntryMapper.ToModel(entity, goalEntities.Where(goal => goal.StoryJournalEntryId == entity.Id)));
+    }
+
     public async Task<IEnumerable<StoryJournalEntry>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<StoryJournalEntryEntity>().ToListAsync();

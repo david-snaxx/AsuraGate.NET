@@ -26,6 +26,21 @@ public class PvpAmuletRepository :
         return PvpAmuletMapper.ToModel(entity, attributeEntities);
     }
 
+    public async Task<IEnumerable<PvpAmulet>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<PvpAmuletEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var attributeEntities = await _database.Connection
+            .Table<PvpAmuletAttributeEntity>()
+            .Where(attribute => idList.Contains(attribute.PvpAmuletId))
+            .ToListAsync();
+
+        return entities.Select(entity => PvpAmuletMapper.ToModel(entity, attributeEntities.Where(attribute => attribute.PvpAmuletId == entity.Id)));
+    }
+
     public async Task<IEnumerable<PvpAmulet>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<PvpAmuletEntity>().ToListAsync();

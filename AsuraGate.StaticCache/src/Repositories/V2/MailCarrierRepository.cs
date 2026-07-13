@@ -27,6 +27,28 @@ public class MailCarrierRepository :
         return MailCarrierMapper.ToModel(entity, unlockItemEntities, flagEntities);
     }
 
+    public async Task<IEnumerable<MailCarrier>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<MailCarrierEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var unlockItemEntities = await _database.Connection
+            .Table<MailCarrierUnlockItemEntity>()
+            .Where(item => idList.Contains(item.MailCarrierId))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<MailCarrierFlagEntity>()
+            .Where(flag => idList.Contains(flag.MailCarrierId))
+            .ToListAsync();
+
+        return entities.Select(entity => MailCarrierMapper.ToModel(
+            entity,
+            unlockItemEntities.Where(item => item.MailCarrierId == entity.Id),
+            flagEntities.Where(flag => flag.MailCarrierId == entity.Id)));
+    }
+
     public async Task<IEnumerable<MailCarrier>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<MailCarrierEntity>().ToListAsync();

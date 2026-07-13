@@ -26,6 +26,21 @@ public class NoveltyRepository :
         return NoveltyMapper.ToModel(entity, unlockItemEntities);
     }
 
+    public async Task<IEnumerable<Novelty>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<NoveltyEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var unlockItemEntities = await _database.Connection
+            .Table<NoveltyUnlockItemEntity>()
+            .Where(item => idList.Contains(item.NoveltyId))
+            .ToListAsync();
+
+        return entities.Select(entity => NoveltyMapper.ToModel(entity, unlockItemEntities.Where(item => item.NoveltyId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Novelty>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<NoveltyEntity>().ToListAsync();

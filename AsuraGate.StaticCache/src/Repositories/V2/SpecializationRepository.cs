@@ -26,6 +26,21 @@ public class SpecializationRepository :
         return SpecializationMapper.ToModel(entity, traitEntities);
     }
 
+    public async Task<IEnumerable<Specialization>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<SpecializationEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var traitEntities = await _database.Connection
+            .Table<SpecializationTraitEntity>()
+            .Where(trait => idList.Contains(trait.SpecializationId))
+            .ToListAsync();
+
+        return entities.Select(entity => SpecializationMapper.ToModel(entity, traitEntities.Where(trait => trait.SpecializationId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Specialization>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<SpecializationEntity>().ToListAsync();

@@ -20,6 +20,16 @@ public class MiniRepository :
         return entity is null ? null : MiniMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<Mini>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<MiniEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(MiniMapper.ToModel);
+    }
+
     public async Task<IEnumerable<Mini>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<MiniEntity>().ToListAsync();

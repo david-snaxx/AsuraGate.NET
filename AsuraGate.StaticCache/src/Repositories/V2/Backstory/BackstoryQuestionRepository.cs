@@ -28,6 +28,33 @@ public class BackstoryQuestionRepository :
         return BackstoryQuestionMapper.ToModel(entity, answerEntities, raceEntities, professionEntities);
     }
 
+    public async Task<IEnumerable<BackstoryQuestion>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<BackstoryQuestionEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var answerEntities = await _database.Connection
+            .Table<BackstoryQuestionAnswerEntity>()
+            .Where(answer => idList.Contains(answer.BackstoryQuestionId))
+            .ToListAsync();
+        var raceEntities = await _database.Connection
+            .Table<BackstoryQuestionRaceEntity>()
+            .Where(race => idList.Contains(race.BackstoryQuestionId))
+            .ToListAsync();
+        var professionEntities = await _database.Connection
+            .Table<BackstoryQuestionProfessionEntity>()
+            .Where(profession => idList.Contains(profession.BackstoryQuestionId))
+            .ToListAsync();
+
+        return entities.Select(entity => BackstoryQuestionMapper.ToModel(
+            entity,
+            answerEntities.Where(answer => answer.BackstoryQuestionId == entity.Id),
+            raceEntities.Where(race => race.BackstoryQuestionId == entity.Id),
+            professionEntities.Where(profession => profession.BackstoryQuestionId == entity.Id)));
+    }
+
     public async Task<IEnumerable<BackstoryQuestion>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<BackstoryQuestionEntity>().ToListAsync();

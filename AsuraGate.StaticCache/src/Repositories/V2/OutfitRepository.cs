@@ -26,6 +26,21 @@ public class OutfitRepository :
         return OutfitMapper.ToModel(entity, unlockItemEntities);
     }
 
+    public async Task<IEnumerable<Outfit>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<OutfitEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var unlockItemEntities = await _database.Connection
+            .Table<OutfitUnlockItemEntity>()
+            .Where(item => idList.Contains(item.OutfitId))
+            .ToListAsync();
+
+        return entities.Select(entity => OutfitMapper.ToModel(entity, unlockItemEntities.Where(item => item.OutfitId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Outfit>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<OutfitEntity>().ToListAsync();

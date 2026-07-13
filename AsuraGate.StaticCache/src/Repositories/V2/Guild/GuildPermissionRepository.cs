@@ -20,6 +20,16 @@ public class GuildPermissionRepository :
         return entity is null ? null : GuildPermissionMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<GuildPermission>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<GuildPermissionEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(GuildPermissionMapper.ToModel);
+    }
+
     public async Task<IEnumerable<GuildPermission>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<GuildPermissionEntity>().ToListAsync();

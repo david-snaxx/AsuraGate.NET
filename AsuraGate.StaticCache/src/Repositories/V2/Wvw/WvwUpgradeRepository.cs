@@ -27,6 +27,28 @@ public class WvwUpgradeRepository :
         return WvwUpgradeMapper.ToModel(entity, tierEntities, itemEntities);
     }
 
+    public async Task<IEnumerable<WvwUpgrade>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<WvwUpgradeEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var tierEntities = await _database.Connection
+            .Table<WvwUpgradeTierEntity>()
+            .Where(tier => idList.Contains(tier.WvwUpgradeId))
+            .ToListAsync();
+        var itemEntities = await _database.Connection
+            .Table<WvwUpgradeItemEntity>()
+            .Where(item => idList.Contains(item.WvwUpgradeId))
+            .ToListAsync();
+
+        return entities.Select(entity => WvwUpgradeMapper.ToModel(
+            entity,
+            tierEntities.Where(tier => tier.WvwUpgradeId == entity.Id),
+            itemEntities.Where(item => item.WvwUpgradeId == entity.Id)));
+    }
+
     public async Task<IEnumerable<WvwUpgrade>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<WvwUpgradeEntity>().ToListAsync();

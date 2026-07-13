@@ -27,6 +27,28 @@ public class RaidRepository :
         return RaidMapper.ToModel(entity, wingEntities, eventEntities);
     }
 
+    public async Task<IEnumerable<Raid>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<RaidEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var wingEntities = await _database.Connection
+            .Table<RaidWingEntity>()
+            .Where(wing => idList.Contains(wing.RaidId))
+            .ToListAsync();
+        var eventEntities = await _database.Connection
+            .Table<RaidEventEntity>()
+            .Where(@event => idList.Contains(@event.RaidId))
+            .ToListAsync();
+
+        return entities.Select(entity => RaidMapper.ToModel(
+            entity,
+            wingEntities.Where(wing => wing.RaidId == entity.Id),
+            eventEntities.Where(@event => @event.RaidId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Raid>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<RaidEntity>().ToListAsync();

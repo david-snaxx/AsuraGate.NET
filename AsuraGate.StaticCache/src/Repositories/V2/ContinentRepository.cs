@@ -26,6 +26,21 @@ public class ContinentRepository :
         return ContinentMapper.ToModel(entity, floorIdEntities);
     }
 
+    public async Task<IEnumerable<Continent>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<ContinentEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var floorIdEntities = await _database.Connection
+            .Table<ContinentFloorIdEntity>()
+            .Where(floor => idList.Contains(floor.ContinentId))
+            .ToListAsync();
+
+        return entities.Select(entity => ContinentMapper.ToModel(entity, floorIdEntities.Where(floor => floor.ContinentId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Continent>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<ContinentEntity>().ToListAsync();

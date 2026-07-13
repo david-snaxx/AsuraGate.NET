@@ -20,6 +20,16 @@ public class LogoRepository :
         return entity is null ? null : LogoMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<Logo>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<LogoEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(LogoMapper.ToModel);
+    }
+
     public async Task<IEnumerable<Logo>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<LogoEntity>().ToListAsync();

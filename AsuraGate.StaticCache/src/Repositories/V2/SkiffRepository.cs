@@ -26,6 +26,21 @@ public class SkiffRepository :
         return SkiffMapper.ToModel(entity, dyeSlotEntities);
     }
 
+    public async Task<IEnumerable<Skiff>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<SkiffEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var dyeSlotEntities = await _database.Connection
+            .Table<SkiffDyeSlotEntity>()
+            .Where(slot => idList.Contains(slot.SkiffId))
+            .ToListAsync();
+
+        return entities.Select(entity => SkiffMapper.ToModel(entity, dyeSlotEntities.Where(slot => slot.SkiffId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Skiff>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<SkiffEntity>().ToListAsync();

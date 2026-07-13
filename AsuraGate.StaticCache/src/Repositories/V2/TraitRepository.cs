@@ -29,6 +29,33 @@ public class TraitRepository :
         return TraitMapper.ToModel(entity, factEntities, skillEntities, skillFactEntities);
     }
 
+    public async Task<IEnumerable<Trait>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<TraitEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var factEntities = await _database.Connection
+            .Table<TraitFactEntity>()
+            .Where(fact => idList.Contains(fact.TraitId))
+            .ToListAsync();
+        var skillEntities = await _database.Connection
+            .Table<TraitSkillEntity>()
+            .Where(skill => idList.Contains(skill.TraitId))
+            .ToListAsync();
+        var skillFactEntities = await _database.Connection
+            .Table<TraitSkillFactEntity>()
+            .Where(fact => idList.Contains(fact.TraitId))
+            .ToListAsync();
+
+        return entities.Select(entity => TraitMapper.ToModel(
+            entity,
+            factEntities.Where(fact => fact.TraitId == entity.Id),
+            skillEntities.Where(skill => skill.TraitId == entity.Id),
+            skillFactEntities.Where(fact => fact.TraitId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Trait>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<TraitEntity>().ToListAsync();

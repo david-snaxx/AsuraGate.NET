@@ -29,6 +29,38 @@ public class RecipeRepository :
         return RecipeMapper.ToModel(entity, professionEntities, flagEntities, ingredientEntities, guildIngredientEntities);
     }
 
+    public async Task<IEnumerable<Recipe>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<RecipeEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var professionEntities = await _database.Connection
+            .Table<RecipeProfessionEntity>()
+            .Where(profession => idList.Contains(profession.RecipeId))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<RecipeFlagEntity>()
+            .Where(flag => idList.Contains(flag.RecipeId))
+            .ToListAsync();
+        var ingredientEntities = await _database.Connection
+            .Table<RecipeIngredientEntity>()
+            .Where(ingredient => idList.Contains(ingredient.RecipeId))
+            .ToListAsync();
+        var guildIngredientEntities = await _database.Connection
+            .Table<RecipeGuildIngredientEntity>()
+            .Where(ingredient => idList.Contains(ingredient.RecipeId))
+            .ToListAsync();
+
+        return entities.Select(entity => RecipeMapper.ToModel(
+            entity,
+            professionEntities.Where(profession => profession.RecipeId == entity.Id),
+            flagEntities.Where(flag => flag.RecipeId == entity.Id),
+            ingredientEntities.Where(ingredient => ingredient.RecipeId == entity.Id),
+            guildIngredientEntities.Where(ingredient => ingredient.RecipeId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Recipe>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<RecipeEntity>().ToListAsync();

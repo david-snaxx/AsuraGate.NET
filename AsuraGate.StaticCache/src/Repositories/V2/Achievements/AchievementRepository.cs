@@ -31,6 +31,43 @@ public class AchievementRepository :
         return AchievementMapper.ToModel(entity, flagEntities, tierEntities, prerequisiteEntities, rewardEntities, bitEntities);
     }
 
+    public async Task<IEnumerable<Achievement>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<AchievementEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<AchievementFlagEntity>()
+            .Where(flag => idList.Contains(flag.AchievementId))
+            .ToListAsync();
+        var tierEntities = await _database.Connection
+            .Table<AchievementTierEntity>()
+            .Where(tier => idList.Contains(tier.AchievementId))
+            .ToListAsync();
+        var prerequisiteEntities = await _database.Connection
+            .Table<AchievementPrerequisiteEntity>()
+            .Where(prerequisite => idList.Contains(prerequisite.AchievementId))
+            .ToListAsync();
+        var rewardEntities = await _database.Connection
+            .Table<AchievementRewardEntity>()
+            .Where(reward => idList.Contains(reward.AchievementId))
+            .ToListAsync();
+        var bitEntities = await _database.Connection
+            .Table<AchievementBitEntity>()
+            .Where(bit => idList.Contains(bit.AchievementId))
+            .ToListAsync();
+
+        return entities.Select(entity => AchievementMapper.ToModel(
+            entity,
+            flagEntities.Where(flag => flag.AchievementId == entity.Id),
+            tierEntities.Where(tier => tier.AchievementId == entity.Id),
+            prerequisiteEntities.Where(prerequisite => prerequisite.AchievementId == entity.Id),
+            rewardEntities.Where(reward => reward.AchievementId == entity.Id),
+            bitEntities.Where(bit => bit.AchievementId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Achievement>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<AchievementEntity>().ToListAsync();

@@ -20,6 +20,16 @@ public class CurrencyRepository :
         return entity is null ? null : CurrencyMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<Currency>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<CurrencyEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(CurrencyMapper.ToModel);
+    }
+
     public async Task<IEnumerable<Currency>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<CurrencyEntity>().ToListAsync();

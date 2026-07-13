@@ -26,6 +26,21 @@ public class GameMapRepository :
         return GameMapMapper.ToModel(entity, floorEntities);
     }
 
+    public async Task<IEnumerable<GameMap>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<GameMapEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var floorEntities = await _database.Connection
+            .Table<GameMapFloorEntity>()
+            .Where(floor => idList.Contains(floor.GameMapId))
+            .ToListAsync();
+
+        return entities.Select(entity => GameMapMapper.ToModel(entity, floorEntities.Where(floor => floor.GameMapId == entity.Id)));
+    }
+
     public async Task<IEnumerable<GameMap>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<GameMapEntity>().ToListAsync();

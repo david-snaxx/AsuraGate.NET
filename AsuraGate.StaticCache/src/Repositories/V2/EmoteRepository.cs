@@ -27,6 +27,28 @@ public class EmoteRepository :
         return EmoteMapper.ToModel(entity, commandEntities, unlockItemEntities);
     }
 
+    public async Task<IEnumerable<Emote>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<EmoteEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var commandEntities = await _database.Connection
+            .Table<EmoteCommandEntity>()
+            .Where(command => idList.Contains(command.EmoteId))
+            .ToListAsync();
+        var unlockItemEntities = await _database.Connection
+            .Table<EmoteUnlockItemEntity>()
+            .Where(item => idList.Contains(item.EmoteId))
+            .ToListAsync();
+
+        return entities.Select(entity => EmoteMapper.ToModel(
+            entity,
+            commandEntities.Where(command => command.EmoteId == entity.Id),
+            unlockItemEntities.Where(item => item.EmoteId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Emote>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<EmoteEntity>().ToListAsync();

@@ -57,6 +57,93 @@ public class ItemRepository :
             upgradeComponentBonusEntities);
     }
 
+    public async Task<IEnumerable<Item>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<ItemEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<ItemFlagEntity>()
+            .Where(flag => idList.Contains(flag.ItemId))
+            .ToListAsync();
+        var gameTypeEntities = await _database.Connection
+            .Table<ItemGameTypeEntity>()
+            .Where(gameType => idList.Contains(gameType.ItemId))
+            .ToListAsync();
+        var restrictionEntities = await _database.Connection
+            .Table<ItemRestrictionEntity>()
+            .Where(restriction => idList.Contains(restriction.ItemId))
+            .ToListAsync();
+        var upgradePathEntities = await _database.Connection
+            .Table<ItemUpgradePathEntity>()
+            .Where(path => idList.Contains(path.ItemId))
+            .ToListAsync();
+        var detailsEntities = await _database.Connection
+            .Table<ItemDetailsEntity>()
+            .Where(details => idList.Contains(details.ItemId))
+            .ToListAsync();
+        var infusionSlotEntities = await _database.Connection
+            .Table<ItemInfusionSlotEntity>()
+            .Where(slot => idList.Contains(slot.ItemId))
+            .ToListAsync();
+        var infusionSlotFlagEntities = await _database.Connection
+            .Table<ItemInfusionSlotFlagEntity>()
+            .Where(flag => idList.Contains(flag.ItemId))
+            .ToListAsync();
+        var statChoiceEntities = await _database.Connection
+            .Table<ItemStatChoiceEntity>()
+            .Where(choice => idList.Contains(choice.ItemId))
+            .ToListAsync();
+        var infixUpgradeAttributeEntities = await _database.Connection
+            .Table<ItemInfixUpgradeAttributeEntity>()
+            .Where(attribute => idList.Contains(attribute.ItemId))
+            .ToListAsync();
+        var extraRecipeEntities = await _database.Connection
+            .Table<ItemExtraRecipeEntity>()
+            .Where(recipe => idList.Contains(recipe.ItemId))
+            .ToListAsync();
+        var unlockSkinEntities = await _database.Connection
+            .Table<ItemUnlockSkinEntity>()
+            .Where(skin => idList.Contains(skin.ItemId))
+            .ToListAsync();
+        var vendorEntities = await _database.Connection
+            .Table<ItemVendorEntity>()
+            .Where(vendor => idList.Contains(vendor.ItemId))
+            .ToListAsync();
+        var upgradeComponentFlagEntities = await _database.Connection
+            .Table<ItemUpgradeComponentFlagEntity>()
+            .Where(flag => idList.Contains(flag.ItemId))
+            .ToListAsync();
+        var infusionUpgradeFlagEntities = await _database.Connection
+            .Table<ItemInfusionUpgradeFlagEntity>()
+            .Where(flag => idList.Contains(flag.ItemId))
+            .ToListAsync();
+        var upgradeComponentBonusEntities = await _database.Connection
+            .Table<ItemUpgradeComponentBonusEntity>()
+            .Where(bonus => idList.Contains(bonus.ItemId))
+            .ToListAsync();
+
+        return entities.Select(entity => ItemMapper.ToModel(
+            entity,
+            flagEntities.Where(flag => flag.ItemId == entity.Id),
+            gameTypeEntities.Where(gameType => gameType.ItemId == entity.Id),
+            restrictionEntities.Where(restriction => restriction.ItemId == entity.Id),
+            upgradePathEntities.Where(path => path.ItemId == entity.Id),
+            detailsEntities.FirstOrDefault(details => details.ItemId == entity.Id),
+            infusionSlotEntities.Where(slot => slot.ItemId == entity.Id),
+            infusionSlotFlagEntities.Where(flag => flag.ItemId == entity.Id),
+            statChoiceEntities.Where(choice => choice.ItemId == entity.Id),
+            infixUpgradeAttributeEntities.Where(attribute => attribute.ItemId == entity.Id),
+            extraRecipeEntities.Where(recipe => recipe.ItemId == entity.Id),
+            unlockSkinEntities.Where(skin => skin.ItemId == entity.Id),
+            vendorEntities.Where(vendor => vendor.ItemId == entity.Id),
+            upgradeComponentFlagEntities.Where(flag => flag.ItemId == entity.Id),
+            infusionUpgradeFlagEntities.Where(flag => flag.ItemId == entity.Id),
+            upgradeComponentBonusEntities.Where(bonus => bonus.ItemId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Item>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<ItemEntity>().ToListAsync();

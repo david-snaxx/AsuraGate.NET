@@ -28,6 +28,33 @@ public class StoryRepository :
         return StoryMapper.ToModel(entity, chapterEntities, raceEntities, flagEntities);
     }
 
+    public async Task<IEnumerable<Story>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<StoryEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var chapterEntities = await _database.Connection
+            .Table<StoryChapterEntity>()
+            .Where(chapter => idList.Contains(chapter.StoryId))
+            .ToListAsync();
+        var raceEntities = await _database.Connection
+            .Table<StoryRaceEntity>()
+            .Where(race => idList.Contains(race.StoryId))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<StoryFlagEntity>()
+            .Where(flag => idList.Contains(flag.StoryId))
+            .ToListAsync();
+
+        return entities.Select(entity => StoryMapper.ToModel(
+            entity,
+            chapterEntities.Where(chapter => chapter.StoryId == entity.Id),
+            raceEntities.Where(race => race.StoryId == entity.Id),
+            flagEntities.Where(flag => flag.StoryId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Story>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<StoryEntity>().ToListAsync();

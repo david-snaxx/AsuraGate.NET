@@ -27,6 +27,28 @@ public class AchievementCategoryRepository :
         return AchievementCategoryMapper.ToModel(entity, achievementEntities, flagEntities);
     }
 
+    public async Task<IEnumerable<AchievementCategory>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<AchievementCategoryEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var achievementEntities = await _database.Connection
+            .Table<AchievementCategoryAchievementEntity>()
+            .Where(achievement => idList.Contains(achievement.CategoryId))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<AchievementCategoryAchievementFlagEntity>()
+            .Where(flag => idList.Contains(flag.CategoryId))
+            .ToListAsync();
+
+        return entities.Select(entity => AchievementCategoryMapper.ToModel(
+            entity,
+            achievementEntities.Where(achievement => achievement.CategoryId == entity.Id),
+            flagEntities.Where(flag => flag.CategoryId == entity.Id)));
+    }
+
     public async Task<IEnumerable<AchievementCategory>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<AchievementCategoryEntity>().ToListAsync();

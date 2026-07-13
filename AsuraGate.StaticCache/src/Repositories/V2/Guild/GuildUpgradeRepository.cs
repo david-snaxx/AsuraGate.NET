@@ -27,6 +27,28 @@ public class GuildUpgradeRepository :
         return GuildUpgradeMapper.ToModel(entity, prerequisiteEntities, costEntities);
     }
 
+    public async Task<IEnumerable<GuildUpgrade>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<GuildUpgradeEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var prerequisiteEntities = await _database.Connection
+            .Table<GuildUpgradePrerequisiteEntity>()
+            .Where(prerequisite => idList.Contains(prerequisite.GuildUpgradeId))
+            .ToListAsync();
+        var costEntities = await _database.Connection
+            .Table<GuildUpgradeCostEntity>()
+            .Where(cost => idList.Contains(cost.GuildUpgradeId))
+            .ToListAsync();
+
+        return entities.Select(entity => GuildUpgradeMapper.ToModel(
+            entity,
+            prerequisiteEntities.Where(prerequisite => prerequisite.GuildUpgradeId == entity.Id),
+            costEntities.Where(cost => cost.GuildUpgradeId == entity.Id)));
+    }
+
     public async Task<IEnumerable<GuildUpgrade>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<GuildUpgradeEntity>().ToListAsync();

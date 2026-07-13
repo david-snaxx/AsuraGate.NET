@@ -20,6 +20,16 @@ public class WvwRankRepository :
         return entity is null ? null : WvwRankMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<WvwRank>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<WvwRankEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(WvwRankMapper.ToModel);
+    }
+
     public async Task<IEnumerable<WvwRank>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<WvwRankEntity>().ToListAsync();

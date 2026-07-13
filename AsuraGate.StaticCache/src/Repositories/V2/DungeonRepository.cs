@@ -26,6 +26,21 @@ public class DungeonRepository :
         return DungeonMapper.ToModel(entity, pathEntities);
     }
 
+    public async Task<IEnumerable<Dungeon>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<DungeonEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var pathEntities = await _database.Connection
+            .Table<DungeonPathEntity>()
+            .Where(path => idList.Contains(path.DungeonId))
+            .ToListAsync();
+
+        return entities.Select(entity => DungeonMapper.ToModel(entity, pathEntities.Where(path => path.DungeonId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Dungeon>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<DungeonEntity>().ToListAsync();

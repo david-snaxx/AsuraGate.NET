@@ -26,6 +26,21 @@ public class MasteryRepository :
         return MasteryMapper.ToModel(entity, levelEntities);
     }
 
+    public async Task<IEnumerable<Mastery>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<MasteryEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var levelEntities = await _database.Connection
+            .Table<MasteryLevelEntity>()
+            .Where(level => idList.Contains(level.MasteryId))
+            .ToListAsync();
+
+        return entities.Select(entity => MasteryMapper.ToModel(entity, levelEntities.Where(level => level.MasteryId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Mastery>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<MasteryEntity>().ToListAsync();

@@ -27,6 +27,28 @@ public class MountTypeRepository :
         return MountTypeMapper.ToModel(entity, skinEntities, skillEntities);
     }
 
+    public async Task<IEnumerable<MountType>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<MountTypeEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var skinEntities = await _database.Connection
+            .Table<MountTypeSkinEntity>()
+            .Where(skin => idList.Contains(skin.MountTypeId))
+            .ToListAsync();
+        var skillEntities = await _database.Connection
+            .Table<MountTypeSkillEntity>()
+            .Where(skill => idList.Contains(skill.MountTypeId))
+            .ToListAsync();
+
+        return entities.Select(entity => MountTypeMapper.ToModel(
+            entity,
+            skinEntities.Where(skin => skin.MountTypeId == entity.Id),
+            skillEntities.Where(skill => skill.MountTypeId == entity.Id)));
+    }
+
     public async Task<IEnumerable<MountType>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<MountTypeEntity>().ToListAsync();

@@ -20,6 +20,16 @@ public class ApiFileRepository :
         return entity is null ? null : ApiFileMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<ApiFile>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<ApiFileEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(ApiFileMapper.ToModel);
+    }
+
     public async Task<IEnumerable<ApiFile>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<ApiFileEntity>().ToListAsync();

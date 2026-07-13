@@ -20,6 +20,16 @@ public class BuildRepository :
         return entity is null ? null : BuildMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<Build>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<BuildEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(BuildMapper.ToModel);
+    }
+
     public async Task<IEnumerable<Build>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<BuildEntity>().ToListAsync();

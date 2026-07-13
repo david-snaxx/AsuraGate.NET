@@ -45,6 +45,63 @@ public class ProfessionRepository :
             weaponSkillEntities);
     }
 
+    public async Task<IEnumerable<Profession>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<ProfessionEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var specializationEntities = await _database.Connection
+            .Table<ProfessionSpecializationEntity>()
+            .Where(specialization => idList.Contains(specialization.ProfessionId))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<ProfessionFlagEntity>()
+            .Where(flag => idList.Contains(flag.ProfessionId))
+            .ToListAsync();
+        var skillEntities = await _database.Connection
+            .Table<ProfessionSkillEntity>()
+            .Where(skill => idList.Contains(skill.ProfessionId))
+            .ToListAsync();
+        var skillPaletteEntities = await _database.Connection
+            .Table<ProfessionSkillPaletteEntity>()
+            .Where(pair => idList.Contains(pair.ProfessionId))
+            .ToListAsync();
+        var trainingEntities = await _database.Connection
+            .Table<ProfessionTrainingEntity>()
+            .Where(training => idList.Contains(training.ProfessionId))
+            .ToListAsync();
+        var trainingTrackEntryEntities = await _database.Connection
+            .Table<ProfessionTrainingTrackEntryEntity>()
+            .Where(entry => idList.Contains(entry.ProfessionId))
+            .ToListAsync();
+        var weaponEntities = await _database.Connection
+            .Table<ProfessionWeaponEntity>()
+            .Where(weapon => idList.Contains(weapon.ProfessionId))
+            .ToListAsync();
+        var weaponFlagEntities = await _database.Connection
+            .Table<ProfessionWeaponFlagEntity>()
+            .Where(flag => idList.Contains(flag.ProfessionId))
+            .ToListAsync();
+        var weaponSkillEntities = await _database.Connection
+            .Table<ProfessionWeaponSkillEntity>()
+            .Where(skill => idList.Contains(skill.ProfessionId))
+            .ToListAsync();
+
+        return entities.Select(entity => ProfessionMapper.ToModel(
+            entity,
+            specializationEntities.Where(specialization => specialization.ProfessionId == entity.Id),
+            flagEntities.Where(flag => flag.ProfessionId == entity.Id),
+            skillEntities.Where(skill => skill.ProfessionId == entity.Id),
+            skillPaletteEntities.Where(pair => pair.ProfessionId == entity.Id),
+            trainingEntities.Where(training => training.ProfessionId == entity.Id),
+            trainingTrackEntryEntities.Where(entry => entry.ProfessionId == entity.Id),
+            weaponEntities.Where(weapon => weapon.ProfessionId == entity.Id),
+            weaponFlagEntities.Where(flag => flag.ProfessionId == entity.Id),
+            weaponSkillEntities.Where(skill => skill.ProfessionId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Profession>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<ProfessionEntity>().ToListAsync();

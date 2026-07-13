@@ -20,6 +20,16 @@ public class QuagganRepository :
         return entity is null ? null : QuagganMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<Quaggan>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<QuagganEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(QuagganMapper.ToModel);
+    }
+
     public async Task<IEnumerable<Quaggan>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<QuagganEntity>().ToListAsync();

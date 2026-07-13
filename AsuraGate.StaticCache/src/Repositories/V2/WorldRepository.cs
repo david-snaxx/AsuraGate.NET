@@ -20,6 +20,16 @@ public class WorldRepository :
         return entity is null ? null : WorldMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<World>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<WorldEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(WorldMapper.ToModel);
+    }
+
     public async Task<IEnumerable<World>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<WorldEntity>().ToListAsync();

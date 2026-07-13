@@ -26,6 +26,21 @@ public class AchievementGroupRepository :
         return AchievementGroupMapper.ToModel(entity, categoryEntities);
     }
 
+    public async Task<IEnumerable<AchievementGroup>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<AchievementGroupEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var categoryEntities = await _database.Connection
+            .Table<AchievementGroupCategoryEntity>()
+            .Where(category => idList.Contains(category.AchievementGroupId))
+            .ToListAsync();
+
+        return entities.Select(entity => AchievementGroupMapper.ToModel(entity, categoryEntities.Where(category => category.AchievementGroupId == entity.Id)));
+    }
+
     public async Task<IEnumerable<AchievementGroup>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<AchievementGroupEntity>().ToListAsync();

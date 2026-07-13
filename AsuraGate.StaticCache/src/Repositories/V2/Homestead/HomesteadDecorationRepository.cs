@@ -26,6 +26,21 @@ public class HomesteadDecorationRepository :
         return HomesteadDecorationMapper.ToModel(entity, categoryEntities);
     }
 
+    public async Task<IEnumerable<HomesteadDecoration>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<HomesteadDecorationEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var categoryEntities = await _database.Connection
+            .Table<HomesteadDecorationCategoryLinkEntity>()
+            .Where(category => idList.Contains(category.HomesteadDecorationId))
+            .ToListAsync();
+
+        return entities.Select(entity => HomesteadDecorationMapper.ToModel(entity, categoryEntities.Where(category => category.HomesteadDecorationId == entity.Id)));
+    }
+
     public async Task<IEnumerable<HomesteadDecoration>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<HomesteadDecorationEntity>().ToListAsync();

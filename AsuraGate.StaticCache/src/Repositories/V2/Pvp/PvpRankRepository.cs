@@ -26,6 +26,21 @@ public class PvpRankRepository :
         return PvpRankMapper.ToModel(entity, levelEntities);
     }
 
+    public async Task<IEnumerable<PvpRank>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<PvpRankEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var levelEntities = await _database.Connection
+            .Table<PvpRankLevelEntity>()
+            .Where(level => idList.Contains(level.PvpRankId))
+            .ToListAsync();
+
+        return entities.Select(entity => PvpRankMapper.ToModel(entity, levelEntities.Where(level => level.PvpRankId == entity.Id)));
+    }
+
     public async Task<IEnumerable<PvpRank>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<PvpRankEntity>().ToListAsync();

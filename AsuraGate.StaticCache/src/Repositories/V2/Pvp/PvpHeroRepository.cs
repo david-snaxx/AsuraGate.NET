@@ -28,6 +28,33 @@ public class PvpHeroRepository :
         return PvpHeroMapper.ToModel(entity, skinEntities, unlockItemEntities);
     }
 
+    public async Task<IEnumerable<PvpHero>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<PvpHeroEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var skinEntities = await _database.Connection
+            .Table<PvpHeroSkinEntity>()
+            .Where(skin => idList.Contains(skin.PvpHeroId))
+            .ToListAsync();
+        var skinIds = skinEntities
+            .Select(skin => skin.Id)
+            .ToList();
+        var unlockItemEntities = await _database.Connection
+            .Table<PvpHeroSkinUnlockItemEntity>()
+            .Where(item => skinIds.Contains(item.PvpHeroSkinId))
+            .ToListAsync();
+
+        return entities.Select(entity =>
+        {
+            var skinsForHero = skinEntities.Where(skin => skin.PvpHeroId == entity.Id).ToList();
+            var batchSkinIds = skinsForHero.Select(skin => skin.Id).ToHashSet();
+            return PvpHeroMapper.ToModel(entity, skinsForHero, unlockItemEntities.Where(item => batchSkinIds.Contains(item.PvpHeroSkinId)));
+        });
+    }
+
     public async Task<IEnumerable<PvpHero>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<PvpHeroEntity>().ToListAsync();

@@ -27,6 +27,23 @@ public class DyeRepository :
         return DyeMapper.ToModel(entity, categoryEntities);
     }
 
+    public async Task<IEnumerable<Dye>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idsList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<DyeEntity>()
+            .Where(dye => idsList.Contains(dye.Id))
+            .ToListAsync();
+        var categoryEntities = await _database.Connection
+            .Table<DyeCategoryEntity>()
+            .Where(category => idsList.Contains(category.DyeId))
+            .ToListAsync();
+        return entities.Select(entity =>
+        {
+            return DyeMapper.ToModel(entity, categoryEntities.Where(category => category.DyeId == entity.Id));
+        });
+    }
+
     public async Task<IEnumerable<Dye>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<DyeEntity>().ToListAsync();

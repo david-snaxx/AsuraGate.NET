@@ -26,6 +26,21 @@ public class StorySeasonRepository :
         return StorySeasonMapper.ToModel(entity, storyEntities);
     }
 
+    public async Task<IEnumerable<StorySeason>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<StorySeasonEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var storyEntities = await _database.Connection
+            .Table<StorySeasonStoryEntity>()
+            .Where(story => idList.Contains(story.StorySeasonId))
+            .ToListAsync();
+
+        return entities.Select(entity => StorySeasonMapper.ToModel(entity, storyEntities.Where(story => story.StorySeasonId == entity.Id)));
+    }
+
     public async Task<IEnumerable<StorySeason>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<StorySeasonEntity>().ToListAsync();

@@ -27,6 +27,28 @@ public class GliderRepository :
         return GliderMapper.ToModel(entity, unlockItemEntities, defaultDyeEntities);
     }
 
+    public async Task<IEnumerable<Glider>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<GliderEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var unlockItemEntities = await _database.Connection
+            .Table<GliderUnlockItemEntity>()
+            .Where(item => idList.Contains(item.GliderId))
+            .ToListAsync();
+        var defaultDyeEntities = await _database.Connection
+            .Table<GliderDefaultDyeEntity>()
+            .Where(dye => idList.Contains(dye.GliderId))
+            .ToListAsync();
+
+        return entities.Select(entity => GliderMapper.ToModel(
+            entity,
+            unlockItemEntities.Where(item => item.GliderId == entity.Id),
+            defaultDyeEntities.Where(dye => dye.GliderId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Glider>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<GliderEntity>().ToListAsync();

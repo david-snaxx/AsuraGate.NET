@@ -53,6 +53,103 @@ public class ContinentFloorRepository :
             masteryPointEntities);
     }
 
+    public async Task<IEnumerable<ContinentFloor>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<ContinentFloorEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var regionEntities = await _database.Connection
+            .Table<ContinentFloorRegionEntity>()
+            .Where(region => idList.Contains(region.FloorId))
+            .ToListAsync();
+        var mapEntities = await _database.Connection
+            .Table<ContinentFloorMapEntity>()
+            .Where(map => idList.Contains(map.FloorId))
+            .ToListAsync();
+        var mapKeys = mapEntities
+            .Select(map => map.MapKey)
+            .ToList();
+
+        var godShrineEntities = await _database.Connection
+            .Table<ContinentFloorGodShrineEntity>()
+            .Where(shrine => mapKeys.Contains(shrine.MapKey))
+            .ToListAsync();
+        var pointOfInterestEntities = await _database.Connection
+            .Table<ContinentFloorPointOfInterestEntity>()
+            .Where(poi => mapKeys.Contains(poi.MapKey))
+            .ToListAsync();
+        var taskEntities = await _database.Connection
+            .Table<ContinentFloorTaskEntity>()
+            .Where(task => mapKeys.Contains(task.MapKey))
+            .ToListAsync();
+        var taskKeys = taskEntities
+            .Select(task => task.TaskKey)
+            .ToList();
+        var taskBoundsPointEntities = await _database.Connection
+            .Table<ContinentFloorTaskBoundsPointEntity>()
+            .Where(point => taskKeys.Contains(point.TaskKey))
+            .ToListAsync();
+        var skillChallengeEntities = await _database.Connection
+            .Table<ContinentFloorSkillChallengeEntity>()
+            .Where(challenge => mapKeys.Contains(challenge.MapKey))
+            .ToListAsync();
+        var sectorEntities = await _database.Connection
+            .Table<ContinentFloorSectorEntity>()
+            .Where(sector => mapKeys.Contains(sector.MapKey))
+            .ToListAsync();
+        var sectorKeys = sectorEntities
+            .Select(sector => sector.SectorKey)
+            .ToList();
+        var sectorBoundsPointEntities = await _database.Connection
+            .Table<ContinentFloorSectorBoundsPointEntity>()
+            .Where(point => sectorKeys.Contains(point.SectorKey))
+            .ToListAsync();
+        var adventureEntities = await _database.Connection
+            .Table<ContinentFloorAdventureEntity>()
+            .Where(adventure => mapKeys.Contains(adventure.MapKey))
+            .ToListAsync();
+        var masteryPointEntities = await _database.Connection
+            .Table<ContinentFloorMasteryPointEntity>()
+            .Where(point => mapKeys.Contains(point.MapKey))
+            .ToListAsync();
+        
+        return entities.Select(entity =>
+        {
+            var batchMapKeys = mapEntities
+                .Where(map => map.FloorId == entity.Id)
+                .Select(map => map.MapKey)
+                .ToHashSet();
+            var tasksForFloor = taskEntities
+                .Where(task => batchMapKeys.Contains(task.MapKey))
+                .ToList();
+            var batchTaskKeys = tasksForFloor
+                .Select(task => task.TaskKey)
+                .ToHashSet();
+            var sectorsForFloor = sectorEntities
+                .Where(sector => batchMapKeys.Contains(sector.MapKey))
+                .ToList();
+            var batchSectorKeys = sectorsForFloor
+                .Select(sector => sector.SectorKey)
+                .ToHashSet();
+
+            return ContinentFloorMapper.ToModel(
+                entity,
+                regionEntities.Where(region => region.FloorId == entity.Id),
+                mapEntities.Where(map => map.FloorId == entity.Id),
+                godShrineEntities.Where(shrine => batchMapKeys.Contains(shrine.MapKey)),
+                pointOfInterestEntities.Where(poi => batchMapKeys.Contains(poi.MapKey)),
+                tasksForFloor,
+                taskBoundsPointEntities.Where(point => batchTaskKeys.Contains(point.TaskKey)),
+                skillChallengeEntities.Where(challenge => batchMapKeys.Contains(challenge.MapKey)),
+                sectorsForFloor,
+                sectorBoundsPointEntities.Where(point => batchSectorKeys.Contains(point.SectorKey)),
+                adventureEntities.Where(adventure => batchMapKeys.Contains(adventure.MapKey)),
+                masteryPointEntities.Where(point => batchMapKeys.Contains(point.MapKey)));
+        });
+    }
+
     public async Task<IEnumerable<ContinentFloor>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<ContinentFloorEntity>().ToListAsync();

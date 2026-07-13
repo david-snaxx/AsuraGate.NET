@@ -26,6 +26,21 @@ public class FinisherRepository :
         return FinisherMapper.ToModel(entity, unlockItemEntities);
     }
 
+    public async Task<IEnumerable<Finisher>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<FinisherEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var unlockItemEntities = await _database.Connection
+            .Table<FinisherUnlockItemEntity>()
+            .Where(item => idList.Contains(item.FinisherId))
+            .ToListAsync();
+
+        return entities.Select(entity => FinisherMapper.ToModel(entity, unlockItemEntities.Where(item => item.FinisherId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Finisher>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<FinisherEntity>().ToListAsync();

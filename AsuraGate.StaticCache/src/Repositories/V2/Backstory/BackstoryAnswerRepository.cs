@@ -27,6 +27,28 @@ public class BackstoryAnswerRepository :
         return BackstoryAnswerMapper.ToModel(entity, professionEntities, raceEntities);
     }
 
+    public async Task<IEnumerable<BackstoryAnswer>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<BackstoryAnswerEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var professionEntities = await _database.Connection
+            .Table<BackstoryAnswerProfessionEntity>()
+            .Where(profession => idList.Contains(profession.BackstoryAnswerId))
+            .ToListAsync();
+        var raceEntities = await _database.Connection
+            .Table<BackstoryAnswerRaceEntity>()
+            .Where(race => idList.Contains(race.BackstoryAnswerId))
+            .ToListAsync();
+
+        return entities.Select(entity => BackstoryAnswerMapper.ToModel(
+            entity,
+            professionEntities.Where(profession => profession.BackstoryAnswerId == entity.Id),
+            raceEntities.Where(race => race.BackstoryAnswerId == entity.Id)));
+    }
+
     public async Task<IEnumerable<BackstoryAnswer>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<BackstoryAnswerEntity>().ToListAsync();

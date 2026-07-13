@@ -26,6 +26,21 @@ public class LegendRepository :
         return LegendMapper.ToModel(entity, utilityEntities);
     }
 
+    public async Task<IEnumerable<Legend>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<LegendEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var utilityEntities = await _database.Connection
+            .Table<LegendUtilityEntity>()
+            .Where(utility => idList.Contains(utility.LegendId))
+            .ToListAsync();
+
+        return entities.Select(entity => LegendMapper.ToModel(entity, utilityEntities.Where(utility => utility.LegendId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Legend>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<LegendEntity>().ToListAsync();

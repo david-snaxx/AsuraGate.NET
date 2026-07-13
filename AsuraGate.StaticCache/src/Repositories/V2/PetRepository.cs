@@ -26,6 +26,21 @@ public class PetRepository :
         return PetMapper.ToModel(entity, skillEntities);
     }
 
+    public async Task<IEnumerable<Pet>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<PetEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var skillEntities = await _database.Connection
+            .Table<PetSkillEntity>()
+            .Where(skill => idList.Contains(skill.PetId))
+            .ToListAsync();
+
+        return entities.Select(entity => PetMapper.ToModel(entity, skillEntities.Where(skill => skill.PetId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Pet>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<PetEntity>().ToListAsync();

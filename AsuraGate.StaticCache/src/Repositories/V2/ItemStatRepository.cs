@@ -26,6 +26,21 @@ public class ItemStatRepository :
         return ItemStatMapper.ToModel(entity, attributeEntities);
     }
 
+    public async Task<IEnumerable<ItemStat>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<ItemStatEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var attributeEntities = await _database.Connection
+            .Table<ItemStatAttributeEntity>()
+            .Where(attribute => idList.Contains(attribute.ItemStatId))
+            .ToListAsync();
+
+        return entities.Select(entity => ItemStatMapper.ToModel(entity, attributeEntities.Where(attribute => attribute.ItemStatId == entity.Id)));
+    }
+
     public async Task<IEnumerable<ItemStat>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<ItemStatEntity>().ToListAsync();

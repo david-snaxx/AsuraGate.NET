@@ -20,6 +20,16 @@ public class HomesteadDecorationCategoryRepository :
         return entity is null ? null : HomesteadDecorationCategoryMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<HomesteadDecorationCategory>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<HomesteadDecorationCategoryEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(HomesteadDecorationCategoryMapper.ToModel);
+    }
+
     public async Task<IEnumerable<HomesteadDecorationCategory>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<HomesteadDecorationCategoryEntity>().ToListAsync();

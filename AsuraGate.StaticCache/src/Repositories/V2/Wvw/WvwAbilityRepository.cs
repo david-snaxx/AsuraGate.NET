@@ -26,6 +26,21 @@ public class WvwAbilityRepository :
         return WvwAbilityMapper.ToModel(entity, rankEntities);
     }
 
+    public async Task<IEnumerable<WvwAbility>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<WvwAbilityEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var rankEntities = await _database.Connection
+            .Table<WvwAbilityRankEntity>()
+            .Where(rank => idList.Contains(rank.WvwAbilityId))
+            .ToListAsync();
+
+        return entities.Select(entity => WvwAbilityMapper.ToModel(entity, rankEntities.Where(rank => rank.WvwAbilityId == entity.Id)));
+    }
+
     public async Task<IEnumerable<WvwAbility>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<WvwAbilityEntity>().ToListAsync();

@@ -31,6 +31,43 @@ public class SkillRepository :
         return SkillMapper.ToModel(entity, professionEntities, categoryEntities, flagEntities, relatedSkillEntities, factEntities);
     }
 
+    public async Task<IEnumerable<Skill>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<SkillEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var professionEntities = await _database.Connection
+            .Table<SkillProfessionEntity>()
+            .Where(profession => idList.Contains(profession.SkillId))
+            .ToListAsync();
+        var categoryEntities = await _database.Connection
+            .Table<SkillCategoryEntity>()
+            .Where(category => idList.Contains(category.SkillId))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<SkillFlagEntity>()
+            .Where(flag => idList.Contains(flag.SkillId))
+            .ToListAsync();
+        var relatedSkillEntities = await _database.Connection
+            .Table<SkillRelatedSkillEntity>()
+            .Where(related => idList.Contains(related.SkillId))
+            .ToListAsync();
+        var factEntities = await _database.Connection
+            .Table<SkillFactEntity>()
+            .Where(fact => idList.Contains(fact.SkillId))
+            .ToListAsync();
+
+        return entities.Select(entity => SkillMapper.ToModel(
+            entity,
+            professionEntities.Where(profession => profession.SkillId == entity.Id),
+            categoryEntities.Where(category => category.SkillId == entity.Id),
+            flagEntities.Where(flag => flag.SkillId == entity.Id),
+            relatedSkillEntities.Where(related => related.SkillId == entity.Id),
+            factEntities.Where(fact => fact.SkillId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Skill>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<SkillEntity>().ToListAsync();

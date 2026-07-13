@@ -30,6 +30,38 @@ public class SkinRepository :
         return SkinMapper.ToModel(entity, flagEntities, restrictionEntities, detailsEntity, defaultDyeSlotEntities);
     }
 
+    public async Task<IEnumerable<Skin>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<SkinEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var flagEntities = await _database.Connection
+            .Table<SkinFlagEntity>()
+            .Where(flag => idList.Contains(flag.SkinId))
+            .ToListAsync();
+        var restrictionEntities = await _database.Connection
+            .Table<SkinRestrictionEntity>()
+            .Where(restriction => idList.Contains(restriction.SkinId))
+            .ToListAsync();
+        var detailsEntities = await _database.Connection
+            .Table<SkinDetailsEntity>()
+            .Where(details => idList.Contains(details.SkinId))
+            .ToListAsync();
+        var defaultDyeSlotEntities = await _database.Connection
+            .Table<SkinDefaultDyeSlotEntity>()
+            .Where(slot => idList.Contains(slot.SkinId))
+            .ToListAsync();
+
+        return entities.Select(entity => SkinMapper.ToModel(
+            entity,
+            flagEntities.Where(flag => flag.SkinId == entity.Id),
+            restrictionEntities.Where(restriction => restriction.SkinId == entity.Id),
+            detailsEntities.FirstOrDefault(details => details.SkinId == entity.Id),
+            defaultDyeSlotEntities.Where(slot => slot.SkinId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Skin>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<SkinEntity>().ToListAsync();

@@ -20,6 +20,16 @@ public class JadeBotRepository :
         return entity is null ? null : JadeBotMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<JadeBot>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<JadeBotEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(JadeBotMapper.ToModel);
+    }
+
     public async Task<IEnumerable<JadeBot>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<JadeBotEntity>().ToListAsync();

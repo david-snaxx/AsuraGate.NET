@@ -20,6 +20,16 @@ public class LegendaryArmoryItemRepository :
         return entity is null ? null : LegendaryArmoryItemMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<LegendaryArmoryItem>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<LegendaryArmoryItemEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(LegendaryArmoryItemMapper.ToModel);
+    }
+
     public async Task<IEnumerable<LegendaryArmoryItem>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<LegendaryArmoryItemEntity>().ToListAsync();

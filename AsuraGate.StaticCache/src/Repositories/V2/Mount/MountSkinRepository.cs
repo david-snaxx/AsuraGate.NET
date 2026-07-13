@@ -26,6 +26,21 @@ public class MountSkinRepository :
         return MountSkinMapper.ToModel(entity, dyeSlotEntities);
     }
 
+    public async Task<IEnumerable<MountSkin>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<MountSkinEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var dyeSlotEntities = await _database.Connection
+            .Table<MountSkinDyeSlotEntity>()
+            .Where(slot => idList.Contains(slot.MountSkinId))
+            .ToListAsync();
+
+        return entities.Select(entity => MountSkinMapper.ToModel(entity, dyeSlotEntities.Where(slot => slot.MountSkinId == entity.Id)));
+    }
+
     public async Task<IEnumerable<MountSkin>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<MountSkinEntity>().ToListAsync();

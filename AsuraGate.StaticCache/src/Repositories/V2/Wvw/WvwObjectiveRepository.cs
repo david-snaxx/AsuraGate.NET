@@ -5,7 +5,7 @@ using AsuraGate.StaticCache.Mappers.V2.Wvw;
 namespace AsuraGate.StaticCache.Repositories.V2.Wvw;
 
 public class WvwObjectiveRepository :
-    IStaticCacheRepository<WvwObjective, int>
+    IStaticCacheRepository<WvwObjective, string>
 {
     private readonly Gw2ApiStaticCacheDatabase _database;
 
@@ -14,10 +14,20 @@ public class WvwObjectiveRepository :
         _database = database;
     }
 
-    public async Task<WvwObjective?> GetAsync(int id)
+    public async Task<WvwObjective?> GetAsync(string id)
     {
         var entity = await _database.Connection.FindAsync<WvwObjectiveEntity>(id);
         return entity is null ? null : WvwObjectiveMapper.ToModel(entity);
+    }
+    
+    public async Task<IEnumerable<WvwObjective>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<WvwObjectiveEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(WvwObjectiveMapper.ToModel);
     }
 
     public async Task<IEnumerable<WvwObjective>> GetAllAsync()
@@ -36,5 +46,5 @@ public class WvwObjectiveRepository :
         }
     });
 
-    public Task DeleteAsync(int id) => _database.Connection.DeleteAsync<WvwObjectiveEntity>(id);
+    public Task DeleteAsync(string id) => _database.Connection.DeleteAsync<WvwObjectiveEntity>(id);
 }

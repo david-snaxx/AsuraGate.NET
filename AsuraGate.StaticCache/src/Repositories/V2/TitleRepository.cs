@@ -26,6 +26,21 @@ public class TitleRepository :
         return TitleMapper.ToModel(entity, achievementEntities);
     }
 
+    public async Task<IEnumerable<Title>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<TitleEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var achievementEntities = await _database.Connection
+            .Table<TitleAchievementEntity>()
+            .Where(achievement => idList.Contains(achievement.TitleId))
+            .ToListAsync();
+
+        return entities.Select(entity => TitleMapper.ToModel(entity, achievementEntities.Where(achievement => achievement.TitleId == entity.Id)));
+    }
+
     public async Task<IEnumerable<Title>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<TitleEntity>().ToListAsync();

@@ -26,6 +26,21 @@ public class MaterialCategoryRepository :
         return MaterialCategoryMapper.ToModel(entity, itemEntities);
     }
 
+    public async Task<IEnumerable<MaterialCategory>> GetManyAsync(IEnumerable<int> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<MaterialCategoryEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        var itemEntities = await _database.Connection
+            .Table<MaterialCategoryItemEntity>()
+            .Where(item => idList.Contains(item.MaterialCategoryId))
+            .ToListAsync();
+
+        return entities.Select(entity => MaterialCategoryMapper.ToModel(entity, itemEntities.Where(item => item.MaterialCategoryId == entity.Id)));
+    }
+
     public async Task<IEnumerable<MaterialCategory>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<MaterialCategoryEntity>().ToListAsync();

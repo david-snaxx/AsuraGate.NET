@@ -20,6 +20,16 @@ public class HomesteadGlyphRepository :
         return entity is null ? null : HomesteadGlyphMapper.ToModel(entity);
     }
 
+    public async Task<IEnumerable<HomesteadGlyph>> GetManyAsync(IEnumerable<string> ids)
+    {
+        var idList = ids.ToList();
+        var entities = await _database.Connection
+            .Table<HomesteadGlyphEntity>()
+            .Where(x => idList.Contains(x.Id))
+            .ToListAsync();
+        return entities.Select(HomesteadGlyphMapper.ToModel);
+    }
+
     public async Task<IEnumerable<HomesteadGlyph>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<HomesteadGlyphEntity>().ToListAsync();
