@@ -1,4 +1,4 @@
-namespace AsuraGate.Persistence.Repositories;
+namespace AsuraGate.Persistence.Static.Repositories;
 
 public interface IStaticRepository<TModel, TId>
 {

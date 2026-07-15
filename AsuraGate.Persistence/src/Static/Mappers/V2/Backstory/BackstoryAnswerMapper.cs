@@ -1,8 +1,8 @@
 using System.Text.Json;
-using AsuraGate.Persistence.Entities.V2.Backstory;
+using AsuraGate.Persistence.Static.Entities.V2.Backstory;
 using AsuraGate.Spec.Models.V2.Backstory;
 
-namespace AsuraGate.Persistence.Mappers.V2.Backstory;
+namespace AsuraGate.Persistence.Static.Mappers.V2.Backstory;
 
 public static class BackstoryAnswerMapper
 {

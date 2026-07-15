@@ -1,7 +1,6 @@
 using SQLite;
-using AsuraGate.Persistence.Entities;
 
-namespace AsuraGate.Persistence.Entities.V2.Guild;
+namespace AsuraGate.Persistence.Static.Entities.V2.Guild;
 
 [Table("guild_permissions")]
 public class GuildPermissionEntity : IIdDataEntity<string>

@@ -1,7 +1,6 @@
 using SQLite;
-using AsuraGate.Persistence.Entities;
 
-namespace AsuraGate.Persistence.Entities.V2.Pvp;
+namespace AsuraGate.Persistence.Static.Entities.V2.Pvp;
 
 [Table("pvp_heroes")]
 public class PvpHeroEntity : IIdDataEntity<string>

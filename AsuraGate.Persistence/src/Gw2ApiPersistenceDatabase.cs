@@ -1,12 +1,16 @@
 using SQLite;
 using AsuraGate.Persistence.Entities.V2;
-using AsuraGate.Persistence.Entities.V2.Achievements;
-using AsuraGate.Persistence.Entities.V2.Backstory;
 using AsuraGate.Persistence.Entities.V2.Guild;
-using AsuraGate.Persistence.Entities.V2.Homestead;
-using AsuraGate.Persistence.Entities.V2.Mount;
 using AsuraGate.Persistence.Entities.V2.Pvp;
 using AsuraGate.Persistence.Entities.V2.Wvw;
+using AsuraGate.Persistence.Static.Entities.V2;
+using AsuraGate.Persistence.Static.Entities.V2.Achievements;
+using AsuraGate.Persistence.Static.Entities.V2.Backstory;
+using AsuraGate.Persistence.Static.Entities.V2.Guild;
+using AsuraGate.Persistence.Static.Entities.V2.Homestead;
+using AsuraGate.Persistence.Static.Entities.V2.Mount;
+using AsuraGate.Persistence.Static.Entities.V2.Pvp;
+using AsuraGate.Persistence.Static.Entities.V2.Wvw;
 
 namespace AsuraGate.Persistence;
 

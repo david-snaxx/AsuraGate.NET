@@ -1,7 +1,6 @@
 using SQLite;
-using AsuraGate.Persistence.Entities;
 
-namespace AsuraGate.Persistence.Entities.V2;
+namespace AsuraGate.Persistence.Static.Entities.V2;
 
 [Table("story_journal_entries")]
 public class StoryJournalEntryEntity : IIdDataEntity<int>

@@ -1,8 +1,9 @@
 using System.Text.Json;
 using AsuraGate.Persistence.Entities.V2.Guild;
+using AsuraGate.Persistence.Static.Entities.V2.Guild;
 using AsuraGate.Spec.Models.V2.Guild;
 
-namespace AsuraGate.Persistence.Mappers.V2.Guild;
+namespace AsuraGate.Persistence.Static.Mappers.V2.Guild;
 
 public static class GuildPermissionMapper
 {

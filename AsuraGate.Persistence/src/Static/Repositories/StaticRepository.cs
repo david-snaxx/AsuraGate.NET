@@ -1,6 +1,7 @@
 using AsuraGate.Persistence.Entities;
+using AsuraGate.Persistence.Static.Entities;
 
-namespace AsuraGate.Persistence.Repositories;
+namespace AsuraGate.Persistence.Static.Repositories;
 
 /// <summary>
 /// Generic id+data cache repository. Every static entity is shaped identically

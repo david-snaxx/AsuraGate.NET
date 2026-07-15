@@ -1,7 +1,6 @@
 using SQLite;
-using AsuraGate.Persistence.Entities;
 
-namespace AsuraGate.Persistence.Entities.V2.Homestead;
+namespace AsuraGate.Persistence.Static.Entities.V2.Homestead;
 
 [Table("homestead_decorations")]
 public class HomesteadDecorationEntity : IIdDataEntity<int>
