@@ -11,6 +11,7 @@ using AsuraGate.Persistence.Static.Entities.V2.Homestead;
 using AsuraGate.Persistence.Static.Entities.V2.Mount;
 using AsuraGate.Persistence.Static.Entities.V2.Pvp;
 using AsuraGate.Persistence.Static.Entities.V2.Wvw;
+using AsuraGate.Persistence.Static.Meta;
 
 namespace AsuraGate.Persistence;
 
@@ -34,6 +35,8 @@ public class Gw2ApiPersistenceDatabase : IAsyncDisposable
 
     public async Task Initialize()
     {
+        await Connection.CreateTableAsync<StaticMetaEntity>();
+        
         // from root /v2/
         await Connection.CreateTableAsync<ApiFileEntity>();
         await Connection.CreateTableAsync<ContinentEntity>();

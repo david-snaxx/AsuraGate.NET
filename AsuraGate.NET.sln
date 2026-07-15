@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.Spec", "AsuraGate
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.Gateway", "AsuraGate.Gateway\AsuraGate.Gateway.csproj", "{17F66960-76F0-4E5B-AF8A-9998C63C6B80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.StaticCache", "AsuraGate.StaticCache\AsuraGate.StaticCache.csproj", "{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.Sync", "AsuraGate.Sync\AsuraGate.Sync.csproj", "{015A1B16-1AF2-4615-84A6-B210F095033D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsuraGate.Test", "AsuraGate.Test\AsuraGate.Test.csproj", "{6C7D5B9F-D480-4AB0-BC46-81A96A0826C5}"
@@ -46,18 +44,6 @@ Global
 		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Release|x64.Build.0 = Release|Any CPU
 		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Release|x86.ActiveCfg = Release|Any CPU
 		{17F66960-76F0-4E5B-AF8A-9998C63C6B80}.Release|x86.Build.0 = Release|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Debug|x64.Build.0 = Debug|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Debug|x86.Build.0 = Debug|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Release|x64.ActiveCfg = Release|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Release|x64.Build.0 = Release|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Release|x86.ActiveCfg = Release|Any CPU
-		{E7CD2ED3-62D4-4E88-97FD-6E698C54F2E5}.Release|x86.Build.0 = Release|Any CPU
 		{015A1B16-1AF2-4615-84A6-B210F095033D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{015A1B16-1AF2-4615-84A6-B210F095033D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{015A1B16-1AF2-4615-84A6-B210F095033D}.Debug|x64.ActiveCfg = Debug|Any CPU

@@ -1,6 +1,6 @@
 is_global = true
 build_property.RootNamespace = AsuraGate.Spec
-build_property.ProjectDir = C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\
+build_property.ProjectDir = C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Spec\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.CsWinRTUseWindowsUIXamlProjections = false
