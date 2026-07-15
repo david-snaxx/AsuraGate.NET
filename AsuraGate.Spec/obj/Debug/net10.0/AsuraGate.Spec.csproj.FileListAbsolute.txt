@@ -10,3 +10,4 @@ C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Spec\obj\Debug\net10.0\AsuraGate.
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Spec\obj\Debug\net10.0\refint\AsuraGate.Spec.dll
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Spec\obj\Debug\net10.0\AsuraGate.Spec.pdb
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Spec\obj\Debug\net10.0\ref\AsuraGate.Spec.dll
+C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Spec\obj\Debug\net10.0\AsuraGate.Spec.sourcelink.json

@@ -8,3 +8,4 @@ C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\Asu
 C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.csproj.CoreCompileInputs.cache
 C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.dll
 C:\Users\snaxx\Desktop\AsuraGate.NET\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.pdb
+C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Spec\obj\Debug\netstandard2.1\AsuraGate.Spec.sourcelink.json

@@ -1,7 +1,7 @@
 {
-  "version": 3,
+  "version": 4,
   "targets": {
-    ".NETStandard,Version=v2.1": {
+    "netstandard2.1": {
       "Microsoft.Bcl.AsyncInterfaces/10.0.9": {
         "type": "package",
         "compile": {
@@ -700,13 +700,13 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETStandard,Version=v2.1": [
-      "PolySharp >= 1.16.0",
-      "System.Text.Json >= 10.0.9",
-      "sqlite-net-pcl >= 1.9.172"
-    ],
     "net10.0": [
       "PolySharp >= 1.16.0",
+      "sqlite-net-pcl >= 1.9.172"
+    ],
+    "netstandard2.1": [
+      "PolySharp >= 1.16.0",
+      "System.Text.Json >= 10.0.9",
       "sqlite-net-pcl >= 1.9.172"
     ]
   },
@@ -716,11 +716,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+      "projectUniqueName": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
       "projectName": "AsuraGate.Spec",
-      "projectPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+      "projectPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
       "packagesPath": "C:\\Users\\snaxx\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\obj\\",
+      "outputPath": "C:\\Users\\snaxx\\desktop\\asuragate.net\\AsuraGate.Spec\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "configFilePaths": [
@@ -735,10 +735,12 @@
       },
       "frameworks": {
         "net10.0": {
+          "framework": "net10.0",
           "targetAlias": "net10.0",
           "projectReferences": {}
         },
         "netstandard2.1": {
+          "framework": "netstandard2.1",
           "targetAlias": "netstandard2.1",
           "projectReferences": {}
         }
@@ -757,6 +759,7 @@
     },
     "frameworks": {
       "net10.0": {
+        "framework": "net10.0",
         "targetAlias": "net10.0",
         "dependencies": {
           "PolySharp": {
@@ -1062,6 +1065,7 @@
         }
       },
       "netstandard2.1": {
+        "framework": "netstandard2.1",
         "targetAlias": "netstandard2.1",
         "dependencies": {
           "PolySharp": {
@@ -1217,8 +1221,8 @@
       "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
-        ".NETStandard,Version=v2.1",
-        "net10.0"
+        "net10.0",
+        "netstandard2.1"
       ]
     }
   ]
