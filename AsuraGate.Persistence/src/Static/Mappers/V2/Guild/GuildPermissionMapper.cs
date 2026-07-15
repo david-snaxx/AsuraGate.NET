@@ -1,5 +1,4 @@
 using System.Text.Json;
-using AsuraGate.Persistence.Entities.V2.Guild;
 using AsuraGate.Persistence.Static.Entities.V2.Guild;
 using AsuraGate.Spec.Models.V2.Guild;
 

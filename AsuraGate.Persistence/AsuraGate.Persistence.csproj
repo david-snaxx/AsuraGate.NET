@@ -16,6 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="src\Dynamic\Entities\V2\" />
       <Folder Include="src\Static\Mappers\" />
     </ItemGroup>
 

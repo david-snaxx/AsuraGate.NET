@@ -1,4 +1,3 @@
-using AsuraGate.Persistence.Entities;
 using AsuraGate.Persistence.Static.Entities;
 
 namespace AsuraGate.Persistence.Static.Repositories;

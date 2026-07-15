@@ -1,8 +1,4 @@
 using SQLite;
-using AsuraGate.Persistence.Entities.V2;
-using AsuraGate.Persistence.Entities.V2.Guild;
-using AsuraGate.Persistence.Entities.V2.Pvp;
-using AsuraGate.Persistence.Entities.V2.Wvw;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Persistence.Static.Entities.V2.Achievements;
 using AsuraGate.Persistence.Static.Entities.V2.Backstory;

@@ -1,4 +1,3 @@
-using AsuraGate.Persistence.Entities.V2.Wvw;
 using AsuraGate.Persistence.Static.Entities.V2.Wvw;
 using AsuraGate.Persistence.Static.Mappers.V2.Wvw;
 using AsuraGate.Spec.Models.V2.Wvw;
