@@ -25,7 +25,7 @@ public class AsuraGateService : IAsyncDisposable
         Gw2ApiNavigator = Gw2ApiNavigator.Instance;
         Gw2ApiPersistenceDatabase = new Gw2ApiPersistenceDatabase(persistenceDatabasePath);
         Gw2ApiPersistenceDatabase.Initialize().Wait();
-        Api = new ProviderLink(Gw2ApiPersistenceDatabase, Gw2ApiGateway);
+        Api = new ProviderLink(Gw2ApiPersistenceDatabase, Gw2ApiGateway, _logger);
     }
 
     public async ValueTask DisposeAsync()

@@ -1,4 +1,5 @@
 using AsuraGate.Gateway;
+using Microsoft.Extensions.Logging;
 using AsuraGate.Spec.Models.V2;
 using AsuraGate.Spec.Requests.V2;
 using AsuraGate.Persistence.Static.Repositories.V2;
@@ -7,8 +8,8 @@ namespace AsuraGate.Sync.Providers.V2;
 
 public class QuagganProvider : Provider<Quaggan, string, QuagganRepository, QuagganRequest>
 {
-    public QuagganProvider(QuagganRepository repository, QuagganRequest request, Gw2ApiGateway gateway)
-        : base(repository, request, gateway)
+    public QuagganProvider(QuagganRepository repository, QuagganRequest request, Gw2ApiGateway gateway, ILogger? logger = null)
+        : base(repository, request, gateway, logger)
     {
     }
 }

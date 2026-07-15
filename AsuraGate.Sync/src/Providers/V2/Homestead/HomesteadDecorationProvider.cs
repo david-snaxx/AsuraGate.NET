@@ -1,4 +1,5 @@
 using AsuraGate.Gateway;
+using Microsoft.Extensions.Logging;
 using AsuraGate.Spec.Models.V2.Homestead;
 using AsuraGate.Spec.Requests.V2.Homestead;
 using AsuraGate.Persistence.Static.Repositories.V2.Homestead;
@@ -7,8 +8,8 @@ namespace AsuraGate.Sync.Providers.V2.Homestead;
 
 public class HomesteadDecorationProvider : Provider<HomesteadDecoration, int, HomesteadDecorationRepository, HomesteadDecorationRequest>
 {
-    public HomesteadDecorationProvider(HomesteadDecorationRepository repository, HomesteadDecorationRequest request, Gw2ApiGateway gateway)
-        : base(repository, request, gateway)
+    public HomesteadDecorationProvider(HomesteadDecorationRepository repository, HomesteadDecorationRequest request, Gw2ApiGateway gateway, ILogger? logger = null)
+        : base(repository, request, gateway, logger)
     {
     }
 }
