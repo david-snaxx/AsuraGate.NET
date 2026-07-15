@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2.Pvp;
 
 [Table("pvp_amulets")]
-public class PvpAmuletEntity
+public class PvpAmuletEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2.Mount;
 
 [Table("mount_skins")]
-public class MountSkinEntity
+public class MountSkinEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

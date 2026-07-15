@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2;
 
 [Table("currencies")]
-public class CurrencyEntity
+public class CurrencyEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

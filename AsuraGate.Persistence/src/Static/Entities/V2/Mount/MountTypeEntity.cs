@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2.Mount;
 
 [Table("mount_types")]
-public class MountTypeEntity
+public class MountTypeEntity : IIdDataEntity<string>
 {
     [PrimaryKey]
     [Column("id")]

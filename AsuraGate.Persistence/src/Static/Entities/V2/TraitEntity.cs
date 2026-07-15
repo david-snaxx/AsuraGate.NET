@@ -1,9 +1,10 @@
 ﻿using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2;
 
 [Table("traits")]
-public class TraitEntity
+public class TraitEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

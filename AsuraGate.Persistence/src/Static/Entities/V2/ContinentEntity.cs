@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2;
 
 [Table("continents")]
-public class ContinentEntity
+public class ContinentEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

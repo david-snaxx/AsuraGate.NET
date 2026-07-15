@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2;
 
 [Table("legends")]
-public class LegendEntity
+public class LegendEntity : IIdDataEntity<string>
 {
     [PrimaryKey]
     [Column("id")]

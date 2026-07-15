@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2;
 
 [Table("game_maps")]
-public class GameMapEntity
+public class GameMapEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

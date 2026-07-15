@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2.Wvw;
 
 [Table("wvw_abilities")]
-public class WvwAbilityEntity
+public class WvwAbilityEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

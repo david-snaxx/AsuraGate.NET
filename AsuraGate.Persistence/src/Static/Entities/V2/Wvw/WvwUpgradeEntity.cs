@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2.Wvw;
 
 [Table("wvw_upgrades")]
-public class WvwUpgradeEntity
+public class WvwUpgradeEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

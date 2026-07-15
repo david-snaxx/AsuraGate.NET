@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2;
 
 [Table("gliders")]
-public class GliderEntity
+public class GliderEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

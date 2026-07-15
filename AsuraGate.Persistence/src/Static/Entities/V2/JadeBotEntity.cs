@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2;
 
 [Table("jade_bots")]
-public class JadeBotEntity
+public class JadeBotEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

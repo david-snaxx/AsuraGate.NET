@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2.Backstory;
 
 [Table("backstory_questions")]
-public class BackstoryQuestionEntity
+public class BackstoryQuestionEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

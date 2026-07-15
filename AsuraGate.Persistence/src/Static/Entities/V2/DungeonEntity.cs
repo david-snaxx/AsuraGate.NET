@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2;
 
 [Table("dungeons")]
-public class DungeonEntity
+public class DungeonEntity : IIdDataEntity<string>
 {
     [PrimaryKey]
     [Column("id")]

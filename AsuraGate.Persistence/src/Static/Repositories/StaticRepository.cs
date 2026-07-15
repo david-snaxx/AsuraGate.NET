@@ -7,7 +7,8 @@ namespace AsuraGate.Persistence.Repositories;
 /// (an id column and a JSON <c>data</c> blob), so this one implementation covers
 /// every model - concrete repositories just supply the model/entity types and mapper delegates.
 /// </summary>
-public abstract class StaticRepository<TModel, TEntity, TId> : IStaticRepository<TModel, TId>
+public abstract class StaticRepository<TModel, TEntity, TId> : 
+    IStaticRepository<TModel, TId>
     where TEntity : class, IIdDataEntity<TId>, new()
 {
     private readonly Gw2ApiPersistenceDatabase _database;
