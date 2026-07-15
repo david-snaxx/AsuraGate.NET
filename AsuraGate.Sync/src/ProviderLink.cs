@@ -1,6 +1,5 @@
 using AsuraGate.Gateway;
 using AsuraGate.Spec.Requests;
-using AsuraGate.Spec.Requests.V2.Emblem;
 using AsuraGate.Persistence;
 using AsuraGate.Persistence.Static.Repositories.V2;
 using AsuraGate.Persistence.Static.Repositories.V2.Achievements;
@@ -72,8 +71,8 @@ public class ProviderLink
     public WorldProvider World => new(new WorldRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.World, _gateway);
 
     public ContinentFloorProvider ContinentFloor(int continentId) => new(new ContinentFloorRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.ContinentFloor(continentId), _gateway);
-    public EmblemComponentProvider<EmblemBackgroundRequest> EmblemBackground => new("background", new EmblemComponentRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Emblems.Background, _gateway);
-    public EmblemComponentProvider<EmblemForegroundRequest> EmblemForeground => new("foreground", new EmblemComponentRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Emblems.Foreground, _gateway);
+    public EmblemBackgroundProvider EmblemBackground => new(new EmblemBackgroundRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Emblems.Background, _gateway);
+    public EmblemForegroundProvider EmblemForeground => new(new EmblemForegroundRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Emblems.Foreground, _gateway);
 
     // branches
     public AchievementsProviders Achievements => new(_database, _gateway);

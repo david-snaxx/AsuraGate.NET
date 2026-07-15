@@ -41,7 +41,8 @@ public class Gw2ApiPersistenceDatabase : IAsyncDisposable
         await Connection.CreateTableAsync<CurrencyEntity>();
         await Connection.CreateTableAsync<DungeonEntity>();
         await Connection.CreateTableAsync<DyeEntity>();
-        await Connection.CreateTableAsync<EmblemComponentEntity>();
+        await Connection.CreateTableAsync<EmblemBackgroundEntity>();
+        await Connection.CreateTableAsync<EmblemForegroundEntity>();
         await Connection.CreateTableAsync<EmoteEntity>();
         await Connection.CreateTableAsync<FinisherEntity>();
         await Connection.CreateTableAsync<GameMapEntity>();

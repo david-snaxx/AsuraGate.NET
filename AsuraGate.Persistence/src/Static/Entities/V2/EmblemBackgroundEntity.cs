@@ -2,8 +2,8 @@ using SQLite;
 
 namespace AsuraGate.Persistence.Static.Entities.V2;
 
-[Table("emblem_components")]
-public class EmblemComponentEntity : IIdDataEntity<int>
+[Table("emblem_backgrounds")]
+public class EmblemBackgroundEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]
