@@ -1,4 +1,5 @@
 using AsuraGate.Gateway;
+using AsuraGate.Persistence.Static.Meta;
 using Microsoft.Extensions.Logging;
 using AsuraGate.Spec.Models.V2.Achievements;
 using AsuraGate.Spec.Requests.V2.Achievements;
@@ -8,8 +9,8 @@ namespace AsuraGate.Sync.Providers.V2.Achievements;
 
 public class AchievementProvider : Provider<Achievement, int, AchievementRepository, AchievementRequest>
 {
-    public AchievementProvider(AchievementRepository repository, AchievementRequest request, Gw2ApiGateway gateway, ILogger? logger = null)
-        : base(repository, request, gateway, logger)
+    public AchievementProvider(AchievementRepository repository, AchievementRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
+        : base(repository, request, gateway, staticMetaRepository, logger)
     {
     }
 }

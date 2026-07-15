@@ -1,4 +1,5 @@
 using AsuraGate.Gateway;
+using AsuraGate.Persistence.Static.Meta;
 using Microsoft.Extensions.Logging;
 using AsuraGate.Spec.Models.V2;
 using AsuraGate.Spec.Requests.V2.Emblem;
@@ -8,8 +9,8 @@ namespace AsuraGate.Sync.Providers.V2;
 
 public class EmblemBackgroundProvider : Provider<EmblemComponent, int, EmblemBackgroundRepository, EmblemBackgroundRequest>
 {
-    public EmblemBackgroundProvider(EmblemBackgroundRepository repository, EmblemBackgroundRequest request, Gw2ApiGateway gateway, ILogger? logger = null)
-        : base(repository, request, gateway, logger)
+    public EmblemBackgroundProvider(EmblemBackgroundRepository repository, EmblemBackgroundRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
+        : base(repository, request, gateway, staticMetaRepository, logger)
     {
     }
 }

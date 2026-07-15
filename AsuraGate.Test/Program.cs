@@ -6,7 +6,7 @@ using AsuraGate.Spec.Requests.Components;
 using AsuraGate.Sync;
 using Microsoft.Extensions.Logging;
 
-using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+using var loggerFactory = LoggerFactory.Create(builder => builder.SetMinimumLevel(LogLevel.Debug).AddConsole());
 ILogger logger = loggerFactory.CreateLogger<Gw2ApiGateway>();
 var asuraGate = await AsuraGateService.CreateAsync(
     "33D87A53-5244-5342-B864-80279DC25775350E691B-B958-4D0E-9938-E8AE9C0D5EC6",

@@ -1,6 +1,7 @@
 using AsuraGate.Gateway;
 using AsuraGate.Spec.Requests;
 using AsuraGate.Spec.Requests.Components;
+using AsuraGate.Persistence.Static.Meta;
 using AsuraGate.Persistence.Static.Repositories;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -16,13 +17,15 @@ public class Provider<TModel, TId, TRepository, TRequest>
     protected TRepository Repository { get; }
     protected TRequest Request { get; }
     protected Gw2ApiGateway Gateway { get; }
+    private readonly StaticMetaRepository _staticMetaRepository;
     private readonly ILogger _logger;
 
-    public Provider(TRepository repository, TRequest request, Gw2ApiGateway gateway, ILogger? logger = null)
+    public Provider(TRepository repository, TRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
     {
         Repository = repository;
         Request = request;
         Gateway = gateway;
+        _staticMetaRepository = staticMetaRepository;
         _logger = logger ?? NullLogger.Instance;
     }
 
@@ -90,6 +93,13 @@ public class Provider<TModel, TId, TRepository, TRequest>
 
     public async Task<IEnumerable<TModel>> GetAll()
     {
+        StaticMetaEntity? meta = await _staticMetaRepository.GetAsync(ResourceName);
+        if (meta is { HasFetchedAll: true })
+        {
+            _logger.LogDebug("{Resource}: already fully synced (per cache_meta); skipping live id check", ResourceName);
+            return await Repository.GetAllAsync();
+        }
+
         IExecutableGw2ApiRequest<IEnumerable<TId>,TId> idsRequest = Request.GetAllIds();
         IEnumerable<TId>? allIds = await Gateway.FetchAsync(idsRequest);
         if (allIds is null)
@@ -103,6 +113,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
         if (cached.Count == idList.Count)
         {
             _logger.LogDebug("{Resource}: cache complete for all {IdCount} live id(s)", ResourceName, idList.Count);
+            await MarkFullySynced();
             return cached;
         }
 
@@ -123,9 +134,20 @@ public class Provider<TModel, TId, TRepository, TRequest>
 
         List<TModel> fetchedList = fetched.ToList();
         await Repository.UpsertAllAsync(fetchedList);
+        await MarkFullySynced();
         _logger.LogInformation("{Resource}: cached {FetchedCount} item(s) after full refetch", ResourceName, fetchedList.Count);
         return fetchedList;
     }
+
+    // FetchedAllBuildId is left at its default (0) — there's no live build-id check wired up yet,
+    // so HasFetchedAll currently never gets invalidated automatically. Clear the static_meta row
+    // for a resource manually if it ever needs to be resynced.
+    private Task MarkFullySynced() => _staticMetaRepository.UpsertAsync(new StaticMetaEntity
+    {
+        Id = ResourceName,
+        HasFetchedAll = true,
+        FetchedAllAt = DateTime.UtcNow
+    });
 
     public Task<IEnumerable<TId>?> GetIds()
     {
