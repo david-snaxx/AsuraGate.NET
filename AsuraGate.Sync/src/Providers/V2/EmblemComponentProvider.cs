@@ -1,7 +1,7 @@
 using AsuraGate.Gateway;
 using AsuraGate.Spec.Models.V2;
 using AsuraGate.Spec.Requests.Components;
-using AsuraGate.StaticCache.Repositories.V2;
+using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
@@ -21,16 +21,18 @@ public class EmblemComponentProvider<TRequest>
         _gateway = gateway;
     }
 
+    // TODO: EmblemComponentEntity keys on componentId alone, so background/foreground ids can collide;
+    // needs splitting into separate per-slot tables/repositories.
     public async Task<EmblemComponent?> GetByIdAsync(int componentId)
     {
-        EmblemComponent? cached = await _repository.GetAsync(_slot, componentId);
+        EmblemComponent? cached = await _repository.GetAsync(componentId);
         if (cached is not null) return cached;
 
         IExecutableGw2ApiRequest<EmblemComponent, int> request = _request.GetById(componentId);
         EmblemComponent? fetched = await _gateway.FetchAsync(request);
         if (fetched is null) return null;
 
-        await _repository.UpsertAsync(_slot, fetched);
+        await _repository.UpsertAsync(fetched);
         return fetched;
     }
 }

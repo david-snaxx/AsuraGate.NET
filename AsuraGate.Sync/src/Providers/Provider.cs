@@ -1,13 +1,12 @@
 ﻿using AsuraGate.Gateway;
 using AsuraGate.Spec.Requests;
 using AsuraGate.Spec.Requests.Components;
-using AsuraGate.StaticCache;
-using AsuraGate.StaticCache.Repositories;
+using AsuraGate.Persistence.Static.Repositories;
 
 namespace AsuraGate.Sync.Providers;
 
 public class Provider<TModel, TId, TRepository, TRequest>
-    where TRepository : IStaticCacheRepository<TModel, TId>
+    where TRepository : IStaticRepository<TModel, TId>
     where TRequest : IGetsSingle<TModel, TId>, IGetsBulk<TModel, TId>, IGetsAll<TModel, TId>, IGetsIds<TId>
 {
     protected TRepository Repository { get; }

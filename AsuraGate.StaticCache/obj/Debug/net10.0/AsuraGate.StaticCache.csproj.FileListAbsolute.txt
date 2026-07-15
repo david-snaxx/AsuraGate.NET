@@ -13,3 +13,4 @@ C:\Users\snaxx\desktop\asuragate.net\AsuraGate.StaticCache\obj\Debug\net10.0\Asu
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.StaticCache\obj\Debug\net10.0\refint\AsuraGate.StaticCache.dll
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.StaticCache\obj\Debug\net10.0\AsuraGate.StaticCache.pdb
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.StaticCache\obj\Debug\net10.0\ref\AsuraGate.StaticCache.dll
+C:\Users\snaxx\desktop\asuragate.net\AsuraGate.StaticCache\obj\Debug\net10.0\AsuraGate.StaticCache.sourcelink.json

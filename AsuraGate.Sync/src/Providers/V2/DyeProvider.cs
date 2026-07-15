@@ -1,7 +1,7 @@
 using AsuraGate.Gateway;
 using AsuraGate.Spec.Models.V2;
 using AsuraGate.Spec.Requests.V2;
-using AsuraGate.StaticCache.Repositories.V2;
+using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
@@ -11,6 +11,4 @@ public class DyeProvider : Provider<Dye, int, DyeRepository, DyeRequest>
         : base(repository, request, gateway)
     {
     }
-
-    public Task<IEnumerable<Dye>> GetByCategoryAsync(string category) => Repository.GetByCategoryAsync(category);
 }

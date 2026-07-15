@@ -13,3 +13,4 @@ C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Gateway\obj\Debug\net10.0\AsuraGa
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Gateway\obj\Debug\net10.0\refint\AsuraGate.Gateway.dll
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Gateway\obj\Debug\net10.0\AsuraGate.Gateway.pdb
 C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Gateway\obj\Debug\net10.0\ref\AsuraGate.Gateway.dll
+C:\Users\snaxx\desktop\asuragate.net\AsuraGate.Gateway\obj\Debug\net10.0\AsuraGate.Gateway.sourcelink.json

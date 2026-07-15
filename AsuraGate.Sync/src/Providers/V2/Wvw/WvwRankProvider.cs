@@ -1,7 +1,7 @@
 using AsuraGate.Gateway;
 using AsuraGate.Spec.Models.V2.Wvw;
 using AsuraGate.Spec.Requests.V2.Wvw;
-using AsuraGate.StaticCache.Repositories.V2.Wvw;
+using AsuraGate.Persistence.Static.Repositories.V2.Wvw;
 
 namespace AsuraGate.Sync.Providers.V2.Wvw;
 

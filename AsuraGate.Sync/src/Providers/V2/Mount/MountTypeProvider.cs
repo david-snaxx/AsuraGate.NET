@@ -1,7 +1,7 @@
 using AsuraGate.Gateway;
 using AsuraGate.Spec.Models.V2.Mount;
 using AsuraGate.Spec.Requests.V2.Mount;
-using AsuraGate.StaticCache.Repositories.V2.Mount;
+using AsuraGate.Persistence.Static.Repositories.V2.Mount;
 
 namespace AsuraGate.Sync.Providers.V2.Mount;
 

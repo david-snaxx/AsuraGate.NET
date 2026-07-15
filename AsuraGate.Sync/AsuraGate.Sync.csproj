@@ -9,7 +9,7 @@
     <ItemGroup>
       <ProjectReference Include="..\AsuraGate.Gateway\AsuraGate.Gateway.csproj" />
       <ProjectReference Include="..\AsuraGate.Spec\AsuraGate.Spec.csproj" />
-      <ProjectReference Include="..\AsuraGate.StaticCache\AsuraGate.StaticCache.csproj" />
+      <ProjectReference Include="..\AsuraGate.Persistence\AsuraGate.Persistence.csproj" />
     </ItemGroup>
 
 </Project>

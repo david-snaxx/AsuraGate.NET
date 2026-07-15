@@ -1,15 +1,15 @@
 using AsuraGate.Gateway;
 using AsuraGate.Spec.Requests;
 using AsuraGate.Spec.Requests.V2.Emblem;
-using AsuraGate.StaticCache;
-using AsuraGate.StaticCache.Repositories.V2;
-using AsuraGate.StaticCache.Repositories.V2.Achievements;
-using AsuraGate.StaticCache.Repositories.V2.Backstory;
-using AsuraGate.StaticCache.Repositories.V2.Guild;
-using AsuraGate.StaticCache.Repositories.V2.Homestead;
-using AsuraGate.StaticCache.Repositories.V2.Mount;
-using AsuraGate.StaticCache.Repositories.V2.Pvp;
-using AsuraGate.StaticCache.Repositories.V2.Wvw;
+using AsuraGate.Persistence;
+using AsuraGate.Persistence.Static.Repositories.V2;
+using AsuraGate.Persistence.Static.Repositories.V2.Achievements;
+using AsuraGate.Persistence.Static.Repositories.V2.Backstory;
+using AsuraGate.Persistence.Static.Repositories.V2.Guild;
+using AsuraGate.Persistence.Static.Repositories.V2.Homestead;
+using AsuraGate.Persistence.Static.Repositories.V2.Mount;
+using AsuraGate.Persistence.Static.Repositories.V2.Pvp;
+using AsuraGate.Persistence.Static.Repositories.V2.Wvw;
 using AsuraGate.Sync.Providers.V2;
 using AsuraGate.Sync.Providers.V2.Achievements;
 using AsuraGate.Sync.Providers.V2.Backstory;
@@ -23,10 +23,10 @@ namespace AsuraGate.Sync;
 
 public class ProviderLink
 {
-    private readonly Gw2ApiStaticCacheDatabase _database;
+    private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Gw2ApiGateway _gateway;
 
-    internal ProviderLink(Gw2ApiStaticCacheDatabase database, Gw2ApiGateway gateway)
+    internal ProviderLink(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway)
     {
         _database = database;
         _gateway = gateway;
@@ -72,7 +72,6 @@ public class ProviderLink
     public WorldProvider World => new(new WorldRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.World, _gateway);
 
     public ContinentFloorProvider ContinentFloor(int continentId) => new(new ContinentFloorRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.ContinentFloor(continentId), _gateway);
-    public BuildProvider Build => new(new BuildRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Build, _gateway);
     public EmblemComponentProvider<EmblemBackgroundRequest> EmblemBackground => new("background", new EmblemComponentRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Emblems.Background, _gateway);
     public EmblemComponentProvider<EmblemForegroundRequest> EmblemForeground => new("foreground", new EmblemComponentRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Emblems.Foreground, _gateway);
 
@@ -88,10 +87,10 @@ public class ProviderLink
 
 public class AchievementsProviders
 {
-    private readonly Gw2ApiStaticCacheDatabase _database;
+    private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Gw2ApiGateway _gateway;
 
-    internal AchievementsProviders(Gw2ApiStaticCacheDatabase database, Gw2ApiGateway gateway)
+    internal AchievementsProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway)
     {
         _database = database;
         _gateway = gateway;
@@ -100,15 +99,14 @@ public class AchievementsProviders
     public AchievementProvider Root => new(new AchievementRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Achievements.Root, _gateway);
     public AchievementCategoryProvider Category => new(new AchievementCategoryRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Achievements.Category, _gateway);
     public AchievementGroupProvider Group => new(new AchievementGroupRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Achievements.Group, _gateway);
-    public AchievementDailyProvider Daily => new(new AchievementDailyRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Achievements.Daily, _gateway);
 }
 
 public class BackstoryProviders
 {
-    private readonly Gw2ApiStaticCacheDatabase _database;
+    private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Gw2ApiGateway _gateway;
 
-    internal BackstoryProviders(Gw2ApiStaticCacheDatabase database, Gw2ApiGateway gateway)
+    internal BackstoryProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway)
     {
         _database = database;
         _gateway = gateway;
@@ -120,10 +118,10 @@ public class BackstoryProviders
 
 public class GuildProviders
 {
-    private readonly Gw2ApiStaticCacheDatabase _database;
+    private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Gw2ApiGateway _gateway;
 
-    internal GuildProviders(Gw2ApiStaticCacheDatabase database, Gw2ApiGateway gateway)
+    internal GuildProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway)
     {
         _database = database;
         _gateway = gateway;
@@ -135,10 +133,10 @@ public class GuildProviders
 
 public class HomesteadProviders
 {
-    private readonly Gw2ApiStaticCacheDatabase _database;
+    private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Gw2ApiGateway _gateway;
 
-    internal HomesteadProviders(Gw2ApiStaticCacheDatabase database, Gw2ApiGateway gateway)
+    internal HomesteadProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway)
     {
         _database = database;
         _gateway = gateway;
@@ -151,10 +149,10 @@ public class HomesteadProviders
 
 public class MountProviders
 {
-    private readonly Gw2ApiStaticCacheDatabase _database;
+    private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Gw2ApiGateway _gateway;
 
-    internal MountProviders(Gw2ApiStaticCacheDatabase database, Gw2ApiGateway gateway)
+    internal MountProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway)
     {
         _database = database;
         _gateway = gateway;
@@ -166,10 +164,10 @@ public class MountProviders
 
 public class PvpProviders
 {
-    private readonly Gw2ApiStaticCacheDatabase _database;
+    private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Gw2ApiGateway _gateway;
 
-    internal PvpProviders(Gw2ApiStaticCacheDatabase database, Gw2ApiGateway gateway)
+    internal PvpProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway)
     {
         _database = database;
         _gateway = gateway;
@@ -182,10 +180,10 @@ public class PvpProviders
 
 public class WvwProviders
 {
-    private readonly Gw2ApiStaticCacheDatabase _database;
+    private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Gw2ApiGateway _gateway;
 
-    internal WvwProviders(Gw2ApiStaticCacheDatabase database, Gw2ApiGateway gateway)
+    internal WvwProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway)
     {
         _database = database;
         _gateway = gateway;
