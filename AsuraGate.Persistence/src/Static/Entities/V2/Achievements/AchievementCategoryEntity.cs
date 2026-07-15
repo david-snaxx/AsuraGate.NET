@@ -1,9 +1,10 @@
 using SQLite;
+using AsuraGate.Persistence.Entities;
 
 namespace AsuraGate.Persistence.Entities.V2.Achievements;
 
 [Table("achievement_categories")]
-public class AchievementCategoryEntity
+public class AchievementCategoryEntity : IIdDataEntity<int>
 {
     [PrimaryKey]
     [Column("id")]

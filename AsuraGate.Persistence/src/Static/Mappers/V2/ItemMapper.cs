@@ -1,0 +1,16 @@
+using System.Text.Json;
+using AsuraGate.Persistence.Entities.V2;
+using AsuraGate.Spec.Models.V2;
+
+namespace AsuraGate.Persistence.Mappers.V2;
+
+public static class ItemMapper
+{
+    public static ItemEntity ToEntity(Item model) => new ItemEntity()
+    {
+        Id = model.Id,
+        Data = JsonSerializer.Serialize(model)
+    };
+
+    public static Item ToModel(ItemEntity entity) => JsonSerializer.Deserialize<Item>(entity.Data)!;
+}
