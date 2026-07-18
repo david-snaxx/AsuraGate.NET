@@ -31,6 +31,11 @@ public class Gw2ApiService
     private const int MaxRetries = 5;
     private static readonly TimeSpan BaseRetryDelay = TimeSpan.FromSeconds(1);
 
+    // netstandard2.1 has no Random.Shared; a single instance shared across concurrent requests
+    // needs its own lock since System.Random isn't thread-safe for concurrent access.
+    private static readonly Random _jitterRandom = new();
+    private static readonly object _jitterRandomLock = new();
+
     private Gw2ApiService(HttpClient? httpClient = null)
     {
         if (httpClient is not null)
@@ -133,7 +138,7 @@ public class Gw2ApiService
         ILogger logger,
         CancellationToken cancellationToken = default)
     {
-        List<Uri> uris = idValues.Chunk(200)
+        List<Uri> uris = ChunkBy(idValues, 200)
             .Select(idBatch => BuildUri(
                 request.BaseRequest.EndpointUrl,
                 request.ExtraQueryParams.Union([new KeyValuePair<string, string>(idParamKey, string.Join(",", idBatch))])))
@@ -152,7 +157,7 @@ public class Gw2ApiService
         CancellationToken cancellationToken = default)
     {
         // Calling the endpoint with no id params returns just the list of all valid ids;
-        // the full objects have to be fetched afterwards via a chunked bulk request.
+        // the full objects have to be fetched afterward via a chunked bulk request.
         logger.LogInformation("Fetching all ids for {Endpoint} before bulk-fetching objects", request.BaseRequest.EndpointUrl);
         Uri idsUri = BuildUri(request.BaseRequest.EndpointUrl, request.ExtraQueryParams);
         IEnumerable<TId>? ids = await FetchOneAsync<IEnumerable<TId>>(
@@ -176,7 +181,7 @@ public class Gw2ApiService
             () => BuildRequestMessage(uri, isAuthenticated, isLocalized, context), uri, logger, cancellationToken);
         response.EnsureSuccessStatusCode();
         TModel? item = await JsonSerializer.DeserializeAsync<TModel>(
-            await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken); 
+            await response.Content.ReadAsStreamAsync(), cancellationToken: cancellationToken);
         response.Dispose();
         return item;
     }
@@ -201,7 +206,7 @@ public class Gw2ApiService
         {
             response.EnsureSuccessStatusCode();
             using JsonDocument document = await JsonDocument.ParseAsync(
-                await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
+                await response.Content.ReadAsStreamAsync(), cancellationToken: cancellationToken);
             mergedElements.AddRange(document.RootElement.EnumerateArray().Select(e => e.Clone()));
             response.Dispose();
         }
@@ -226,7 +231,7 @@ public class Gw2ApiService
         return await JsonSerializer.DeserializeAsync<TModel>(stream, cancellationToken: cancellationToken);
     }
 
-    // doesnt know or care about how many ids are in the request
+    // doesn't know or care about how many ids are in the request
     private Uri BuildUri(string baseUrl, IEnumerable<KeyValuePair<string, string>> queryParams)
     {
         if (queryParams == null || !queryParams.Any()) return new Uri(baseUrl);
@@ -344,7 +349,26 @@ public class Gw2ApiService
     private static TimeSpan GetRetryDelay(int attempt)
     {
         TimeSpan delay = BaseRetryDelay * Math.Pow(2, attempt);
-        TimeSpan jitter = TimeSpan.FromMilliseconds(Random.Shared.Next(0, 250));
-        return delay + jitter;
+        int jitterMs;
+        lock (_jitterRandomLock)
+        {
+            jitterMs = _jitterRandom.Next(0, 250);
+        }
+        return delay + TimeSpan.FromMilliseconds(jitterMs);
+    }
+
+    // netstandard2.1 has no Enumerable.Chunk
+    private static IEnumerable<TSource[]> ChunkBy<TSource>(IEnumerable<TSource> source, int size)
+    {
+        using IEnumerator<TSource> enumerator = source.GetEnumerator();
+        while (enumerator.MoveNext())
+        {
+            List<TSource> chunk = new List<TSource>(size) { enumerator.Current };
+            for (int i = 1; i < size && enumerator.MoveNext(); i++)
+            {
+                chunk.Add(enumerator.Current);
+            }
+            yield return chunk.ToArray();
+        }
     }
 }

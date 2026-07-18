@@ -159,7 +159,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
             return null;
         }
 
-        int idCount = ids.TryGetNonEnumeratedCount(out int count) ? count : ids.Count();
+        int idCount = ids.Count();
         _logger.LogInformation("{Resource}: fetched {IdCount} live id(s) from API", ResourceName, idCount);
         return ids;
     }
