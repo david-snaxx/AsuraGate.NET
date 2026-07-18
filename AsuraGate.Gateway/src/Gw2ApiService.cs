@@ -31,9 +31,11 @@ public class Gw2ApiService
     private const int MaxRetries = 5;
     private static readonly TimeSpan BaseRetryDelay = TimeSpan.FromSeconds(1);
 
-    private Gw2ApiService()
+    private Gw2ApiService(HttpClient? httpClient = null)
     {
+        if (httpClient is not null) return;
         _httpClient = new HttpClient();
+        _httpClient.Timeout = TimeSpan.FromSeconds(10);
     }
 
     public async Task<TModel?> GetAsync<TModel, TId>(
@@ -160,8 +162,10 @@ public class Gw2ApiService
         HttpResponseMessage response = await ExecuteHttpRequestAsync(
             () => BuildRequestMessage(uri, isAuthenticated, isLocalized, context), uri, logger, cancellationToken);
         response.EnsureSuccessStatusCode();
-        return await JsonSerializer.DeserializeAsync<TModel>(
-            await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
+        TModel? item = await JsonSerializer.DeserializeAsync<TModel>(
+            await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken); 
+        response.Dispose();
+        return item;
     }
 
     // Each uri returns its own JSON array (the GW2 API caps id lists at 200 per call); when more than
@@ -186,6 +190,7 @@ public class Gw2ApiService
             using JsonDocument document = await JsonDocument.ParseAsync(
                 await response.Content.ReadAsStreamAsync(cancellationToken), cancellationToken: cancellationToken);
             mergedElements.AddRange(document.RootElement.EnumerateArray().Select(e => e.Clone()));
+            response.Dispose();
         }
 
         logger.LogInformation("Merged {ChunkCount} chunk response(s) into {ElementCount} total element(s)",

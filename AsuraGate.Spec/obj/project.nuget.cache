@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0YNGDvQ5kj4=",
+  "dgSpecHash": "ypzccANDj1Y=",
   "success": true,
-  "projectFilePath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+  "projectFilePath": "C:\\Users\\snaxx\\workspace\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\snaxx\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\10.0.9\\microsoft.bcl.asyncinterfaces.10.0.9.nupkg.sha512",
     "C:\\Users\\snaxx\\.nuget\\packages\\polysharp\\1.16.0\\polysharp.1.16.0.nupkg.sha512",
@@ -22,9 +22,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'SQLitePCLRaw.lib.e_sqlite3' 2.1.2 has a known high severity vulnerability, https://github.com/advisories/GHSA-2m69-gcr7-jv3q",
-      "projectPath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+      "projectPath": "C:\\Users\\snaxx\\workspace\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
+      "filePath": "C:\\Users\\snaxx\\workspace\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
         ".NETStandard,Version=v2.1",
