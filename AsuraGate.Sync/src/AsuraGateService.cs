@@ -17,7 +17,7 @@ public class AsuraGateService : IAsyncDisposable
     public ProviderLink Api { get; }
     private readonly ILogger _logger;
 
-    public AsuraGateService(string gw2ApiKey, string staticDatabasePath, string dynamicDatabasePath, string defaultLocalization, string defaultSchemaVersion, ILogger? logger = null)
+    private AsuraGateService(string gw2ApiKey, string staticDatabasePath, string dynamicDatabasePath, string defaultLocalization, string defaultSchemaVersion, ILogger? logger = null)
     {
         Gw2ApiGateway = new Gw2ApiGateway(
             gw2ApiKey,
@@ -27,9 +27,7 @@ public class AsuraGateService : IAsyncDisposable
         MapperUtils.Configure(logger ?? NullLogger<Gw2ApiGateway>.Instance);
         Gw2ApiNavigator = Gw2ApiNavigator.Instance;
         Gw2ApiPersistenceDatabase = new Gw2ApiPersistenceDatabase(staticDatabasePath);
-        Gw2ApiPersistenceDatabase.Initialize().Wait();
         Gw2ApiDynamicDatabase = new Gw2ApiDynamicDatabase(dynamicDatabasePath);
-        Gw2ApiDynamicDatabase.Initialize().Wait();
         Api = new ProviderLink(Gw2ApiPersistenceDatabase, Gw2ApiGateway, _logger);
     }
 
