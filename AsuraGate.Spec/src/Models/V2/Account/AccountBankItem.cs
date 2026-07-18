@@ -67,41 +67,41 @@ public record BankItemAttributes
 {
     /// <summary>Agony resistance bonus; null if not provided by this stat set.</summary>
     [JsonPropertyName("AgonyResistance")]
-    public double? AgonyResistance { get; init; }
+    public int? AgonyResistance { get; init; }
 
     /// <summary>Concentration (boon duration) bonus; null if not provided.</summary>
     [JsonPropertyName("BoonDuration")]
-    public double? BoonDuration { get; init; }
+    public int? BoonDuration { get; init; }
 
     /// <summary>Condition damage bonus; null if not provided.</summary>
     [JsonPropertyName("ConditionDamage")]
-    public double? ConditionDamage { get; init; }
+    public int? ConditionDamage { get; init; }
 
     /// <summary>Expertise (condition duration) bonus; null if not provided.</summary>
     [JsonPropertyName("ConditionDuration")]
-    public double? ConditionDuration { get; init; }
+    public int? ConditionDuration { get; init; }
 
     /// <summary>Ferocity (critical damage multiplier) bonus; null if not provided.</summary>
     [JsonPropertyName("CritDamage")]
-    public double? CritDamage { get; init; }
+    public int? CritDamage { get; init; }
 
     /// <summary>Healing power bonus; null if not provided.</summary>
     [JsonPropertyName("Healing")]
-    public double? Healing { get; init; }
+    public int? Healing { get; init; }
 
     /// <summary>Power bonus; null if not provided.</summary>
     [JsonPropertyName("Power")]
-    public double? Power { get; init; }
+    public int? Power { get; init; }
 
     /// <summary>Precision bonus; null if not provided.</summary>
     [JsonPropertyName("Precision")]
-    public double? Precision { get; init; }
+    public int? Precision { get; init; }
 
     /// <summary>Toughness bonus; null if not provided.</summary>
     [JsonPropertyName("Toughness")]
-    public double? Toughness { get; init; }
+    public int? Toughness { get; init; }
 
     /// <summary>Vitality bonus; null if not provided.</summary>
     [JsonPropertyName("Vitality")]
-    public double? Vitality { get; init; }
+    public int? Vitality { get; init; }
 }

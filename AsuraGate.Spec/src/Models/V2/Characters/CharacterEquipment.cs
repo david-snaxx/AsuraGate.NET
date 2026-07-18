@@ -84,6 +84,10 @@ public record EquipmentAttributes
     /// <summary>Precision bonus; null if not provided.</summary>
     [JsonPropertyName("Precision")]
     public int? Precision { get; init; }
+    
+    /// <summary>Ferocity bonus; null if not provided.</summary>
+    [JsonPropertyName("CritDamage")]
+    public int? CritDamage { get; init; }
 
     /// <summary>Toughness bonus; null if not provided.</summary>
     [JsonPropertyName("Toughness")]
