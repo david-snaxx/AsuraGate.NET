@@ -1,9 +1,7 @@
 using AsuraGate.Persistence.Static.Entities.V2.Achievements;
-using AsuraGate.Persistence.Static.Mappers.V2.Achievements;
 using AsuraGate.Spec.Models.V2.Achievements;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Achievements;
 
 public class AchievementRepository(Gw2ApiPersistenceDatabase database)
-    : StaticRepository<Achievement, AchievementEntity, int>(
-        database, AchievementMapper.ToEntity, AchievementMapper.ToModel);
+    : StaticRepository<Achievement, AchievementEntity, int>(database, model => model.Id);

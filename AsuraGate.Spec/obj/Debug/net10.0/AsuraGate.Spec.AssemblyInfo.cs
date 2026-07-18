@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AsuraGate.Spec")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0d279ac3283ba2ba0a8baee13f576f118664cd9e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+758d523fdd1c1660fe8187c739e895bcfcb75f93")]
 [assembly: System.Reflection.AssemblyProductAttribute("AsuraGate.Spec")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AsuraGate.Spec")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

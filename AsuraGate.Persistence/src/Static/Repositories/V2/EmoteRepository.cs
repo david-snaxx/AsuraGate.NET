@@ -1,9 +1,7 @@
 using AsuraGate.Persistence.Static.Entities.V2;
-using AsuraGate.Persistence.Static.Mappers.V2;
 using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
 public class EmoteRepository(Gw2ApiPersistenceDatabase database)
-    : StaticRepository<Emote, EmoteEntity, string>(
-        database, EmoteMapper.ToEntity, EmoteMapper.ToModel);
+    : StaticRepository<Emote, EmoteEntity, string>(database, model => model.Id);

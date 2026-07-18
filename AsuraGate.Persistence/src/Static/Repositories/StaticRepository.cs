@@ -1,31 +1,38 @@
 using AsuraGate.Persistence.Static.Entities;
+using AsuraGate.Persistence.Static.Mappers;
 
 namespace AsuraGate.Persistence.Static.Repositories;
 
 /// <summary>
 /// Generic id+data cache repository. Every static entity is shaped identically
 /// (an id column and a JSON <c>data</c> blob), so this one implementation covers
-/// every model - concrete repositories just supply the model/entity types and mapper delegates.
+/// every model - concrete repositories just supply the model's id selector.
 /// </summary>
-public abstract class StaticRepository<TModel, TEntity, TId> : 
+public abstract class StaticRepository<TModel, TEntity, TId> :
     IStaticRepository<TModel, TId>
     where TEntity : class, IIdDataEntity<TId>, new()
 {
     private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Func<TModel, TEntity> _toEntity;
-    private readonly Func<TEntity, TModel?> _toModel;
+    private readonly Func<TModel, TId> _idSelector;
 
-    protected StaticRepository(Gw2ApiPersistenceDatabase database, Func<TModel, TEntity> toEntity, Func<TEntity, TModel?> toModel)
+    protected StaticRepository(Gw2ApiPersistenceDatabase database, Func<TModel, TId> idSelector)
     {
         _database = database;
-        _toEntity = toEntity;
-        _toModel = toModel;
+        _idSelector = idSelector;
     }
+
+    private TEntity ToEntity(TModel model) => new TEntity
+    {
+        Id = _idSelector(model),
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
+    };
+
+    private static TModel? ToModel(TEntity entity) => MapperUtils.DeserializeJson<TModel>(entity.Data);
 
     public async Task<TModel?> GetAsync(TId id)
     {
         var entity = await _database.Connection.FindAsync<TEntity>(id);
-        return entity is null ? default : _toModel(entity);
+        return entity is null ? default : ToModel(entity);
     }
 
     public async Task<IEnumerable<TModel>> GetManyAsync(IEnumerable<TId> ids)
@@ -35,13 +42,13 @@ public abstract class StaticRepository<TModel, TEntity, TId> :
             .Table<TEntity>()
             .Where(entity => idList.Contains(entity.Id))
             .ToListAsync();
-        return entities.Select(_toModel).OfType<TModel>();
+        return entities.Select(ToModel).OfType<TModel>();
     }
 
     public async Task<IEnumerable<TModel>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<TEntity>().ToListAsync();
-        return entities.Select(_toModel).OfType<TModel>();
+        return entities.Select(ToModel).OfType<TModel>();
     }
 
     public async Task<IEnumerable<TId>> GetCachedIdsAsync() =>
@@ -53,7 +60,7 @@ public abstract class StaticRepository<TModel, TEntity, TId> :
     {
         foreach (var model in models)
         {
-            connection.InsertOrReplace(_toEntity(model));
+            connection.InsertOrReplace(ToEntity(model));
         }
     });
 

@@ -9,4 +9,5 @@ namespace AsuraGate.Persistence.Static.Entities;
 public interface IIdDataEntity<TId>
 {
     TId Id { get; set; }
+    string Data { get; set; }
 }
