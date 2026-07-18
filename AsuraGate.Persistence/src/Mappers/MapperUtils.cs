@@ -1,7 +1,7 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 using Microsoft.Extensions.Logging;
 
-namespace AsuraGate.Persistence.Static.Mappers;
+namespace AsuraGate.Persistence.Mappers;
 
 public static class MapperUtils
 {
@@ -11,7 +11,7 @@ public static class MapperUtils
     /// so constructing a second consumer (e.g. a second AsuraGateService) in the same process cannot
     /// silently repoint logging away from an already-alive first instance.</summary>
     public static void Configure(ILogger logger) => _logger ??= logger;
-    
+
     public static string? SerializeModel<TModel>(TModel model, JsonSerializerOptions? options = null)
     {
         try

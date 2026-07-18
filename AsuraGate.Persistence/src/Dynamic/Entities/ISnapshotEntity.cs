@@ -10,4 +10,5 @@ public interface ISnapshotEntity
 {
     int Id { get; set; }
     DateTime Timestamp { get; set; }
+    string Data { get; set; }
 }

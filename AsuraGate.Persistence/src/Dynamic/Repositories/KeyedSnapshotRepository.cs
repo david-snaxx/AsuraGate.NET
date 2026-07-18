@@ -1,4 +1,5 @@
 using AsuraGate.Persistence.Dynamic.Entities;
+using AsuraGate.Persistence.Mappers;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories;
 
@@ -13,18 +14,25 @@ public abstract class KeyedSnapshotRepository<TModel, TEntity> :
     where TEntity : class, IKeyedSnapshotEntity, new()
 {
     private readonly ISnapshotDatabase _database;
-    private readonly Func<string, TModel, DateTime, TEntity> _toEntity;
-    private readonly Func<TEntity, TModel?> _toModel;
+    private readonly string _emptyDefault;
 
-    protected KeyedSnapshotRepository(ISnapshotDatabase database, Func<string, TModel, DateTime, TEntity> toEntity, Func<TEntity, TModel?> toModel)
+    protected KeyedSnapshotRepository(ISnapshotDatabase database, string emptyDefault = "null")
     {
         _database = database;
-        _toEntity = toEntity;
-        _toModel = toModel;
+        _emptyDefault = emptyDefault;
     }
 
+    private TEntity ToEntity(string key, TModel model, DateTime timestamp) => new TEntity
+    {
+        Key = key,
+        Timestamp = timestamp,
+        Data = MapperUtils.SerializeModel(model) ?? _emptyDefault
+    };
+
+    private static TModel? ToModel(TEntity entity) => MapperUtils.DeserializeJson<TModel>(entity.Data);
+
     public Task InsertAsync(string key, TModel model, DateTime? timestamp = null) =>
-        _database.Connection.InsertAsync(_toEntity(key, model, timestamp ?? DateTime.UtcNow));
+        _database.Connection.InsertAsync(ToEntity(key, model, timestamp ?? DateTime.UtcNow));
 
     public async Task<TModel?> GetLatestAsync(string key)
     {
@@ -32,7 +40,7 @@ public abstract class KeyedSnapshotRepository<TModel, TEntity> :
             .Where(entity => entity.Key == key)
             .OrderByDescending(entity => entity.Timestamp)
             .FirstOrDefaultAsync();
-        return entity is null ? default : _toModel(entity);
+        return entity is null ? default : ToModel(entity);
     }
 
     public async Task<TModel?> GetOldestAsync(string key)
@@ -41,7 +49,7 @@ public abstract class KeyedSnapshotRepository<TModel, TEntity> :
             .Where(entity => entity.Key == key)
             .OrderBy(entity => entity.Timestamp)
             .FirstOrDefaultAsync();
-        return entity is null ? default : _toModel(entity);
+        return entity is null ? default : ToModel(entity);
     }
 
     public async Task<TModel?> GetAsOfAsync(string key, DateTime timestamp)
@@ -50,7 +58,7 @@ public abstract class KeyedSnapshotRepository<TModel, TEntity> :
             .Where(entity => entity.Key == key && entity.Timestamp <= timestamp)
             .OrderByDescending(entity => entity.Timestamp)
             .FirstOrDefaultAsync();
-        return entity is null ? default : _toModel(entity);
+        return entity is null ? default : ToModel(entity);
     }
 
     public Task<int> CountAsync(string key) =>
@@ -92,7 +100,7 @@ public abstract class KeyedSnapshotRepository<TModel, TEntity> :
 
         List<TEntity> entities = await query.ToListAsync();
         return entities
-            .Select(entity => (entity.Timestamp, Model: _toModel(entity)))
+            .Select(entity => (entity.Timestamp, Model: ToModel(entity)))
             .Where(entry => entry.Model is not null)
             .Select(entry => (entry.Timestamp, entry.Model!));
     }

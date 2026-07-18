@@ -1,8 +1,6 @@
 using AsuraGate.Persistence.Dynamic.Entities.Account.V2;
-using AsuraGate.Persistence.Dynamic.Mappers.Account.V2;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
 public class AccountDyeRepository(Gw2ApiDynamicDatabase database)
-    : SnapshotRepository<IEnumerable<int>, AccountDyeSnapshotEntity>(
-        database, AccountDyeMapper.ToEntity, AccountDyeMapper.ToModel);
+    : SnapshotRepository<IEnumerable<int>, AccountDyeSnapshotEntity>(database, "[]");

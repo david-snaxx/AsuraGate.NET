@@ -4,7 +4,7 @@ using AsuraGate.Spec.Requests;
 using AsuraGate.Spec.Requests.Components;
 using AsuraGate.Spec.Requests.V2.Account;
 using AsuraGate.Persistence;
-using AsuraGate.Persistence.Static.Mappers;
+using AsuraGate.Persistence.Mappers;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Account = AsuraGate.Spec.Models.V2.Account.Account;

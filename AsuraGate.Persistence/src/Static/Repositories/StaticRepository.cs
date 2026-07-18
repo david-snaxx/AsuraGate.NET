@@ -1,5 +1,5 @@
 using AsuraGate.Persistence.Static.Entities;
-using AsuraGate.Persistence.Static.Mappers;
+using AsuraGate.Persistence.Mappers;
 
 namespace AsuraGate.Persistence.Static.Repositories;
 
