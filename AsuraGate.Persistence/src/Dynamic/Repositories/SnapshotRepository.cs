@@ -12,20 +12,22 @@ public abstract class SnapshotRepository<TModel, TEntity> :
     ISnapshotRepository<TModel>
     where TEntity : class, ISnapshotEntity, new()
 {
-    private readonly Gw2ApiDynamicDatabase _database;
+    private readonly ISnapshotDatabase _database;
     private readonly Func<TModel, DateTime, TEntity> _toEntity;
     private readonly Func<TEntity, TModel?> _toModel;
 
-    protected SnapshotRepository(Gw2ApiDynamicDatabase database, Func<TModel, DateTime, TEntity> toEntity, Func<TEntity, TModel?> toModel)
+    protected SnapshotRepository(ISnapshotDatabase database, Func<TModel, DateTime, TEntity> toEntity, Func<TEntity, TModel?> toModel)
     {
         _database = database;
         _toEntity = toEntity;
         _toModel = toModel;
     }
 
+    /// <summary>Records a new snapshot, stamped with <paramref name="timestamp"/> or now if omitted.</summary>
     public Task InsertAsync(TModel model, DateTime? timestamp = null) =>
         _database.Connection.InsertAsync(_toEntity(model, timestamp ?? DateTime.UtcNow));
 
+    /// <summary>Returns the most recently recorded snapshot; null if none have been recorded yet.</summary>
     public async Task<TModel?> GetLatestAsync()
     {
         TEntity? entity = await _database.Connection.Table<TEntity>()
@@ -34,16 +36,45 @@ public abstract class SnapshotRepository<TModel, TEntity> :
         return entity is null ? default : _toModel(entity);
     }
 
-    public Task<IEnumerable<(DateTime Timestamp, TModel Model)>> GetAllAsync() =>
-        QueryAsync(since: null, until: null);
+    /// <summary>Returns the first snapshot ever recorded; null if none have been recorded yet.</summary>
+    public async Task<TModel?> GetOldestAsync()
+    {
+        TEntity? entity = await _database.Connection.Table<TEntity>()
+            .OrderBy(entity => entity.Timestamp)
+            .FirstOrDefaultAsync();
+        return entity is null ? default : _toModel(entity);
+    }
 
-    public Task<IEnumerable<(DateTime Timestamp, TModel Model)>> GetHistoryAsync(DateTime? since = null) =>
-        QueryAsync(since, until: null);
+    /// <summary>Returns the snapshot that was current at <paramref name="timestamp"/> - the latest one recorded at or before it; null if none exist that far back.</summary>
+    public async Task<TModel?> GetAsOfAsync(DateTime timestamp)
+    {
+        TEntity? entity = await _database.Connection.Table<TEntity>()
+            .Where(entity => entity.Timestamp <= timestamp)
+            .OrderByDescending(entity => entity.Timestamp)
+            .FirstOrDefaultAsync();
+        return entity is null ? default : _toModel(entity);
+    }
 
-    public Task<IEnumerable<(DateTime Timestamp, TModel Model)>> GetRangeAsync(DateTime start, DateTime end) =>
-        QueryAsync(start, end);
+    /// <summary>Returns the total number of snapshots recorded, without deserializing any of them.</summary>
+    public Task<int> CountAsync() => _database.Connection.Table<TEntity>().CountAsync();
 
-    private async Task<IEnumerable<(DateTime Timestamp, TModel Model)>> QueryAsync(DateTime? since, DateTime? until)
+    /// <summary>Deletes every snapshot recorded before <paramref name="olderThan"/>; returns how many rows were removed.</summary>
+    public Task<int> PruneAsync(DateTime olderThan) =>
+        _database.Connection.Table<TEntity>().Where(entity => entity.Timestamp < olderThan).DeleteAsync();
+
+    /// <summary>Returns every recorded snapshot, oldest first; use <paramref name="skip"/>/<paramref name="take"/> to page through a large history.</summary>
+    public Task<IEnumerable<(DateTime Timestamp, TModel Model)>> GetAllAsync(int skip = 0, int? take = null) =>
+        QueryAsync(since: null, until: null, skip, take);
+
+    /// <summary>Returns every snapshot recorded at or after <paramref name="since"/> (or all of them if omitted), oldest first.</summary>
+    public Task<IEnumerable<(DateTime Timestamp, TModel Model)>> GetHistoryAsync(DateTime? since = null, int skip = 0, int? take = null) =>
+        QueryAsync(since, until: null, skip, take);
+
+    /// <summary>Returns every snapshot recorded between <paramref name="start"/> and <paramref name="end"/> (inclusive), oldest first.</summary>
+    public Task<IEnumerable<(DateTime Timestamp, TModel Model)>> GetRangeAsync(DateTime start, DateTime end, int skip = 0, int? take = null) =>
+        QueryAsync(start, end, skip, take);
+
+    private async Task<IEnumerable<(DateTime Timestamp, TModel Model)>> QueryAsync(DateTime? since, DateTime? until, int skip = 0, int? take = null)
     {
         var query = _database.Connection.Table<TEntity>();
         if (since is { } start)
@@ -55,7 +86,17 @@ public abstract class SnapshotRepository<TModel, TEntity> :
             query = query.Where(entity => entity.Timestamp <= end);
         }
 
-        List<TEntity> entities = await query.OrderBy(entity => entity.Timestamp).ToListAsync();
+        query = query.OrderBy(entity => entity.Timestamp);
+        if (skip > 0)
+        {
+            query = query.Skip(skip);
+        }
+        if (take is { } limit)
+        {
+            query = query.Take(limit);
+        }
+
+        List<TEntity> entities = await query.ToListAsync();
         return entities
             .Select(entity => (entity.Timestamp, Model: _toModel(entity)))
             .Where(entry => entry.Model is not null)

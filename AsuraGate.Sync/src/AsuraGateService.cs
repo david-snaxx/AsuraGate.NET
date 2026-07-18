@@ -42,8 +42,8 @@ public class AsuraGateService : IAsyncDisposable
     /// <summary>
     /// Resolves the GW2 account tied to <paramref name="gw2ApiKey"/> and creates a fully-initialized
     /// service backed by a static cache (a fixed-name file inside <paramref name="staticDatabaseDirectory"/>)
-    /// and an account-scoped dynamic database file (named after the resolved account id) inside
-    /// <paramref name="dynamicDatabaseDirectory"/>.
+    /// and an account-scoped dynamic database file (named after the resolved account id, holding data
+    /// for both the account and every character on it) inside <paramref name="dynamicDatabaseDirectory"/>.
     /// </summary>
     public static async Task<AsuraGateService> CreateAsync(
         string gw2ApiKey,

@@ -6,7 +6,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Character;
 
 public sealed class CharacterBuildTabRequest :
-    IGetsSingleNoId<CharacterBuildTab>
+    IGetsAll<CharacterBuildTab, int>
 {
     public string EndpointUrl { get; }
     public bool IsAuthenticated { get; } = true;
