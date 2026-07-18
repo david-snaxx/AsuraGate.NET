@@ -6,10 +6,7 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Account;
 
 public sealed class AccountBankRequest :
-    IGetsSingle<AccountBankItem, int>,
-    IGetsBulk<AccountBankItem, int>,
-    IGetsAll<AccountBankItem, int>,
-    IPaginated<AccountBankItem>
+    IGetsAll<AccountBankItem, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountBank;
     public bool IsAuthenticated { get; } = true;

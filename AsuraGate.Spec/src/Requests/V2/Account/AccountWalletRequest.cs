@@ -6,8 +6,6 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Account;
 
 public sealed class AccountWalletRequest :
-    IGetsSingle<AccountCurrency, int>,
-    IGetsBulk<AccountCurrency, int>,
     IGetsAll<AccountCurrency, int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.AccountWallet;
