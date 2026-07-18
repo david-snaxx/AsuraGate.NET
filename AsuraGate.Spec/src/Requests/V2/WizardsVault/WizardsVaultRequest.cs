@@ -10,5 +10,5 @@ public sealed class WizardsVaultRequest :
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.WizardsVault;
     public bool IsAuthenticated { get; } = false;
-    public bool IsLocalized { get; } = false;
+    public bool IsLocalized { get; } = true;
 }
