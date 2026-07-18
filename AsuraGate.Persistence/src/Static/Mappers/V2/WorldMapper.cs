@@ -5,10 +5,10 @@ namespace AsuraGate.Persistence.Static.Mappers.V2;
 
 public static class WorldMapper
 {
-    public static WorldEntity ToEntity(World world) => new WorldEntity()
+    public static WorldEntity ToEntity(World model) => new WorldEntity()
     {
-        Id = world.Id,
-        Data = MapperUtils.SerializeModel(world) ?? string.Empty
+        Id = model.Id,
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
     public static World? ToModel(WorldEntity entity) => MapperUtils.DeserializeJson<World>(entity.Data);
