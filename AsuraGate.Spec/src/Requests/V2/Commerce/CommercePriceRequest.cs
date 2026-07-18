@@ -5,9 +5,9 @@ using AsuraGate.Spec.Requests.Components;
 namespace AsuraGate.Spec.Requests.V2.Commerce;
 
 public sealed class CommercePriceRequest :
-    IGetsSingle<CommerceTransaction, int>,
-    IGetsBulk<CommerceTransaction, int>,
-    IGetsAll<CommerceTransaction, int>,
+    IGetsSingle<CommercePrice, int>,
+    IGetsBulk<CommercePrice, int>,
+    IGetsAll<CommercePrice, int>,
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.CommercePrice;
