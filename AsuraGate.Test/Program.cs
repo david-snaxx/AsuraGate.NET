@@ -10,8 +10,8 @@ using var loggerFactory = LoggerFactory.Create(builder => builder.SetMinimumLeve
 ILogger logger = loggerFactory.CreateLogger<Gw2ApiGateway>();
 var asuraGate = await AsuraGateService.CreateAsync(
     System.Environment.GetEnvironmentVariable("GW2_API_KEY") ?? string.Empty,
-    "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Test\\gw2cache.db",
-    "C:\\Users\\snaxx\\Desktop\\AsuraGate.NET\\AsuraGate.Test\\gw2dynamic.db",
+    "C:\\Users\\snaxx\\workspace\\AsuraGate.NET\\AsuraGate.Test\\dbs",
+    "C:\\Users\\snaxx\\workspace\\AsuraGate.NET\\AsuraGate.Test\\dbs",
     Gw2ApiLocalization.English,
     Gw2ApiSchemaVersion.Latest,
     logger);

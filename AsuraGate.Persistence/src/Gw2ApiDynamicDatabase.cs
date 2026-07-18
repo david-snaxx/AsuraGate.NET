@@ -1,4 +1,5 @@
 using SQLite;
+using AsuraGate.Persistence.Dynamic.Entities.V2.Account;
 
 namespace AsuraGate.Persistence;
 
@@ -23,8 +24,9 @@ public class Gw2ApiDynamicDatabase : IAsyncDisposable
         await Connection.CloseAsync();
     }
 
-    public Task Initialize()
+    public async Task Initialize()
     {
-        return Task.CompletedTask;
+        // from /v2/account
+        await Connection.CreateTableAsync<AccountDyeSnapshotEntity>();
     }
 }

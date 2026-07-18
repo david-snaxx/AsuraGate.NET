@@ -18,6 +18,8 @@
 
     <ItemGroup>
       <Folder Include="src\Dynamic\Entities\V2\" />
+      <Folder Include="src\Dynamic\Mappers\V2\" />
+      <Folder Include="src\Dynamic\Repositories\V2\" />
     </ItemGroup>
 
 </Project>
