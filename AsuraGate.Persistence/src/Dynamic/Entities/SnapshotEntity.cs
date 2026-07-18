@@ -14,6 +14,7 @@ public abstract class SnapshotEntity : ISnapshotEntity
     [Column("id")]
     public int Id { get; set; }
 
+    [Indexed]
     [NotNull]
     [Column("timestamp")]
     public DateTime Timestamp { get; set; }

@@ -22,13 +22,13 @@ public abstract class SnapshotRepository<TModel, TEntity> :
         _emptyDefault = emptyDefault;
     }
 
-    private TEntity ToEntity(TModel model, DateTime timestamp) => new TEntity
+    protected virtual TEntity ToEntity(TModel model, DateTime timestamp) => new TEntity
     {
         Timestamp = timestamp,
         Data = MapperUtils.SerializeModel(model) ?? _emptyDefault
     };
 
-    private static TModel? ToModel(TEntity entity) => MapperUtils.DeserializeJson<TModel>(entity.Data);
+    protected virtual TModel? ToModel(TEntity entity) => MapperUtils.DeserializeJson<TModel>(entity.Data);
 
     /// <summary>Records a new snapshot, stamped with <paramref name="timestamp"/> or now if omitted.</summary>
     public Task InsertAsync(TModel model, DateTime? timestamp = null) =>

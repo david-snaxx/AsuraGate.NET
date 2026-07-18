@@ -22,14 +22,14 @@ public abstract class KeyedSnapshotRepository<TModel, TEntity> :
         _emptyDefault = emptyDefault;
     }
 
-    private TEntity ToEntity(string key, TModel model, DateTime timestamp) => new TEntity
+    protected virtual TEntity ToEntity(string key, TModel model, DateTime timestamp) => new TEntity
     {
         Key = key,
         Timestamp = timestamp,
         Data = MapperUtils.SerializeModel(model) ?? _emptyDefault
     };
 
-    private static TModel? ToModel(TEntity entity) => MapperUtils.DeserializeJson<TModel>(entity.Data);
+    protected virtual TModel? ToModel(TEntity entity) => MapperUtils.DeserializeJson<TModel>(entity.Data);
 
     public Task InsertAsync(string key, TModel model, DateTime? timestamp = null) =>
         _database.Connection.InsertAsync(ToEntity(key, model, timestamp ?? DateTime.UtcNow));

@@ -21,13 +21,13 @@ public abstract class StaticRepository<TModel, TEntity, TId> :
         _idSelector = idSelector;
     }
 
-    private TEntity ToEntity(TModel model) => new TEntity
+    protected virtual TEntity ToEntity(TModel model) => new TEntity
     {
         Id = _idSelector(model),
         Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    private static TModel? ToModel(TEntity entity) => MapperUtils.DeserializeJson<TModel>(entity.Data);
+    protected virtual TModel? ToModel(TEntity entity) => MapperUtils.DeserializeJson<TModel>(entity.Data);
 
     public async Task<TModel?> GetAsync(TId id)
     {

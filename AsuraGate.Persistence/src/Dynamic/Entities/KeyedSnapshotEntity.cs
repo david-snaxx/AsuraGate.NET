@@ -8,6 +8,7 @@ namespace AsuraGate.Persistence.Dynamic.Entities;
 /// </summary>
 public abstract class KeyedSnapshotEntity : SnapshotEntity, IKeyedSnapshotEntity
 {
+    [Indexed]
     [NotNull]
     [Column("character_name")]
     public string Key { get; set; } = string.Empty;
