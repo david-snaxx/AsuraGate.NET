@@ -29,7 +29,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
         _logger = logger ?? NullLogger.Instance;
     }
 
-    public async Task<TModel?> GetById(TId id)
+    public async Task<TModel?> GetById(TId id, CancellationToken cancellationToken = default)
     {
         TModel? cached = await Repository.GetAsync(id);
         if (cached is not null)
@@ -40,7 +40,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
 
         _logger.LogInformation("{Resource}: cache miss for id {Id}; fetching from API", ResourceName, id);
         IExecutableGw2ApiRequest<TModel, TId> request = Request.GetById(id);
-        TModel? fetched = await Gateway.FetchAsync(request);
+        TModel? fetched = await Gateway.FetchAsync(request, cancellationToken);
         if (fetched is null)
         {
             _logger.LogWarning("{Resource}: fetch for id {Id} returned null", ResourceName, id);
@@ -54,7 +54,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
         return fetched;
     }
 
-    public async Task<IEnumerable<TModel?>> GetBulk(IEnumerable<TId> ids)
+    public async Task<IEnumerable<TModel?>> GetBulk(IEnumerable<TId> ids, CancellationToken cancellationToken = default)
     {
         var idList = ids.Distinct().ToList();
         IEnumerable<TModel?> cached = (await Repository.GetManyAsync(idList)).ToList();
@@ -72,7 +72,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
 
         // something was missing, refetch the whole batch from the API
         IExecutableGw2ApiRequest<IEnumerable<TModel>, TId> request = Request.GetBulk(idList);
-        IEnumerable<TModel>? fetched = await Gateway.FetchAsync(request);
+        IEnumerable<TModel>? fetched = await Gateway.FetchAsync(request, cancellationToken);
         if (fetched is null)
         {
             _logger.LogWarning(
@@ -91,7 +91,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
         return fetchedList;
     }
 
-    public async Task<IEnumerable<TModel>> GetAll()
+    public async Task<IEnumerable<TModel>> GetAll(CancellationToken cancellationToken = default)
     {
         StaticMetaEntity? meta = await _staticMetaRepository.GetAsync(ResourceName);
         if (meta is { HasFetchedAll: true })
@@ -101,7 +101,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
         }
 
         IExecutableGw2ApiRequest<IEnumerable<TId>,TId> idsRequest = Request.GetAllIds();
-        IEnumerable<TId>? allIds = await Gateway.FetchAsync(idsRequest);
+        IEnumerable<TId>? allIds = await Gateway.FetchAsync(idsRequest, cancellationToken);
         if (allIds is null)
         {
             _logger.LogWarning("{Resource}: could not fetch live id list; returning cached data as-is", ResourceName);
@@ -123,7 +123,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
 
         // cache incomplete relative to the live id set, repopulate everything
         IExecutableGw2ApiRequest<IEnumerable<TModel>,TId> allRequest = Request.GetAll();
-        IEnumerable<TModel>? fetched = await Gateway.FetchAsync(allRequest);
+        IEnumerable<TModel>? fetched = await Gateway.FetchAsync(allRequest, cancellationToken);
         if (fetched is null)
         {
             _logger.LogWarning(
@@ -149,10 +149,10 @@ public class Provider<TModel, TId, TRepository, TRequest>
         FetchedAllAt = DateTime.UtcNow
     });
 
-    public Task<IEnumerable<TId>?> GetIds()
+    public Task<IEnumerable<TId>?> GetIds(CancellationToken cancellationToken = default)
     {
         _logger.LogDebug("{Resource}: fetching live id list from API", ResourceName);
-        return Gateway.FetchAsync(Request.GetAllIds());
+        return Gateway.FetchAsync(Request.GetAllIds(), cancellationToken);
     }
 
     public Task<IEnumerable<TId>> GetCachedIds()
