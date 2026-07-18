@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Backstory;
 
 namespace AsuraGate.Sync.Providers.V2.Backstory;
 
-public class BackstoryAnswerProvider : Provider<BackstoryAnswer, string, BackstoryAnswerRepository, BackstoryAnswerRequest>
-{
-    public BackstoryAnswerProvider(BackstoryAnswerRepository repository, BackstoryAnswerRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class BackstoryAnswerProvider(
+    BackstoryAnswerRepository repository,
+    BackstoryAnswerRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<BackstoryAnswer, string, BackstoryAnswerRepository, BackstoryAnswerRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

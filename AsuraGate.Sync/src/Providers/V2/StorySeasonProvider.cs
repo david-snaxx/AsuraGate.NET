@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class StorySeasonProvider : Provider<StorySeason, string, StorySeasonRepository, StorySeasonRequest>
-{
-    public StorySeasonProvider(StorySeasonRepository repository, StorySeasonRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class StorySeasonProvider(
+    StorySeasonRepository repository,
+    StorySeasonRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<StorySeason, string, StorySeasonRepository, StorySeasonRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

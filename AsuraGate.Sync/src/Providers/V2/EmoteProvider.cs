@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class EmoteProvider : Provider<Emote, string, EmoteRepository, EmoteRequest>
-{
-    public EmoteProvider(EmoteRepository repository, EmoteRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class EmoteProvider(
+    EmoteRepository repository,
+    EmoteRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Emote, string, EmoteRepository, EmoteRequest>(repository, request, gateway, staticMetaRepository, logger);

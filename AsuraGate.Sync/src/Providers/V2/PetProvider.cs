@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class PetProvider : Provider<Pet, int, PetRepository, PetRequest>
-{
-    public PetProvider(PetRepository repository, PetRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class PetProvider(
+    PetRepository repository,
+    PetRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Pet, int, PetRepository, PetRequest>(repository, request, gateway, staticMetaRepository, logger);

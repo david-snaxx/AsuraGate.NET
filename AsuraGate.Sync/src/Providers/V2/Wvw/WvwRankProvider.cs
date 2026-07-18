@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Wvw;
 
 namespace AsuraGate.Sync.Providers.V2.Wvw;
 
-public class WvwRankProvider : Provider<WvwRank, int, WvwRankRepository, WvwRankRequest>
-{
-    public WvwRankProvider(WvwRankRepository repository, WvwRankRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class WvwRankProvider(
+    WvwRankRepository repository,
+    WvwRankRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<WvwRank, int, WvwRankRepository, WvwRankRequest>(repository, request, gateway, staticMetaRepository,
+        logger);

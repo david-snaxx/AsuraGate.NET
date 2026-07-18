@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class GliderProvider : Provider<Glider, int, GliderRepository, GliderRequest>
-{
-    public GliderProvider(GliderRepository repository, GliderRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class GliderProvider(
+    GliderRepository repository,
+    GliderRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Glider, int, GliderRepository, GliderRequest>(repository, request, gateway, staticMetaRepository, logger);

@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class MailCarrierProvider : Provider<MailCarrier, int, MailCarrierRepository, MailCarrierRequest>
-{
-    public MailCarrierProvider(MailCarrierRepository repository, MailCarrierRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class MailCarrierProvider(
+    MailCarrierRepository repository,
+    MailCarrierRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<MailCarrier, int, MailCarrierRepository, MailCarrierRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

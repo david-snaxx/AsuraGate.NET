@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class MasteryProvider : Provider<Mastery, int, MasteryRepository, MasteryRequest>
-{
-    public MasteryProvider(MasteryRepository repository, MasteryRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class MasteryProvider(
+    MasteryRepository repository,
+    MasteryRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Mastery, int, MasteryRepository, MasteryRequest>(repository, request, gateway, staticMetaRepository,
+        logger);

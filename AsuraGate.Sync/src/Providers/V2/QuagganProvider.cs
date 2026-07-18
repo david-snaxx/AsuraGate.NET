@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class QuagganProvider : Provider<Quaggan, string, QuagganRepository, QuagganRequest>
-{
-    public QuagganProvider(QuagganRepository repository, QuagganRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class QuagganProvider(
+    QuagganRepository repository,
+    QuagganRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Quaggan, string, QuagganRepository, QuagganRequest>(repository, request, gateway, staticMetaRepository,
+        logger);

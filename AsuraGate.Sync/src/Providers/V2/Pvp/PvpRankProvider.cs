@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Pvp;
 
 namespace AsuraGate.Sync.Providers.V2.Pvp;
 
-public class PvpRankProvider : Provider<PvpRank, int, PvpRankRepository, PvpRankRequest>
-{
-    public PvpRankProvider(PvpRankRepository repository, PvpRankRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class PvpRankProvider(
+    PvpRankRepository repository,
+    PvpRankRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<PvpRank, int, PvpRankRepository, PvpRankRequest>(repository, request, gateway, staticMetaRepository,
+        logger);

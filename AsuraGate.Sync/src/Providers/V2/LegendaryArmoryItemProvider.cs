@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class LegendaryArmoryItemProvider : Provider<LegendaryArmoryItem, int, LegendaryArmoryItemRepository, LegendaryArmoryRequest>
-{
-    public LegendaryArmoryItemProvider(LegendaryArmoryItemRepository repository, LegendaryArmoryRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class LegendaryArmoryItemProvider(
+    LegendaryArmoryItemRepository repository,
+    LegendaryArmoryRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<LegendaryArmoryItem, int, LegendaryArmoryItemRepository, LegendaryArmoryRequest>(repository, request,
+        gateway, staticMetaRepository, logger);

@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class ContinentFloorProvider : Provider<ContinentFloor, int, ContinentFloorRepository, ContinentFloorRequest>
-{
-    public ContinentFloorProvider(ContinentFloorRepository repository, ContinentFloorRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class ContinentFloorProvider(
+    ContinentFloorRepository repository,
+    ContinentFloorRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<ContinentFloor, int, ContinentFloorRepository, ContinentFloorRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

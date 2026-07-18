@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Wvw;
 
 namespace AsuraGate.Sync.Providers.V2.Wvw;
 
-public class WvwObjectiveProvider : Provider<WvwObjective, string, WvwObjectiveRepository, WvwObjectiveRequest>
-{
-    public WvwObjectiveProvider(WvwObjectiveRepository repository, WvwObjectiveRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class WvwObjectiveProvider(
+    WvwObjectiveRepository repository,
+    WvwObjectiveRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<WvwObjective, string, WvwObjectiveRepository, WvwObjectiveRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

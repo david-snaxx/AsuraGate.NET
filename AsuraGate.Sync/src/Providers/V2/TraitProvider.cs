@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class TraitProvider : Provider<Trait, int, TraitRepository, TraitRequest>
-{
-    public TraitProvider(TraitRepository repository, TraitRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class TraitProvider(
+    TraitRepository repository,
+    TraitRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Trait, int, TraitRepository, TraitRequest>(repository, request, gateway, staticMetaRepository, logger);

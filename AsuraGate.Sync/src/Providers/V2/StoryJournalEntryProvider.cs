@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class StoryJournalEntryProvider : Provider<StoryJournalEntry, int, StoryJournalEntryRepository, QuestRequest>
-{
-    public StoryJournalEntryProvider(StoryJournalEntryRepository repository, QuestRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class StoryJournalEntryProvider(
+    StoryJournalEntryRepository repository,
+    QuestRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<StoryJournalEntry, int, StoryJournalEntryRepository, QuestRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

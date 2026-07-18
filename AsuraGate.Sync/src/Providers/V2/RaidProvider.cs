@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class RaidProvider : Provider<Raid, string, RaidRepository, RaidRequest>
-{
-    public RaidProvider(RaidRepository repository, RaidRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class RaidProvider(
+    RaidRepository repository,
+    RaidRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Raid, string, RaidRepository, RaidRequest>(repository, request, gateway, staticMetaRepository, logger);

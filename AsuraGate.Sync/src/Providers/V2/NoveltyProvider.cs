@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class NoveltyProvider : Provider<Novelty, int, NoveltyRepository, NoveltyRequest>
-{
-    public NoveltyProvider(NoveltyRepository repository, NoveltyRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class NoveltyProvider(
+    NoveltyRepository repository,
+    NoveltyRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Novelty, int, NoveltyRepository, NoveltyRequest>(repository, request, gateway, staticMetaRepository,
+        logger);

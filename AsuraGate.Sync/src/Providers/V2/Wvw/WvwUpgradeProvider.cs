@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Wvw;
 
 namespace AsuraGate.Sync.Providers.V2.Wvw;
 
-public class WvwUpgradeProvider : Provider<WvwUpgrade, int, WvwUpgradeRepository, WvwUpgradeRequest>
-{
-    public WvwUpgradeProvider(WvwUpgradeRepository repository, WvwUpgradeRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class WvwUpgradeProvider(
+    WvwUpgradeRepository repository,
+    WvwUpgradeRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<WvwUpgrade, int, WvwUpgradeRepository, WvwUpgradeRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

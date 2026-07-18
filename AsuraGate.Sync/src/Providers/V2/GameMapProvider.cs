@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class GameMapProvider : Provider<GameMap, int, GameMapRepository, MapRequest>
-{
-    public GameMapProvider(GameMapRepository repository, MapRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class GameMapProvider(
+    GameMapRepository repository,
+    MapRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<GameMap, int, GameMapRepository, MapRequest>(repository, request, gateway, staticMetaRepository, logger);

@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class LegendProvider : Provider<Legend, string, LegendRepository, LegendRequest>
-{
-    public LegendProvider(LegendRepository repository, LegendRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class LegendProvider(
+    LegendRepository repository,
+    LegendRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Legend, string, LegendRepository, LegendRequest>(repository, request, gateway, staticMetaRepository,
+        logger);

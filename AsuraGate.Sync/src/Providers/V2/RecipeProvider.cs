@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class RecipeProvider : Provider<Recipe, int, RecipeRepository, RecipeRequest>
-{
-    public RecipeProvider(RecipeRepository repository, RecipeRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class RecipeProvider(
+    RecipeRepository repository,
+    RecipeRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Recipe, int, RecipeRepository, RecipeRequest>(repository, request, gateway, staticMetaRepository, logger);

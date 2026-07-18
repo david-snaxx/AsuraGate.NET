@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class MiniProvider : Provider<Mini, int, MiniRepository, MiniRequest>
-{
-    public MiniProvider(MiniRepository repository, MiniRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class MiniProvider(
+    MiniRepository repository,
+    MiniRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Mini, int, MiniRepository, MiniRequest>(repository, request, gateway, staticMetaRepository, logger);

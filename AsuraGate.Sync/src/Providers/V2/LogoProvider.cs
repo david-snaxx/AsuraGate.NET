@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class LogoProvider : Provider<Logo, string, LogoRepository, LogoRequest>
-{
-    public LogoProvider(LogoRepository repository, LogoRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class LogoProvider(
+    LogoRepository repository,
+    LogoRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Logo, string, LogoRepository, LogoRequest>(repository, request, gateway, staticMetaRepository, logger);

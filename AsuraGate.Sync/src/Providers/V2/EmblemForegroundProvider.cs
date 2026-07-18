@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class EmblemForegroundProvider : Provider<EmblemComponent, int, EmblemForegroundRepository, EmblemForegroundRequest>
-{
-    public EmblemForegroundProvider(EmblemForegroundRepository repository, EmblemForegroundRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class EmblemForegroundProvider(
+    EmblemForegroundRepository repository,
+    EmblemForegroundRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<EmblemComponent, int, EmblemForegroundRepository, EmblemForegroundRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class SkinProvider : Provider<Skin, int, SkinRepository, SkinRequest>
-{
-    public SkinProvider(SkinRepository repository, SkinRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class SkinProvider(
+    SkinRepository repository,
+    SkinRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Skin, int, SkinRepository, SkinRequest>(repository, request, gateway, staticMetaRepository, logger);

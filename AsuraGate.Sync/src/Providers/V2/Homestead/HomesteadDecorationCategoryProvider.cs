@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Homestead;
 
 namespace AsuraGate.Sync.Providers.V2.Homestead;
 
-public class HomesteadDecorationCategoryProvider : Provider<HomesteadDecorationCategory, int, HomesteadDecorationCategoryRepository, HomesteadDecorationCategoryRequest>
-{
-    public HomesteadDecorationCategoryProvider(HomesteadDecorationCategoryRepository repository, HomesteadDecorationCategoryRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class HomesteadDecorationCategoryProvider(
+    HomesteadDecorationCategoryRepository repository,
+    HomesteadDecorationCategoryRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<HomesteadDecorationCategory, int, HomesteadDecorationCategoryRepository,
+        HomesteadDecorationCategoryRequest>(repository, request, gateway, staticMetaRepository, logger);

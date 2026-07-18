@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class SkiffProvider : Provider<Skiff, int, SkiffRepository, SkiffRequest>
-{
-    public SkiffProvider(SkiffRepository repository, SkiffRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class SkiffProvider(
+    SkiffRepository repository,
+    SkiffRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Skiff, int, SkiffRepository, SkiffRequest>(repository, request, gateway, staticMetaRepository, logger);

@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Pvp;
 
 namespace AsuraGate.Sync.Providers.V2.Pvp;
 
-public class PvpAmuletProvider : Provider<PvpAmulet, int, PvpAmuletRepository, PvpAmuletRequest>
-{
-    public PvpAmuletProvider(PvpAmuletRepository repository, PvpAmuletRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class PvpAmuletProvider(
+    PvpAmuletRepository repository,
+    PvpAmuletRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<PvpAmulet, int, PvpAmuletRepository, PvpAmuletRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

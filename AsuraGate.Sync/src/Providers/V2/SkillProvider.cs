@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class SkillProvider : Provider<Skill, int, SkillRepository, SkillRequest>
-{
-    public SkillProvider(SkillRepository repository, SkillRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class SkillProvider(
+    SkillRepository repository,
+    SkillRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Skill, int, SkillRepository, SkillRequest>(repository, request, gateway, staticMetaRepository, logger);

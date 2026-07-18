@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Guild;
 
 namespace AsuraGate.Sync.Providers.V2.Guild;
 
-public class GuildPermissionProvider : Provider<GuildPermission, string, GuildPermissionRepository, GuildPermissionRequest>
-{
-    public GuildPermissionProvider(GuildPermissionRepository repository, GuildPermissionRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class GuildPermissionProvider(
+    GuildPermissionRepository repository,
+    GuildPermissionRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<GuildPermission, string, GuildPermissionRepository, GuildPermissionRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

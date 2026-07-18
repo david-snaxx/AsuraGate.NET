@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class CurrencyProvider : Provider<Currency, int, CurrencyRepository, CurrencyRequest>
-{
-    public CurrencyProvider(CurrencyRepository repository, CurrencyRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class CurrencyProvider(
+    CurrencyRepository repository,
+    CurrencyRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Currency, int, CurrencyRepository, CurrencyRequest>(repository, request, gateway, staticMetaRepository,
+        logger);

@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class DungeonProvider : Provider<Dungeon, string, DungeonRepository, DungeonRequest>
-{
-    public DungeonProvider(DungeonRepository repository, DungeonRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class DungeonProvider(
+    DungeonRepository repository,
+    DungeonRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Dungeon, string, DungeonRepository, DungeonRequest>(repository, request, gateway, staticMetaRepository,
+        logger);

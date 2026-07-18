@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Achievements;
 
 namespace AsuraGate.Sync.Providers.V2.Achievements;
 
-public class AchievementProvider : Provider<Achievement, int, AchievementRepository, AchievementRequest>
-{
-    public AchievementProvider(AchievementRepository repository, AchievementRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class AchievementProvider(
+    AchievementRepository repository,
+    AchievementRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Achievement, int, AchievementRepository, AchievementRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

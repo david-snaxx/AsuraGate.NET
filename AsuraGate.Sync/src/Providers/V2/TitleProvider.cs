@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class TitleProvider : Provider<Title, int, TitleRepository, TitleRequest>
-{
-    public TitleProvider(TitleRepository repository, TitleRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class TitleProvider(
+    TitleRepository repository,
+    TitleRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Title, int, TitleRepository, TitleRequest>(repository, request, gateway, staticMetaRepository, logger);

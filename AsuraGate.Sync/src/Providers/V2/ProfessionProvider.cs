@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class ProfessionProvider : Provider<Profession, string, ProfessionRepository, ProfessionRequest>
-{
-    public ProfessionProvider(ProfessionRepository repository, ProfessionRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class ProfessionProvider(
+    ProfessionRepository repository,
+    ProfessionRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Profession, string, ProfessionRepository, ProfessionRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

@@ -7,10 +7,11 @@ using AsuraGate.Persistence.Static.Repositories.V2.Guild;
 
 namespace AsuraGate.Sync.Providers.V2.Guild;
 
-public class GuildUpgradeProvider : Provider<GuildUpgrade, int, GuildUpgradeRepository, GuildUpgradesRequest>
-{
-    public GuildUpgradeProvider(GuildUpgradeRepository repository, GuildUpgradesRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class GuildUpgradeProvider(
+    GuildUpgradeRepository repository,
+    GuildUpgradesRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<GuildUpgrade, int, GuildUpgradeRepository, GuildUpgradesRequest>(repository, request, gateway,
+        staticMetaRepository, logger);

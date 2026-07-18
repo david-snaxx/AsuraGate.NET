@@ -7,10 +7,10 @@ using AsuraGate.Persistence.Static.Repositories.V2;
 
 namespace AsuraGate.Sync.Providers.V2;
 
-public class DyeProvider : Provider<Dye, int, DyeRepository, DyeRequest>
-{
-    public DyeProvider(DyeRepository repository, DyeRequest request, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger? logger = null)
-        : base(repository, request, gateway, staticMetaRepository, logger)
-    {
-    }
-}
+public class DyeProvider(
+    DyeRepository repository,
+    DyeRequest request,
+    Gw2ApiGateway gateway,
+    StaticMetaRepository staticMetaRepository,
+    ILogger? logger = null)
+    : Provider<Dye, int, DyeRepository, DyeRequest>(repository, request, gateway, staticMetaRepository, logger);
