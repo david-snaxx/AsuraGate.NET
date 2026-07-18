@@ -9,8 +9,12 @@ public static class ContinentMapper
     public static ContinentEntity ToEntity(Continent model) => new ContinentEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Continent ToModel(ContinentEntity entity) => JsonSerializer.Deserialize<Continent>(entity.Data)!;
+    public static Continent? ToModel(ContinentEntity entity)
+    {
+        
+        return MapperUtils.DeserializeJson<Continent>(entity.Data);
+    }
 }
