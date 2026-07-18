@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class OutfitRepository : StaticRepository<Outfit, OutfitEntity, int>
-{
-    public OutfitRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, OutfitMapper.ToEntity, OutfitMapper.ToModel)
-    {
-    }
-}
+public class OutfitRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Outfit, OutfitEntity, int>(
+        database, OutfitMapper.ToEntity, OutfitMapper.ToModel);

@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class LogoRepository : StaticRepository<Logo, LogoEntity, string>
-{
-    public LogoRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, LogoMapper.ToEntity, LogoMapper.ToModel)
-    {
-    }
-}
+public class LogoRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Logo, LogoEntity, string>(
+        database, LogoMapper.ToEntity, LogoMapper.ToModel);

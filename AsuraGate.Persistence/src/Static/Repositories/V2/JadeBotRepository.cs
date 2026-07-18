@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class JadeBotRepository : StaticRepository<JadeBot, JadeBotEntity, int>
-{
-    public JadeBotRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, JadeBotMapper.ToEntity, JadeBotMapper.ToModel)
-    {
-    }
-}
+public class JadeBotRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<JadeBot, JadeBotEntity, int>(
+        database, JadeBotMapper.ToEntity, JadeBotMapper.ToModel);

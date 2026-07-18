@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class ItemStatRepository : StaticRepository<ItemStat, ItemStatEntity, int>
-{
-    public ItemStatRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, ItemStatMapper.ToEntity, ItemStatMapper.ToModel)
-    {
-    }
-}
+public class ItemStatRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<ItemStat, ItemStatEntity, int>(
+        database, ItemStatMapper.ToEntity, ItemStatMapper.ToModel);

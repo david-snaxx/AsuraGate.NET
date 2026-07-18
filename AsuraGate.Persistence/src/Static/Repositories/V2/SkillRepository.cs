@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class SkillRepository : StaticRepository<Skill, SkillEntity, int>
-{
-    public SkillRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, SkillMapper.ToEntity, SkillMapper.ToModel)
-    {
-    }
-}
+public class SkillRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Skill, SkillEntity, int>(
+        database, SkillMapper.ToEntity, SkillMapper.ToModel);

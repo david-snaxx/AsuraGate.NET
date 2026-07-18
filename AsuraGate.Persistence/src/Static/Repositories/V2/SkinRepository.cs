@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class SkinRepository : StaticRepository<Skin, SkinEntity, int>
-{
-    public SkinRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, SkinMapper.ToEntity, SkinMapper.ToModel)
-    {
-    }
-}
+public class SkinRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Skin, SkinEntity, int>(
+        database, SkinMapper.ToEntity, SkinMapper.ToModel);

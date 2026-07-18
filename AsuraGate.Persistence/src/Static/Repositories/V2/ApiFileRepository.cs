@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class ApiFileRepository : StaticRepository<ApiFile, ApiFileEntity, string>
-{
-    public ApiFileRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, ApiFileMapper.ToEntity, ApiFileMapper.ToModel)
-    {
-    }
-}
+public class ApiFileRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<ApiFile, ApiFileEntity, string>(
+        database, ApiFileMapper.ToEntity, ApiFileMapper.ToModel);

@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class TitleRepository : StaticRepository<Title, TitleEntity, int>
-{
-    public TitleRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, TitleMapper.ToEntity, TitleMapper.ToModel)
-    {
-    }
-}
+public class TitleRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Title, TitleEntity, int>(
+        database, TitleMapper.ToEntity, TitleMapper.ToModel);

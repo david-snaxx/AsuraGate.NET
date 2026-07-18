@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Homestead;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Homestead;
 
-public class HomesteadDecorationCategoryRepository : StaticRepository<HomesteadDecorationCategory, HomesteadDecorationCategoryEntity, int>
-{
-    public HomesteadDecorationCategoryRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, HomesteadDecorationCategoryMapper.ToEntity, HomesteadDecorationCategoryMapper.ToModel)
-    {
-    }
-}
+public class HomesteadDecorationCategoryRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<HomesteadDecorationCategory, HomesteadDecorationCategoryEntity, int>(
+        database, HomesteadDecorationCategoryMapper.ToEntity, HomesteadDecorationCategoryMapper.ToModel);

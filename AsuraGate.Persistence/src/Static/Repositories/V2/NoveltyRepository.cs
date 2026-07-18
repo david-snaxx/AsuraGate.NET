@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class NoveltyRepository : StaticRepository<Novelty, NoveltyEntity, int>
-{
-    public NoveltyRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, NoveltyMapper.ToEntity, NoveltyMapper.ToModel)
-    {
-    }
-}
+public class NoveltyRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Novelty, NoveltyEntity, int>(
+        database, NoveltyMapper.ToEntity, NoveltyMapper.ToModel);

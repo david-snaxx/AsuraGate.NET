@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Pvp;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Pvp;
 
-public class PvpHeroRepository : StaticRepository<PvpHero, PvpHeroEntity, string>
-{
-    public PvpHeroRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, PvpHeroMapper.ToEntity, PvpHeroMapper.ToModel)
-    {
-    }
-}
+public class PvpHeroRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<PvpHero, PvpHeroEntity, string>(
+        database, PvpHeroMapper.ToEntity, PvpHeroMapper.ToModel);

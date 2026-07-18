@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class GameMapRepository : StaticRepository<GameMap, GameMapEntity, int>
-{
-    public GameMapRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, GameMapMapper.ToEntity, GameMapMapper.ToModel)
-    {
-    }
-}
+public class GameMapRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<GameMap, GameMapEntity, int>(
+        database, GameMapMapper.ToEntity, GameMapMapper.ToModel);

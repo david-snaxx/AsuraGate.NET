@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class LegendaryArmoryItemRepository : StaticRepository<LegendaryArmoryItem, LegendaryArmoryItemEntity, int>
-{
-    public LegendaryArmoryItemRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, LegendaryArmoryItemMapper.ToEntity, LegendaryArmoryItemMapper.ToModel)
-    {
-    }
-}
+public class LegendaryArmoryItemRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<LegendaryArmoryItem, LegendaryArmoryItemEntity, int>(
+        database, LegendaryArmoryItemMapper.ToEntity, LegendaryArmoryItemMapper.ToModel);

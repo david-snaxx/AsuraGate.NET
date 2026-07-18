@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Mount;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Mount;
 
-public class MountTypeRepository : StaticRepository<MountType, MountTypeEntity, string>
-{
-    public MountTypeRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, MountTypeMapper.ToEntity, MountTypeMapper.ToModel)
-    {
-    }
-}
+public class MountTypeRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<MountType, MountTypeEntity, string>(
+        database, MountTypeMapper.ToEntity, MountTypeMapper.ToModel);

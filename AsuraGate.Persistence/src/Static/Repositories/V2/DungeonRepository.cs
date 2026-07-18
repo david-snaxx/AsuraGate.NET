@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class DungeonRepository : StaticRepository<Dungeon, DungeonEntity, string>
-{
-    public DungeonRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, DungeonMapper.ToEntity, DungeonMapper.ToModel)
-    {
-    }
-}
+public class DungeonRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Dungeon, DungeonEntity, string>(
+        database, DungeonMapper.ToEntity, DungeonMapper.ToModel);

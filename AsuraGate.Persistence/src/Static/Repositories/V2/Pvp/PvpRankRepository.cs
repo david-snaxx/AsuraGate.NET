@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Pvp;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Pvp;
 
-public class PvpRankRepository : StaticRepository<PvpRank, PvpRankEntity, int>
-{
-    public PvpRankRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, PvpRankMapper.ToEntity, PvpRankMapper.ToModel)
-    {
-    }
-}
+public class PvpRankRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<PvpRank, PvpRankEntity, int>(
+        database, PvpRankMapper.ToEntity, PvpRankMapper.ToModel);

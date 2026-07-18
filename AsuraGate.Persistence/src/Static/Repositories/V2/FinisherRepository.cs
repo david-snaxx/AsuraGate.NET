@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class FinisherRepository : StaticRepository<Finisher, FinisherEntity, int>
-{
-    public FinisherRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, FinisherMapper.ToEntity, FinisherMapper.ToModel)
-    {
-    }
-}
+public class FinisherRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Finisher, FinisherEntity, int>(
+        database, FinisherMapper.ToEntity, FinisherMapper.ToModel);

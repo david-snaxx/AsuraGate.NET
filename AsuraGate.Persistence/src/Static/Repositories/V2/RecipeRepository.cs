@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class RecipeRepository : StaticRepository<Recipe, RecipeEntity, int>
-{
-    public RecipeRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, RecipeMapper.ToEntity, RecipeMapper.ToModel)
-    {
-    }
-}
+public class RecipeRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Recipe, RecipeEntity, int>(
+        database, RecipeMapper.ToEntity, RecipeMapper.ToModel);

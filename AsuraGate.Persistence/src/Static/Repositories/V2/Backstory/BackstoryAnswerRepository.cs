@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Backstory;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Backstory;
 
-public class BackstoryAnswerRepository : StaticRepository<BackstoryAnswer, BackstoryAnswerEntity, string>
-{
-    public BackstoryAnswerRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, BackstoryAnswerMapper.ToEntity, BackstoryAnswerMapper.ToModel)
-    {
-    }
-}
+public class BackstoryAnswerRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<BackstoryAnswer, BackstoryAnswerEntity, string>(
+        database, BackstoryAnswerMapper.ToEntity, BackstoryAnswerMapper.ToModel);

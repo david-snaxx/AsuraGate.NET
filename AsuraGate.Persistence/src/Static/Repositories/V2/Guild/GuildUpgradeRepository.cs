@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Guild;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Guild;
 
-public class GuildUpgradeRepository : StaticRepository<GuildUpgrade, GuildUpgradeEntity, int>
-{
-    public GuildUpgradeRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, GuildUpgradeMapper.ToEntity, GuildUpgradeMapper.ToModel)
-    {
-    }
-}
+public class GuildUpgradeRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<GuildUpgrade, GuildUpgradeEntity, int>(
+        database, GuildUpgradeMapper.ToEntity, GuildUpgradeMapper.ToModel);

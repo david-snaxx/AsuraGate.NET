@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Wvw;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Wvw;
 
-public class WvwRankRepository : StaticRepository<WvwRank, WvwRankEntity, int>
-{
-    public WvwRankRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, WvwRankMapper.ToEntity, WvwRankMapper.ToModel)
-    {
-    }
-}
+public class WvwRankRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<WvwRank, WvwRankEntity, int>(
+        database, WvwRankMapper.ToEntity, WvwRankMapper.ToModel);

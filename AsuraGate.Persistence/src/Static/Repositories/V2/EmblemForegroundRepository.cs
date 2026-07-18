@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class EmblemForegroundRepository : StaticRepository<EmblemComponent, EmblemForegroundEntity, int>
-{
-    public EmblemForegroundRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, EmblemForegroundMapper.ToEntity, EmblemForegroundMapper.ToModel)
-    {
-    }
-}
+public class EmblemForegroundRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<EmblemComponent, EmblemForegroundEntity, int>(
+        database, EmblemForegroundMapper.ToEntity, EmblemForegroundMapper.ToModel);

@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class ContinentRepository : StaticRepository<Continent, ContinentEntity, int>
-{
-    public ContinentRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, ContinentMapper.ToEntity, ContinentMapper.ToModel)
-    {
-    }
-}
+public class ContinentRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Continent, ContinentEntity, int>(
+        database, ContinentMapper.ToEntity, ContinentMapper.ToModel);

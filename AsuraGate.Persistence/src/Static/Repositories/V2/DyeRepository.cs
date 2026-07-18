@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class DyeRepository : StaticRepository<Dye, DyeEntity, int>
-{
-    public DyeRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, DyeMapper.ToEntity, DyeMapper.ToModel)
-    {
-    }
-}
+public class DyeRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Dye, DyeEntity, int>(
+        database, DyeMapper.ToEntity, DyeMapper.ToModel);

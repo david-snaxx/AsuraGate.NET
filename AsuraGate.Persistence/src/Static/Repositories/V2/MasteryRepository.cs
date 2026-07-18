@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class MasteryRepository : StaticRepository<Mastery, MasteryEntity, int>
-{
-    public MasteryRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, MasteryMapper.ToEntity, MasteryMapper.ToModel)
-    {
-    }
-}
+public class MasteryRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Mastery, MasteryEntity, int>(
+        database, MasteryMapper.ToEntity, MasteryMapper.ToModel);

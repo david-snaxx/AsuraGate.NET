@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class HomeCatRepository : StaticRepository<HomeCat, HomeCatEntity, int>
-{
-    public HomeCatRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, HomeCatMapper.ToEntity, HomeCatMapper.ToModel)
-    {
-    }
-}
+public class HomeCatRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<HomeCat, HomeCatEntity, int>(
+        database, HomeCatMapper.ToEntity, HomeCatMapper.ToModel);

@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class PetRepository : StaticRepository<Pet, PetEntity, int>
-{
-    public PetRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, PetMapper.ToEntity, PetMapper.ToModel)
-    {
-    }
-}
+public class PetRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Pet, PetEntity, int>(
+        database, PetMapper.ToEntity, PetMapper.ToModel);

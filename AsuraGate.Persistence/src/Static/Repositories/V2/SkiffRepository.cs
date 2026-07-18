@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class SkiffRepository : StaticRepository<Skiff, SkiffEntity, int>
-{
-    public SkiffRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, SkiffMapper.ToEntity, SkiffMapper.ToModel)
-    {
-    }
-}
+public class SkiffRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Skiff, SkiffEntity, int>(
+        database, SkiffMapper.ToEntity, SkiffMapper.ToModel);

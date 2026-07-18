@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Achievements;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2.Achievements;
 
-public class AchievementRepository : StaticRepository<Achievement, AchievementEntity, int>
-{
-    public AchievementRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, AchievementMapper.ToEntity, AchievementMapper.ToModel)
-    {
-    }
-}
+public class AchievementRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Achievement, AchievementEntity, int>(
+        database, AchievementMapper.ToEntity, AchievementMapper.ToModel);

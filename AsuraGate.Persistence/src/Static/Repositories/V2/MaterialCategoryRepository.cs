@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class MaterialCategoryRepository : StaticRepository<MaterialCategory, MaterialCategoryEntity, int>
-{
-    public MaterialCategoryRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, MaterialCategoryMapper.ToEntity, MaterialCategoryMapper.ToModel)
-    {
-    }
-}
+public class MaterialCategoryRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<MaterialCategory, MaterialCategoryEntity, int>(
+        database, MaterialCategoryMapper.ToEntity, MaterialCategoryMapper.ToModel);

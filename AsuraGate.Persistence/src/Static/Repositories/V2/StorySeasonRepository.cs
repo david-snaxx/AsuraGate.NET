@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class StorySeasonRepository : StaticRepository<StorySeason, StorySeasonEntity, string>
-{
-    public StorySeasonRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, StorySeasonMapper.ToEntity, StorySeasonMapper.ToModel)
-    {
-    }
-}
+public class StorySeasonRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<StorySeason, StorySeasonEntity, string>(
+        database, StorySeasonMapper.ToEntity, StorySeasonMapper.ToModel);

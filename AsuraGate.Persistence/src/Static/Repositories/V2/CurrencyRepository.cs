@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class CurrencyRepository : StaticRepository<Currency, CurrencyEntity, int>
-{
-    public CurrencyRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, CurrencyMapper.ToEntity, CurrencyMapper.ToModel)
-    {
-    }
-}
+public class CurrencyRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Currency, CurrencyEntity, int>(
+        database, CurrencyMapper.ToEntity, CurrencyMapper.ToModel);

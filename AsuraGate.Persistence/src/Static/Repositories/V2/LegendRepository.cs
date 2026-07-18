@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class LegendRepository : StaticRepository<Legend, LegendEntity, string>
-{
-    public LegendRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, LegendMapper.ToEntity, LegendMapper.ToModel)
-    {
-    }
-}
+public class LegendRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Legend, LegendEntity, string>(
+        database, LegendMapper.ToEntity, LegendMapper.ToModel);

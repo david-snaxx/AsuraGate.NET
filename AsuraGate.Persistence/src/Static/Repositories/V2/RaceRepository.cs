@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2;
 
 namespace AsuraGate.Persistence.Static.Repositories.V2;
 
-public class RaceRepository : StaticRepository<Race, RaceEntity, string>
-{
-    public RaceRepository(Gw2ApiPersistenceDatabase database)
-        : base(database, RaceMapper.ToEntity, RaceMapper.ToModel)
-    {
-    }
-}
+public class RaceRepository(Gw2ApiPersistenceDatabase database)
+    : StaticRepository<Race, RaceEntity, string>(
+        database, RaceMapper.ToEntity, RaceMapper.ToModel);
