@@ -54,14 +54,18 @@ public record Recipe
     public required string ChatLink { get; init; }
 }
 
-/// <summary>Represents a single item ingredient required by a <see cref="Recipe"/>.</summary>
+/// <summary>Represents a single item ingredient required by a <see cref="Recipe"/> Follows latest schema version.</summary>
 public record RecipeIngredient
 {
-    /// <summary>ID of the required item; resolvable to an <see cref="Item"/>.</summary>
-    [JsonPropertyName("item_id")]
-    public int? ItemId { get; init; } = null;
-
-    /// <summary>Number of this item required.</summary>
+    /// <summary>The type of ingredient, i.e. 'Currency, Item, GuildUpgrade'.</summary>
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+    
+    /// <summary>The /v2/items or /v2/currency id to resolve this ingredient against.</summary>
+    [JsonPropertyName("id")]
+    public required int Id { get; init; }
+    
+    /// <summary>The quantity of this ingredient required for the <see cref="Recipe"/>.</summary>
     [JsonPropertyName("count")]
     public required int Count { get; init; }
 }

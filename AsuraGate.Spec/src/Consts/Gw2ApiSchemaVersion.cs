@@ -46,7 +46,7 @@ public class Gw2ApiSchemaVersion
     public const string V2021_04_06 = "2021-04-06T21:00:00.000Z";
     
     /// <summary>
-    /// Change the type of `details.secondary_suffix_item_id` from `/v2/items` to be an optional int.
+    /// Change the type of `details.secondary_suffix_item_id` from `/v2/items` to be an optional string.
     /// </summary>
     public const string V2020_11_17 = "2020-11-17T00:30:00.000Z";
     
