@@ -54,7 +54,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
         return fetched;
     }
 
-    public async Task<IEnumerable<TModel?>> GetBulk(IEnumerable<TId> ids, CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TModel>> GetBulk(IEnumerable<TId> ids, CancellationToken cancellationToken = default)
     {
         var idList = ids.Distinct().ToList();
         IEnumerable<TModel?> cached = (await Repository.GetManyAsync(idList)).ToList();
@@ -149,15 +149,26 @@ public class Provider<TModel, TId, TRepository, TRequest>
         FetchedAllAt = DateTime.UtcNow
     });
 
-    public Task<IEnumerable<TId>?> GetIds(CancellationToken cancellationToken = default)
+    public async Task<IEnumerable<TId>?> GetIds(CancellationToken cancellationToken = default)
     {
         _logger.LogDebug("{Resource}: fetching live id list from API", ResourceName);
-        return Gateway.FetchAsync(Request.GetAllIds(), cancellationToken);
+        IEnumerable<TId>? ids = await Gateway.FetchAsync(Request.GetAllIds(), cancellationToken);
+        if (ids is null)
+        {
+            _logger.LogWarning("{Resource}: fetch for live id list returned null", ResourceName);
+            return null;
+        }
+
+        List<TId> idList = ids.ToList();
+        _logger.LogInformation("{Resource}: fetched {IdCount} live id(s) from API", ResourceName, idList.Count);
+        return idList;
     }
 
-    public Task<IEnumerable<TId>> GetCachedIds()
+    public async Task<IEnumerable<TId>> GetCachedIds()
     {
         _logger.LogDebug("{Resource}: reading cached ids", ResourceName);
-        return Repository.GetCachedIdsAsync();
+        List<TId> ids = (await Repository.GetCachedIdsAsync()).ToList();
+        _logger.LogDebug("{Resource}: read {IdCount} cached id(s)", ResourceName, ids.Count);
+        return ids;
     }
 }

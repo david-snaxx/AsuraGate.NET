@@ -17,14 +17,14 @@ public class AsuraGateService : IAsyncDisposable
     public ProviderLink Api { get; }
     private readonly ILogger _logger;
 
-    private AsuraGateService(string gw2ApiKey, string staticDatabasePath, string dynamicDatabasePath, string defaultLocalization, string defaultSchemaVersion, ILogger? logger = null)
+    private AsuraGateService(string gw2ApiKey, string staticDatabasePath, string dynamicDatabasePath, string? defaultLocalization, string? defaultSchemaVersion, ILogger? logger = null)
     {
         Gw2ApiGateway = new Gw2ApiGateway(
             gw2ApiKey,
-            defaultLocalization?.ToString() ?? Gw2ApiLocalization.English,
-            defaultSchemaVersion?.ToString() ?? Gw2ApiSchemaVersion.Latest,
+            defaultLocalization ?? Gw2ApiLocalization.English,
+            defaultSchemaVersion ?? Gw2ApiSchemaVersion.Latest,
             _logger = logger ?? NullLogger<Gw2ApiGateway>.Instance);
-        MapperUtils.Configure(logger ?? NullLogger<Gw2ApiGateway>.Instance);
+        MapperUtils.Configure(logger ?? NullLogger.Instance);
         Gw2ApiNavigator = Gw2ApiNavigator.Instance;
         Gw2ApiPersistenceDatabase = new Gw2ApiPersistenceDatabase(staticDatabasePath);
         Gw2ApiDynamicDatabase = new Gw2ApiDynamicDatabase(dynamicDatabasePath);
