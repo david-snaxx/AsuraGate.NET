@@ -33,7 +33,12 @@ public class Gw2ApiService
 
     private Gw2ApiService(HttpClient? httpClient = null)
     {
-        if (httpClient is not null) return;
+        if (httpClient is not null)
+        {
+            _httpClient = httpClient;
+            return;
+        }
+
         _httpClient = new HttpClient();
         _httpClient.Timeout = TimeSpan.FromSeconds(10);
     }

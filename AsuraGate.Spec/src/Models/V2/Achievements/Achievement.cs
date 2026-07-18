@@ -59,14 +59,31 @@ public record Achievement
     public int? PointCap { get; init; }
 
     /// <summary>Deserializes each entry in <see cref="Rewards"/> into the correct <see cref="AchievementReward"/> subtype based on its "type" field.</summary>
-    public IEnumerable<AchievementReward?> GetRewards() => Rewards.Select(reward => reward.GetProperty("type").GetString() switch
+    public IEnumerable<AchievementReward?> GetRewards() => Rewards.Select(DeserializeReward);
+
+    private static AchievementReward? DeserializeReward(JsonElement reward)
     {
-        "Coins" => (AchievementReward?)reward.Deserialize<AchievementRewardCoins>(),
-        "Item" => reward.Deserialize<AchievementRewardItem>(),
-        "Mastery" => reward.Deserialize<AchievementRewardMastery>(),
-        "Title" => reward.Deserialize<AchievementRewardTitle>(),
-        _ => null
-    });
+        if (!reward.TryGetProperty("type", out JsonElement typeProperty))
+        {
+            return null;
+        }
+
+        try
+        {
+            return typeProperty.GetString() switch
+            {
+                "Coins" => (AchievementReward?)reward.Deserialize<AchievementRewardCoins>(),
+                "Item" => reward.Deserialize<AchievementRewardItem>(),
+                "Mastery" => reward.Deserialize<AchievementRewardMastery>(),
+                "Title" => reward.Deserialize<AchievementRewardTitle>(),
+                _ => null
+            };
+        }
+        catch (JsonException)
+        {
+            return null;
+        }
+    }
 }
 
 /// <summary>Represents a single completion tier within an <see cref="Achievement"/>.</summary>

@@ -42,7 +42,7 @@ public record Trait
     [JsonPropertyName("facts")]
     public JsonElement[] Facts { get; init; } = [];
 
-    public TraitFact?[] GetFacts(string type) => Facts.Select(DeserializeTraitFact).ToArray();
+    public TraitFact?[] GetFacts() => Facts.Select(DeserializeTraitFact).ToArray();
 
     private static TraitFact? DeserializeTraitFact(JsonElement element)
     {

@@ -22,19 +22,11 @@ using Microsoft.Extensions.Logging;
 
 namespace AsuraGate.Sync;
 
-public class ProviderLink
+public class ProviderLink : ProviderBase
 {
-    private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Gw2ApiGateway _gateway;
-    private readonly StaticMetaRepository _staticMetaRepository;
-    private readonly ILogger _logger;
-
     internal ProviderLink(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, ILogger logger)
+        : base(database, gateway, new StaticMetaRepository(database), logger)
     {
-        _database = database;
-        _gateway = gateway;
-        _staticMetaRepository = new StaticMetaRepository(database);
-        _logger = logger;
     }
 
     // leaves

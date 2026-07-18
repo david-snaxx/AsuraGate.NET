@@ -6,7 +6,11 @@ namespace AsuraGate.Persistence.Static.Mappers;
 public static class MapperUtils
 {
     private static ILogger? _logger;
-    public static void Configure(ILogger logger) => _logger = logger;
+
+    /// <summary>Sets the logger used for (de)serialization warnings. Only the first call takes effect,
+    /// so constructing a second consumer (e.g. a second AsuraGateService) in the same process cannot
+    /// silently repoint logging away from an already-alive first instance.</summary>
+    public static void Configure(ILogger logger) => _logger ??= logger;
     
     public static string? SerializeModel<TModel>(TModel model, JsonSerializerOptions? options = null)
     {

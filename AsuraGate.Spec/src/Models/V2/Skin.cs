@@ -42,7 +42,7 @@ public record Skin
     [JsonPropertyName("details")]
     public JsonElement? Details { get; init; }
     
-    public SkinDetails? GetDetails() => Details?.Deserialize<SkinDetails>();
+    public SkinDetails? GetDetails() => Details is { } details ? DeserializeSkinDetails(details) : null;
 
     private static SkinDetails? DeserializeSkinDetails(JsonElement element)
     {
