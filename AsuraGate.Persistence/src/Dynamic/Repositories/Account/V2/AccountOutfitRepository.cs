@@ -3,10 +3,6 @@ using AsuraGate.Persistence.Dynamic.Mappers.Account.V2;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountOutfitRepository : SnapshotRepository<IEnumerable<int>, AccountOutfitSnapshotEntity>
-{
-    public AccountOutfitRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountOutfitMapper.ToEntity, AccountOutfitMapper.ToModel)
-    {
-    }
-}
+public class AccountOutfitRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<int>, AccountOutfitSnapshotEntity>(
+        database, AccountOutfitMapper.ToEntity, AccountOutfitMapper.ToModel);

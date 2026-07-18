@@ -3,10 +3,6 @@ using AsuraGate.Persistence.Dynamic.Mappers.Account.V2;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountEmoteRepository : SnapshotRepository<IEnumerable<string>, AccountEmoteSnapshotEntity>
-{
-    public AccountEmoteRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountEmoteMapper.ToEntity, AccountEmoteMapper.ToModel)
-    {
-    }
-}
+public class AccountEmoteRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<string>, AccountEmoteSnapshotEntity>(
+        database, AccountEmoteMapper.ToEntity, AccountEmoteMapper.ToModel);

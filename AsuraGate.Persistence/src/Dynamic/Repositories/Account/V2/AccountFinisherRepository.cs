@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Account;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountFinisherRepository : SnapshotRepository<IEnumerable<AccountFinisher>, AccountFinisherSnapshotEntity>
-{
-    public AccountFinisherRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountFinisherMapper.ToEntity, AccountFinisherMapper.ToModel)
-    {
-    }
-}
+public class AccountFinisherRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<AccountFinisher>, AccountFinisherSnapshotEntity>(
+        database, AccountFinisherMapper.ToEntity, AccountFinisherMapper.ToModel);

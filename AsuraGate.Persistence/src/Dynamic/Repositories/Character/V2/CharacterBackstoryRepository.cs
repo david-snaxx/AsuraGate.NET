@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Characters;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Character.V2;
 
-public class CharacterBackstoryRepository : KeyedSnapshotRepository<CharacterBackstory, CharacterBackstorySnapshotEntity>
-{
-    public CharacterBackstoryRepository(Gw2ApiDynamicDatabase database)
-        : base(database, CharacterBackstoryMapper.ToEntity, CharacterBackstoryMapper.ToModel)
-    {
-    }
-}
+public class CharacterBackstoryRepository(Gw2ApiDynamicDatabase database)
+    : KeyedSnapshotRepository<CharacterBackstory, CharacterBackstorySnapshotEntity>(
+        database, CharacterBackstoryMapper.ToEntity, CharacterBackstoryMapper.ToModel);

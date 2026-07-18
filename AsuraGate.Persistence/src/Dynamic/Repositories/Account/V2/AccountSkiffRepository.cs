@@ -3,10 +3,6 @@ using AsuraGate.Persistence.Dynamic.Mappers.Account.V2;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountSkiffRepository : SnapshotRepository<IEnumerable<int>, AccountSkiffSnapshotEntity>
-{
-    public AccountSkiffRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountSkiffMapper.ToEntity, AccountSkiffMapper.ToModel)
-    {
-    }
-}
+public class AccountSkiffRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<int>, AccountSkiffSnapshotEntity>(
+        database, AccountSkiffMapper.ToEntity, AccountSkiffMapper.ToModel);

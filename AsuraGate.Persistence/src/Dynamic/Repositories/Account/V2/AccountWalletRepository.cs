@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Account;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountWalletRepository : SnapshotRepository<IEnumerable<AccountCurrency>, AccountWalletSnapshotEntity>
-{
-    public AccountWalletRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountWalletMapper.ToEntity, AccountWalletMapper.ToModel)
-    {
-    }
-}
+public class AccountWalletRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<AccountCurrency>, AccountWalletSnapshotEntity>(
+        database, AccountWalletMapper.ToEntity, AccountWalletMapper.ToModel);

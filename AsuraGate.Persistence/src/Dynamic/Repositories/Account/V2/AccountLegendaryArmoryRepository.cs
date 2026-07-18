@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Account;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountLegendaryArmoryRepository : SnapshotRepository<IEnumerable<AccountLegendaryItem>, AccountLegendaryArmorySnapshotEntity>
-{
-    public AccountLegendaryArmoryRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountLegendaryArmoryMapper.ToEntity, AccountLegendaryArmoryMapper.ToModel)
-    {
-    }
-}
+public class AccountLegendaryArmoryRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<AccountLegendaryItem>, AccountLegendaryArmorySnapshotEntity>(
+        database, AccountLegendaryArmoryMapper.ToEntity, AccountLegendaryArmoryMapper.ToModel);

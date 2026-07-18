@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Account;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountProgressionRepository : SnapshotRepository<IEnumerable<AccountProgression>, AccountProgressionSnapshotEntity>
-{
-    public AccountProgressionRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountProgressionMapper.ToEntity, AccountProgressionMapper.ToModel)
-    {
-    }
-}
+public class AccountProgressionRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<AccountProgression>, AccountProgressionSnapshotEntity>(
+        database, AccountProgressionMapper.ToEntity, AccountProgressionMapper.ToModel);

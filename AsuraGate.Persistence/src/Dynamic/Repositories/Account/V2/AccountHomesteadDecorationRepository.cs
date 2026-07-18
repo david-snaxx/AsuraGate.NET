@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Account;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountHomesteadDecorationRepository : SnapshotRepository<IEnumerable<AccountHomesteadDecoration>, AccountHomesteadDecorationSnapshotEntity>
-{
-    public AccountHomesteadDecorationRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountHomesteadDecorationMapper.ToEntity, AccountHomesteadDecorationMapper.ToModel)
-    {
-    }
-}
+public class AccountHomesteadDecorationRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<AccountHomesteadDecoration>, AccountHomesteadDecorationSnapshotEntity>(
+        database, AccountHomesteadDecorationMapper.ToEntity, AccountHomesteadDecorationMapper.ToModel);

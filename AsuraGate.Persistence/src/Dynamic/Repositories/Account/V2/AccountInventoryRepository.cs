@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Account;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountInventoryRepository : SnapshotRepository<IEnumerable<AccountSharedInventoryItem>, AccountInventorySnapshotEntity>
-{
-    public AccountInventoryRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountInventoryMapper.ToEntity, AccountInventoryMapper.ToModel)
-    {
-    }
-}
+public class AccountInventoryRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<AccountSharedInventoryItem>, AccountInventorySnapshotEntity>(
+        database, AccountInventoryMapper.ToEntity, AccountInventoryMapper.ToModel);

@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Account;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountWizardsVaultDailyRepository : SnapshotRepository<AccountWizardsVaultDaily, AccountWizardsVaultDailySnapshotEntity>
-{
-    public AccountWizardsVaultDailyRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountWizardsVaultDailyMapper.ToEntity, AccountWizardsVaultDailyMapper.ToModel)
-    {
-    }
-}
+public class AccountWizardsVaultDailyRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<AccountWizardsVaultDaily, AccountWizardsVaultDailySnapshotEntity>(
+        database, AccountWizardsVaultDailyMapper.ToEntity, AccountWizardsVaultDailyMapper.ToModel);

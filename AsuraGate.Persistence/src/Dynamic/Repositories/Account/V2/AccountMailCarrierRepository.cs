@@ -3,10 +3,6 @@ using AsuraGate.Persistence.Dynamic.Mappers.Account.V2;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Account.V2;
 
-public class AccountMailCarrierRepository : SnapshotRepository<IEnumerable<int>, AccountMailCarrierSnapshotEntity>
-{
-    public AccountMailCarrierRepository(Gw2ApiDynamicDatabase database)
-        : base(database, AccountMailCarrierMapper.ToEntity, AccountMailCarrierMapper.ToModel)
-    {
-    }
-}
+public class AccountMailCarrierRepository(Gw2ApiDynamicDatabase database)
+    : SnapshotRepository<IEnumerable<int>, AccountMailCarrierSnapshotEntity>(
+        database, AccountMailCarrierMapper.ToEntity, AccountMailCarrierMapper.ToModel);

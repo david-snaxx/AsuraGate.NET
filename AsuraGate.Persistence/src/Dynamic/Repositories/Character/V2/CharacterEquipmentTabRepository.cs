@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Characters;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Character.V2;
 
-public class CharacterEquipmentTabRepository : KeyedSnapshotRepository<IEnumerable<CharacterEquipmentTab>, CharacterEquipmentTabSnapshotEntity>
-{
-    public CharacterEquipmentTabRepository(Gw2ApiDynamicDatabase database)
-        : base(database, CharacterEquipmentTabMapper.ToEntity, CharacterEquipmentTabMapper.ToModel)
-    {
-    }
-}
+public class CharacterEquipmentTabRepository(Gw2ApiDynamicDatabase database)
+    : KeyedSnapshotRepository<IEnumerable<CharacterEquipmentTab>, CharacterEquipmentTabSnapshotEntity>(
+        database, CharacterEquipmentTabMapper.ToEntity, CharacterEquipmentTabMapper.ToModel);

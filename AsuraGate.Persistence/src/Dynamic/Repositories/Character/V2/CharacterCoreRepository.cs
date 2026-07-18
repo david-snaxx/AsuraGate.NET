@@ -4,10 +4,6 @@ using AsuraGate.Spec.Models.V2.Characters;
 
 namespace AsuraGate.Persistence.Dynamic.Repositories.Character.V2;
 
-public class CharacterCoreRepository : KeyedSnapshotRepository<CharacterCore, CharacterCoreSnapshotEntity>
-{
-    public CharacterCoreRepository(Gw2ApiDynamicDatabase database)
-        : base(database, CharacterCoreMapper.ToEntity, CharacterCoreMapper.ToModel)
-    {
-    }
-}
+public class CharacterCoreRepository(Gw2ApiDynamicDatabase database)
+    : KeyedSnapshotRepository<CharacterCore, CharacterCoreSnapshotEntity>(
+        database, CharacterCoreMapper.ToEntity, CharacterCoreMapper.ToModel);
