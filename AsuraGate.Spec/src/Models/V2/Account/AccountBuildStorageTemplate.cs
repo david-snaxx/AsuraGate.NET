@@ -25,13 +25,13 @@ public record AccountBuildStorageTemplate
     [JsonPropertyName("aquatic_skills")]
     public required BuildStorageSkills AquaticSkills { get; init; }
 
-    /// <summary>Two Revenant legend IDs for land combat (Revenant only); null for other professions.</summary>
+    /// <summary>Two Revenant legend IDs for land combat (Revenant only); empty for other professions.</summary>
     [JsonPropertyName("legends")]
-    public string[]? Legends { get; init; }
+    public string[] Legends { get; init; } = [];
 
-    /// <summary>Two Revenant legend IDs for aquatic combat (Revenant only); null for other professions.</summary>
+    /// <summary>Two Revenant legend IDs for aquatic combat (Revenant only); empty for other professions.</summary>
     [JsonPropertyName("aquatic_legends")]
-    public string[]? AquaticLegends { get; init; }
+    public string[] AquaticLegends { get; init; } = [];
 }
 
 /// <summary>Represents a single specialization slot in an <see cref="AccountBuildStorageTemplate"/>.</summary>
@@ -41,9 +41,9 @@ public record BuildStorageSpecialization
     [JsonPropertyName("id")]
     public int? Id { get; init; }
 
-    /// <summary>Up to three trait IDs selected within this specialization; each resolvable to a <see cref="Trait"/>; null entries indicate an unselected trait slot.</summary>
+    /// <summary>Up to three trait IDs selected within this specialization; each resolvable to a <see cref="Trait"/>; empty if none selected.</summary>
     [JsonPropertyName("traits")]
-    public int[]? Traits { get; init; }
+    public int[] Traits { get; init; } = [];
 }
 
 /// <summary>Represents the skill loadout within an <see cref="AccountBuildStorageTemplate"/>.</summary>
@@ -53,9 +53,9 @@ public record BuildStorageSkills
     [JsonPropertyName("heal")]
     public int? Heal { get; init; }
 
-    /// <summary>Up to three utility skill IDs; each resolvable to a <see cref="Skill"/>; null entries indicate an empty slot.</summary>
+    /// <summary>Up to three utility skill IDs; each resolvable to a <see cref="Skill"/>; empty if none selected.</summary>
     [JsonPropertyName("utilities")]
-    public int[]? Utilities { get; init; }
+    public int[] Utilities { get; init; } = [];
 
     /// <summary>Skill ID in the elite slot; resolvable to a <see cref="Skill"/>; null if the slot is empty.</summary>
     [JsonPropertyName("elite")]

@@ -13,9 +13,9 @@ public record ContinentFloor
     [JsonPropertyName("texture_dims")]
     public int[] TextureDims { get; init; } = [];
 
-    /// <summary>Optional viewport bounds that restrict the visible area [[x1,y1],[x2,y2]]; null if no clamping is applied.</summary>
+    /// <summary>Optional viewport bounds that restrict the visible area [[x1,y1],[x2,y2]]; empty if no clamping is applied.</summary>
     [JsonPropertyName("clamped_view")]
-    public double[][]? ClampedView { get; init; }
+    public double[][] ClampedView { get; init; } = [];
 
     /// <summary>Map of region ID strings to region data; see <see cref="FloorRegion"/>.</summary>
     [JsonPropertyName("regions")]

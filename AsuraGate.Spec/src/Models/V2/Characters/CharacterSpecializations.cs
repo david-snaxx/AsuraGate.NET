@@ -33,7 +33,7 @@ public record SpecializationSlot
     [JsonPropertyName("id")]
     public int? Id { get; init; }
 
-    /// <summary>Up to three selected trait IDs within this specialization; each resolvable to a <see cref="Trait"/>; null entries indicate an unselected trait slot.</summary>
+    /// <summary>Up to three selected trait IDs within this specialization; each resolvable to a <see cref="Trait"/>; empty if none selected.</summary>
     [JsonPropertyName("traits")]
-    public int[]? Traits { get; init; }
+    public int[] Traits { get; init; } = [];
 }

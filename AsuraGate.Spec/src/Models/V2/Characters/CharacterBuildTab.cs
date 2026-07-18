@@ -41,13 +41,13 @@ public record CharacterBuild
     [JsonPropertyName("aquatic_skills")]
     public required CharacterBuildSkills AquaticSkills { get; init; }
 
-    /// <summary>Two Revenant legend IDs for land combat (Revenant only); null for other professions.</summary>
+    /// <summary>Two Revenant legend IDs for land combat (Revenant only); empty for other professions.</summary>
     [JsonPropertyName("legends")]
-    public string[]? Legends { get; init; }
+    public string[] Legends { get; init; } = [];
 
-    /// <summary>Two Revenant legend IDs for aquatic combat (Revenant only); null for other professions.</summary>
+    /// <summary>Two Revenant legend IDs for aquatic combat (Revenant only); empty for other professions.</summary>
     [JsonPropertyName("aquatic_legends")]
-    public string[]? AquaticLegends { get; init; }
+    public string[] AquaticLegends { get; init; } = [];
 
     /// <summary>Ranger pet selections for this build (Ranger only); null for other professions.</summary>
     [JsonPropertyName("pets")]
@@ -61,9 +61,9 @@ public record CharacterBuildSpecialization
     [JsonPropertyName("id")]
     public int? Id { get; init; }
 
-    /// <summary>Up to three trait IDs selected within this specialization; each resolvable to a <see cref="Trait"/>; null entries indicate an unselected trait slot.</summary>
+    /// <summary>Up to three trait IDs selected within this specialization; each resolvable to a <see cref="Trait"/>; empty if none selected.</summary>
     [JsonPropertyName("traits")]
-    public int[]? Traits { get; init; }
+    public int[] Traits { get; init; } = [];
 }
 
 /// <summary>Represents the skill bar loadout in a <see cref="CharacterBuild"/>.</summary>
@@ -73,9 +73,9 @@ public record CharacterBuildSkills
     [JsonPropertyName("heal")]
     public int? Heal { get; init; }
 
-    /// <summary>Up to three utility skill IDs; each resolvable to a <see cref="Skill"/>; null entries indicate an empty slot.</summary>
+    /// <summary>Up to three utility skill IDs; each resolvable to a <see cref="Skill"/>; empty if none selected.</summary>
     [JsonPropertyName("utilities")]
-    public int[]? Utilities { get; init; }
+    public int[] Utilities { get; init; } = [];
 
     /// <summary>Skill ID in the elite slot; resolvable to a <see cref="Skill"/>; null if empty.</summary>
     [JsonPropertyName("elite")]
@@ -87,9 +87,9 @@ public record CharacterBuildPets
 {
     /// <summary>Up to two pet IDs selected for land combat; each resolvable to a <see cref="Pet"/>.</summary>
     [JsonPropertyName("terrestrial")]
-    public int[]? Terrestrial { get; init; }
+    public int[] Terrestrial { get; init; } = [];
 
     /// <summary>Up to two pet IDs selected for aquatic combat; each resolvable to a <see cref="Pet"/>.</summary>
     [JsonPropertyName("aquatic")]
-    public int[]? Aquatic { get; init; }
+    public int[] Aquatic { get; init; } = [];
 }

@@ -62,9 +62,9 @@ public record TabEquipmentItem
     [JsonPropertyName("location")]
     public required string Location { get; init; }
 
-    /// <summary>Dye color IDs applied to this item's dye slots; each resolvable to a <see cref="Dye"/>; null if no dyes applied.</summary>
+    /// <summary>Dye color IDs applied to this item's dye slots; each resolvable to a <see cref="Dye"/>; empty if no dyes applied.</summary>
     [JsonPropertyName("dyes")]
-    public int[]? Dyes { get; init; }
+    public int[] Dyes { get; init; } = [];
 
     /// <summary>Applied stat set and its calculated attribute bonuses; null if no stats are applied.</summary>
     [JsonPropertyName("stats")]
@@ -94,7 +94,7 @@ public record EquipmentPvp
     [JsonPropertyName("rune")]
     public int? Rune { get; init; }
 
-    /// <summary>Up to four PvP sigil item IDs selected for this tab; each resolvable to an <see cref="Item"/>; null entries indicate empty slots.</summary>
+    /// <summary>Up to four PvP sigil item IDs selected for this tab; each resolvable to an <see cref="Item"/>; empty if none selected.</summary>
     [JsonPropertyName("sigils")]
-    public int[]? Sigils { get; init; }
+    public int[] Sigils { get; init; } = [];
 }

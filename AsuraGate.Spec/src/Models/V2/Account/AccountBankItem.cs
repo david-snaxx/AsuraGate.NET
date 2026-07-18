@@ -21,9 +21,9 @@ public record AccountBankItem
     [JsonPropertyName("skin")]
     public int? Skin { get; init; }
 
-    /// <summary>Dye color IDs applied to this item's dye slots; each resolvable to a <see cref="Dye"/>; null if no dyes applied.</summary>
+    /// <summary>Dye color IDs applied to this item's dye slots; each resolvable to a <see cref="Dye"/>; empty if no dyes applied.</summary>
     [JsonPropertyName("dyes")]
-    public int[]? Dyes { get; init; }
+    public int[] Dyes { get; init; } = [];
 
     /// <summary>Upgrade component item IDs slotted in this item; each resolvable to an <see cref="Item"/>.</summary>
     [JsonPropertyName("upgrades")]

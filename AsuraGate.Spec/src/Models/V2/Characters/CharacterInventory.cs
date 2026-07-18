@@ -57,9 +57,9 @@ public record InventoryItem
     [JsonPropertyName("stats")]
     public InventoryItemStats? Stats { get; init; }
 
-    /// <summary>Dye color IDs applied to this item's dye slots; each resolvable to a <see cref="Dye"/>; null if no dyes applied.</summary>
+    /// <summary>Dye color IDs applied to this item's dye slots; each resolvable to a <see cref="Dye"/>; empty if no dyes applied.</summary>
     [JsonPropertyName("dyes")]
-    public int[]? Dyes { get; init; }
+    public int[] Dyes { get; init; } = [];
 
     /// <summary>Item binding type: "Account" or "Character"; null if unbound.</summary>
     [JsonPropertyName("binding")]

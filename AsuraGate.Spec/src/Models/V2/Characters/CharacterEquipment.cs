@@ -57,9 +57,9 @@ public record EquipmentItem
     [JsonPropertyName("charges")]
     public int? Charges { get; init; }
 
-    /// <summary>Dye color IDs applied to this item's dye slots; each resolvable to a <see cref="Dye"/>; null if no dyes applied.</summary>
+    /// <summary>Dye color IDs applied to this item's dye slots; each resolvable to a <see cref="Dye"/>; empty if no dyes applied.</summary>
     [JsonPropertyName("dyes")]
-    public int[]? Dyes { get; init; }
+    public int[] Dyes { get; init; } = [];
 }
 
 /// <summary>Represents the applied stat set on an equipped item.</summary>

@@ -90,7 +90,7 @@ public record SkinDyeSlot
 {
     /// <summary>Default dye configuration applied to each dye channel; see <see cref="SkinDefaultSlot"/>.</summary>
     [JsonPropertyName("default")]
-    public SkinDefaultSlot[]? Default { get; init; }
+    public SkinDefaultSlot[] Default { get; init; } = [];
 }
 
 /// <summary>Default dye slot data for a single dye channel within a <see cref="SkinDyeSlot"/>.</summary>

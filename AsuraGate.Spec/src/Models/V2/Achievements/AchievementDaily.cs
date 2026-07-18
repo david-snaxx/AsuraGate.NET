@@ -55,6 +55,7 @@ public record DailyLevelRange
 }
 
 /// <summary>Represents an expansion access requirement for a <see cref="DailyAchievement"/>.</summary>
+// identically shaped to AchievementCategory.AchievementAccess but renamed for clarity
 public record DailyRequiredAccess
 {
     /// <summary>Game expansion product required (e.g., "HeartOfThorns", "PathOfFire", "EndOfDragons").</summary>

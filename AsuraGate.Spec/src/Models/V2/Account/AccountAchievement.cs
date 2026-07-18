@@ -14,9 +14,9 @@ public record AccountAchievement
     [JsonPropertyName("done")]
     public required bool Done { get; init; }
 
-    /// <summary>Zero-based bit indices representing which optional steps or collectibles within the achievement are completed; null if none completed or the achievement has no bits.</summary>
+    /// <summary>Zero-based bit indices representing which optional steps or collectibles within the achievement are completed; empty if none completed or the achievement has no bits.</summary>
     [JsonPropertyName("bits")]
-    public int[]? Bits { get; init; }
+    public int[] Bits { get; init; } = [];
 
     /// <summary>Current progress toward the achievement's goal; null if this achievement does not use a progress counter.</summary>
     [JsonPropertyName("current")]

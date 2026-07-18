@@ -34,6 +34,7 @@ public record AchievementCategory
     public CategoryAchievement[] Tomorrow { get; init; } = [];
 }
 
+/// <summary>Represents an achievement that is a part of this category.</summary>
 public record CategoryAchievement
 {
     /// <summary>The ID of the achievement.</summary>
@@ -53,6 +54,7 @@ public record CategoryAchievement
     public int[]? Level { get; init; }
 }
 
+/// <summary>Describes if a daily requires a specific campaign.</summary>
 public record AchievementAccess
 {
     [JsonPropertyName("product")]

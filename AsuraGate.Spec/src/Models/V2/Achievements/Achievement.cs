@@ -33,25 +33,25 @@ public record Achievement
     [JsonPropertyName("type")]
     public required string Type { get; init; }
 
-    /// <summary>Behavior flags (e.g., "Pvp", "Daily", "Weekly", "Repeatable", "Hidden"); null if not provided.</summary>
+    /// <summary>Behavior flags (e.g., "Pvp", "Daily", "Weekly", "Repeatable", "Hidden"); empty if not provided.</summary>
     [JsonPropertyName("flags")]
-    public string[]? Flags { get; init; }
+    public string[] Flags { get; init; } = [];
 
-    /// <summary>Ordered completion tiers, each awarding points at a progress threshold; null if not provided.</summary>
+    /// <summary>Ordered completion tiers, each awarding points at a progress threshold; empty if not provided.</summary>
     [JsonPropertyName("tiers")]
-    public AchievementTier[]? Tiers { get; init; }
+    public AchievementTier[] Tiers { get; init; } = [];
 
-    /// <summary>Achievement IDs that must be completed before this achievement unlocks; null if not provided.</summary>
+    /// <summary>Achievement IDs that must be completed before this achievement unlocks; empty if not provided.</summary>
     [JsonPropertyName("prerequisites")]
-    public int[]? Prerequisites { get; init; }
+    public int[] Prerequisites { get; init; } = [];
 
-    /// <summary>Rewards granted upon completion; null if not provided.</summary>
+    /// <summary>Rewards granted upon completion; empty if not provided.</summary>
     [JsonPropertyName("rewards")]
-    public AchievementReward[]? Rewards { get; init; }
+    public AchievementReward[] Rewards { get; init; } = [];
 
-    /// <summary>Discrete collectible or step entries for achievements with bit-based progress; null if not applicable.</summary>
+    /// <summary>Discrete collectible or step entries for achievements with bit-based progress; empty if not applicable.</summary>
     [JsonPropertyName("bits")]
-    public AchievementBit[]? Bits { get; init; }
+    public AchievementBit[] Bits { get; init; } = [];
 
     /// <summary>Maximum achievement point cap for repeatable achievements; null for non-repeatable achievements.</summary>
     [JsonPropertyName("point_cap")]

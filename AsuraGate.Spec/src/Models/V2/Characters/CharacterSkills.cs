@@ -33,15 +33,15 @@ public record SkillLoadout
     [JsonPropertyName("heal")]
     public int? Heal { get; init; }
 
-    /// <summary>Up to three utility skill IDs; each resolvable to a <see cref="Skill"/>; null entries indicate an empty slot.</summary>
+    /// <summary>Up to three utility skill IDs; each resolvable to a <see cref="Skill"/>; empty if none selected.</summary>
     [JsonPropertyName("utilities")]
-    public int[]? Utilities { get; init; }
+    public int[] Utilities { get; init; } = [];
 
     /// <summary>Skill ID in the elite slot; resolvable to a <see cref="Skill"/>; null if empty.</summary>
     [JsonPropertyName("elite")]
     public int? Elite { get; init; }
 
-    /// <summary>Active Revenant legend IDs for this mode (Revenant only); each resolvable to a <see cref="Legend"/>; null for other professions.</summary>
+    /// <summary>Active Revenant legend IDs for this mode (Revenant only); each resolvable to a <see cref="Legend"/>; empty for other professions.</summary>
     [JsonPropertyName("legends")]
-    public string[]? Legends { get; init; }
+    public string[] Legends { get; init; } = [];
 }
