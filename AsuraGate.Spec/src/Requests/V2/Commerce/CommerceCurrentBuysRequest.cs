@@ -12,6 +12,6 @@ public sealed class CommerceCurrentBuysRequest :
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.CommerceTransactionsCurrentBuys;
-    public bool IsAuthenticated { get; } = false;
+    public bool IsAuthenticated { get; } = true;
     public bool IsLocalized { get; } = false;
 }

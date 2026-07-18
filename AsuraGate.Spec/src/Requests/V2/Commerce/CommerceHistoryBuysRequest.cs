@@ -12,6 +12,6 @@ public sealed class CommerceHistoryBuysRequest :
     IGetsIds<int>
 {
     public string EndpointUrl { get; } = Gw2ApiEndpointUrl.CommerceTransactionsHistoryBuys;
-    public bool IsAuthenticated { get; } = false;
+    public bool IsAuthenticated { get; } = true;
     public bool IsLocalized { get; } = false;
 }
