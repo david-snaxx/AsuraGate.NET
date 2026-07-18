@@ -185,5 +185,4 @@ public abstract class ProviderBase
         _staticMetaRepository = staticMetaRepository;
         _logger = logger;
     }
-
 }
