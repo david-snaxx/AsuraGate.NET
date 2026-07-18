@@ -17,7 +17,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="src\Dynamic\Entities\World\V2\" />
       <Folder Include="src\Dynamic\Mappers\World\" />
       <Folder Include="src\Dynamic\Repositories\Account\" />
       <Folder Include="src\Dynamic\Repositories\World\" />
