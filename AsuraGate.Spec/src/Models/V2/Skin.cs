@@ -74,7 +74,7 @@ public record SkinArmorDetails : SkinDetails
 {
     /// <summary>Armor slot type (e.g., "Helm", "Shoulders", "Coat", "Gloves", "Leggings", "Boots").</summary>
     [JsonPropertyName("type")]
-    public string Type { get; init; }
+    public required string Type { get; init; }
 
     /// <summary>Armor weight class: "Light", "Medium", or "Heavy".</summary>
     [JsonPropertyName("weight_class")]

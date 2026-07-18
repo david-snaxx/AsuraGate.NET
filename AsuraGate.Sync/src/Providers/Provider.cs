@@ -57,7 +57,7 @@ public class Provider<TModel, TId, TRepository, TRequest>
     public async Task<IEnumerable<TModel>> GetBulk(IEnumerable<TId> ids, CancellationToken cancellationToken = default)
     {
         var idList = ids.Distinct().ToList();
-        IEnumerable<TModel?> cached = (await Repository.GetManyAsync(idList)).ToList();
+        IEnumerable<TModel> cached = (await Repository.GetManyAsync(idList)).ToList();
         int cachedCount = cached.Count();
 
         if (cachedCount == idList.Count)

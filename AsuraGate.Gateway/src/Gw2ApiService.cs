@@ -84,10 +84,18 @@ public class Gw2ApiService
             logger.LogInformation("Completed request for {Endpoint} in {ElapsedMs}ms", endpoint, stopwatch.ElapsedMilliseconds);
             return result;
         }
+        // the caller's own token fired - this is a deliberate stop, not a failed fetch, so it must
+        // propagate rather than come back looking like "no data" (HttpClient's request timeout also
+        // throws OperationCanceledException, but with the caller's token left un-signaled, which is
+        // how it's told apart from a real cancellation below)
+        catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
+        {
+            throw;
+        }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Request for {Endpoint} failed after {ElapsedMs}ms", endpoint, stopwatch.ElapsedMilliseconds);
-            throw;
+            logger.LogError(ex, "Request for {Endpoint} failed after {ElapsedMs}ms; returning default", endpoint, stopwatch.ElapsedMilliseconds);
+            return default;
         }
     }
 
