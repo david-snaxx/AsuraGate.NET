@@ -90,19 +90,12 @@ public class ProviderLink
     public WvwProviders Wvw => new(_database, _gateway, _staticMetaRepository, _logger);
 }
 
-public class AchievementsProviders
+public class AchievementsProviders : ProviderBase
 {
-    private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Gw2ApiGateway _gateway;
-    private readonly StaticMetaRepository _staticMetaRepository;
-    private readonly ILogger _logger;
-
-    internal AchievementsProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger logger)
+    internal AchievementsProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway,
+        StaticMetaRepository staticMetaRepository, ILogger logger) : base(database, gateway, staticMetaRepository,
+        logger)
     {
-        _database = database;
-        _gateway = gateway;
-        _staticMetaRepository = staticMetaRepository;
-        _logger = logger;
     }
 
     public AchievementProvider Root => new(new AchievementRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Achievements.Root, _gateway, _staticMetaRepository, _logger);
@@ -110,57 +103,36 @@ public class AchievementsProviders
     public AchievementGroupProvider Group => new(new AchievementGroupRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Achievements.Group, _gateway, _staticMetaRepository, _logger);
 }
 
-public class BackstoryProviders
+public class BackstoryProviders : ProviderBase
 {
-    private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Gw2ApiGateway _gateway;
-    private readonly StaticMetaRepository _staticMetaRepository;
-    private readonly ILogger _logger;
-
-    internal BackstoryProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger logger)
+    internal BackstoryProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway,
+        StaticMetaRepository staticMetaRepository, ILogger logger) : base(database, gateway, staticMetaRepository,
+        logger)
     {
-        _database = database;
-        _gateway = gateway;
-        _staticMetaRepository = staticMetaRepository;
-        _logger = logger;
     }
 
     public BackstoryAnswerProvider Answer => new(new BackstoryAnswerRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Backstory.Answer, _gateway, _staticMetaRepository, _logger);
     public BackstoryQuestionProvider Question => new(new BackstoryQuestionRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Backstory.Question, _gateway, _staticMetaRepository, _logger);
 }
 
-public class GuildProviders
+public class GuildProviders : ProviderBase
 {
-    private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Gw2ApiGateway _gateway;
-    private readonly StaticMetaRepository _staticMetaRepository;
-    private readonly ILogger _logger;
-
-    internal GuildProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger logger)
+    internal GuildProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway,
+        StaticMetaRepository staticMetaRepository, ILogger logger) : base(database, gateway, staticMetaRepository,
+        logger)
     {
-        _database = database;
-        _gateway = gateway;
-        _staticMetaRepository = staticMetaRepository;
-        _logger = logger;
     }
 
     public GuildPermissionProvider Permission => new(new GuildPermissionRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Guild.Permission, _gateway, _staticMetaRepository, _logger);
     public GuildUpgradeProvider Upgrade => new(new GuildUpgradeRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Guild.Upgrades, _gateway, _staticMetaRepository, _logger);
 }
 
-public class HomesteadProviders
+public class HomesteadProviders : ProviderBase
 {
-    private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Gw2ApiGateway _gateway;
-    private readonly StaticMetaRepository _staticMetaRepository;
-    private readonly ILogger _logger;
-
-    internal HomesteadProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger logger)
+    internal HomesteadProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway,
+        StaticMetaRepository staticMetaRepository, ILogger logger) : base(database, gateway, staticMetaRepository,
+        logger)
     {
-        _database = database;
-        _gateway = gateway;
-        _staticMetaRepository = staticMetaRepository;
-        _logger = logger;
     }
 
     public HomesteadDecorationProvider Decoration => new(new HomesteadDecorationRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Homestead.Decoration, _gateway, _staticMetaRepository, _logger);
@@ -168,38 +140,24 @@ public class HomesteadProviders
     public HomesteadGlyphProvider Glyph => new(new HomesteadGlyphRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Homestead.Glyph, _gateway, _staticMetaRepository, _logger);
 }
 
-public class MountProviders
+public class MountProviders : ProviderBase
 {
-    private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Gw2ApiGateway _gateway;
-    private readonly StaticMetaRepository _staticMetaRepository;
-    private readonly ILogger _logger;
-
-    internal MountProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger logger)
+    internal MountProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway,
+        StaticMetaRepository staticMetaRepository, ILogger logger) : base(database, gateway, staticMetaRepository,
+        logger)
     {
-        _database = database;
-        _gateway = gateway;
-        _staticMetaRepository = staticMetaRepository;
-        _logger = logger;
     }
 
     public MountSkinProvider Skin => new(new MountSkinRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Mounts.Skin, _gateway, _staticMetaRepository, _logger);
     public MountTypeProvider Type => new(new MountTypeRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Mounts.Type, _gateway, _staticMetaRepository, _logger);
 }
 
-public class PvpProviders
+public class PvpProviders : ProviderBase
 {
-    private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Gw2ApiGateway _gateway;
-    private readonly StaticMetaRepository _staticMetaRepository;
-    private readonly ILogger _logger;
-
-    internal PvpProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger logger)
+    internal PvpProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway,
+        StaticMetaRepository staticMetaRepository, ILogger logger) : base(database, gateway, staticMetaRepository,
+        logger)
     {
-        _database = database;
-        _gateway = gateway;
-        _staticMetaRepository = staticMetaRepository;
-        _logger = logger;
     }
 
     public PvpAmuletProvider Amulet => new(new PvpAmuletRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Pvp.Amulet, _gateway, _staticMetaRepository, _logger);
@@ -207,14 +165,28 @@ public class PvpProviders
     public PvpRankProvider Rank => new(new PvpRankRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.Pvp.Rank, _gateway, _staticMetaRepository, _logger);
 }
 
-public class WvwProviders
+public class WvwProviders : ProviderBase
 {
-    private readonly Gw2ApiPersistenceDatabase _database;
-    private readonly Gw2ApiGateway _gateway;
-    private readonly StaticMetaRepository _staticMetaRepository;
-    private readonly ILogger _logger;
+    internal WvwProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway,
+        StaticMetaRepository staticMetaRepository, ILogger logger) : base(database, gateway, staticMetaRepository,
+        logger)
+    {
+    }
 
-    internal WvwProviders(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger logger)
+    public WvwAbilityProvider Ability => new(new WvwAbilityRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.WvW.Ability, _gateway, _staticMetaRepository, _logger);
+    public WvwObjectiveProvider Objective => new(new WvwObjectiveRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.WvW.Objective, _gateway, _staticMetaRepository, _logger);
+    public WvwRankProvider Rank => new(new WvwRankRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.WvW.Rank, _gateway, _staticMetaRepository, _logger);
+    public WvwUpgradeProvider Upgrade => new(new WvwUpgradeRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.WvW.Upgrade, _gateway, _staticMetaRepository, _logger);
+}
+
+public abstract class ProviderBase
+{
+    protected readonly Gw2ApiPersistenceDatabase _database;
+    protected readonly Gw2ApiGateway _gateway;
+    protected readonly StaticMetaRepository _staticMetaRepository;
+    protected readonly ILogger _logger;
+
+    internal ProviderBase(Gw2ApiPersistenceDatabase database, Gw2ApiGateway gateway, StaticMetaRepository staticMetaRepository, ILogger logger)
     {
         _database = database;
         _gateway = gateway;
@@ -222,8 +194,4 @@ public class WvwProviders
         _logger = logger;
     }
 
-    public WvwAbilityProvider Ability => new(new WvwAbilityRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.WvW.Ability, _gateway, _staticMetaRepository, _logger);
-    public WvwObjectiveProvider Objective => new(new WvwObjectiveRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.WvW.Objective, _gateway, _staticMetaRepository, _logger);
-    public WvwRankProvider Rank => new(new WvwRankRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.WvW.Rank, _gateway, _staticMetaRepository, _logger);
-    public WvwUpgradeProvider Upgrade => new(new WvwUpgradeRepository(_database), Gw2ApiNavigator.Instance.Api.VersionTwo.WvW.Upgrade, _gateway, _staticMetaRepository, _logger);
 }
