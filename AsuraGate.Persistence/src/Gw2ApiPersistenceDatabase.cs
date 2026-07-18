@@ -31,6 +31,8 @@ public class Gw2ApiPersistenceDatabase : IAsyncDisposable
 
     public async Task Initialize()
     {
+        await Connection.ExecuteScalarAsync<string>("PRAGMA journal_mode=WAL;");
+
         await Connection.CreateTableAsync<StaticMetaEntity>();
         
         // from root /v2/

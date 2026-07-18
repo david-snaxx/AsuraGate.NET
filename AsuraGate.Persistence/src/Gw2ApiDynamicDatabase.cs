@@ -27,6 +27,11 @@ public class Gw2ApiDynamicDatabase : ISnapshotDatabase, IAsyncDisposable
 
     public async Task Initialize()
     {
+        // WAL lets writers and readers proceed concurrently instead of the default rollback
+        // journal's exclusive-lock-per-write, which matters once a high-frequency poller
+        // (e.g. WvW) is inserting snapshots on the same connection as ordinary reads.
+        await Connection.ExecuteScalarAsync<string>("PRAGMA journal_mode=WAL;");
+
         // from /v2/account
         await Connection.CreateTableAsync<AccountDyeSnapshotEntity>();
         await Connection.CreateTableAsync<AccountAchievementSnapshotEntity>();
