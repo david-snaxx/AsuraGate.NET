@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2.Wvw;
 using AsuraGate.Spec.Models.V2.Wvw;
 
@@ -9,8 +8,8 @@ public static class WvwObjectiveMapper
     public static WvwObjectiveEntity ToEntity(WvwObjective model) => new WvwObjectiveEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static WvwObjective ToModel(WvwObjectiveEntity entity) => JsonSerializer.Deserialize<WvwObjective>(entity.Data)!;
+    public static WvwObjective? ToModel(WvwObjectiveEntity entity) => MapperUtils.DeserializeJson<WvwObjective>(entity.Data);
 }

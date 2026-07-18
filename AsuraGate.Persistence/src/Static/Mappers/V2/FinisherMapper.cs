@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class FinisherMapper
     public static FinisherEntity ToEntity(Finisher model) => new FinisherEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Finisher ToModel(FinisherEntity entity) => JsonSerializer.Deserialize<Finisher>(entity.Data)!;
+    public static Finisher? ToModel(FinisherEntity entity) => MapperUtils.DeserializeJson<Finisher>(entity.Data);
 }

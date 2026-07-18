@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class HomeCatMapper
     public static HomeCatEntity ToEntity(HomeCat model) => new HomeCatEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static HomeCat ToModel(HomeCatEntity entity) => JsonSerializer.Deserialize<HomeCat>(entity.Data)!;
+    public static HomeCat? ToModel(HomeCatEntity entity) => MapperUtils.DeserializeJson<HomeCat>(entity.Data);
 }

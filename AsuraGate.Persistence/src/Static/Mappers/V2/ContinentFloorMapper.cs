@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class ContinentFloorMapper
     public static ContinentFloorEntity ToEntity(ContinentFloor model) => new ContinentFloorEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static ContinentFloor ToModel(ContinentFloorEntity entity) => JsonSerializer.Deserialize<ContinentFloor>(entity.Data)!;
+    public static ContinentFloor? ToModel(ContinentFloorEntity entity) => MapperUtils.DeserializeJson<ContinentFloor>(entity.Data);
 }

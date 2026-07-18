@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class PetMapper
     public static PetEntity ToEntity(Pet model) => new PetEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Pet ToModel(PetEntity entity) => JsonSerializer.Deserialize<Pet>(entity.Data)!;
+    public static Pet? ToModel(PetEntity entity) => MapperUtils.DeserializeJson<Pet>(entity.Data);
 }

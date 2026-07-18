@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class JadeBotMapper
     public static JadeBotEntity ToEntity(JadeBot model) => new JadeBotEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static JadeBot ToModel(JadeBotEntity entity) => JsonSerializer.Deserialize<JadeBot>(entity.Data)!;
+    public static JadeBot? ToModel(JadeBotEntity entity) => MapperUtils.DeserializeJson<JadeBot>(entity.Data);
 }

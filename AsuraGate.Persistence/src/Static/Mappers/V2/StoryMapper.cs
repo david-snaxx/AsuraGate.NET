@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class StoryMapper
     public static StoryEntity ToEntity(Story model) => new StoryEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Story ToModel(StoryEntity entity) => JsonSerializer.Deserialize<Story>(entity.Data)!;
+    public static Story? ToModel(StoryEntity entity) => MapperUtils.DeserializeJson<Story>(entity.Data);
 }

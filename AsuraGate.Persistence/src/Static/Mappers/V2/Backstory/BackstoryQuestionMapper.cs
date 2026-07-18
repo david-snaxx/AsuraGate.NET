@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2.Backstory;
 using AsuraGate.Spec.Models.V2.Backstory;
 
@@ -9,8 +8,8 @@ public static class BackstoryQuestionMapper
     public static BackstoryQuestionEntity ToEntity(BackstoryQuestion model) => new BackstoryQuestionEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static BackstoryQuestion ToModel(BackstoryQuestionEntity entity) => JsonSerializer.Deserialize<BackstoryQuestion>(entity.Data)!;
+    public static BackstoryQuestion? ToModel(BackstoryQuestionEntity entity) => MapperUtils.DeserializeJson<BackstoryQuestion>(entity.Data);
 }

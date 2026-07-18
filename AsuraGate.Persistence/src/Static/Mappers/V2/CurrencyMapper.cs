@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class CurrencyMapper
     public static CurrencyEntity ToEntity(Currency model) => new CurrencyEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Currency ToModel(CurrencyEntity entity) => JsonSerializer.Deserialize<Currency>(entity.Data)!;
+    public static Currency? ToModel(CurrencyEntity entity) => MapperUtils.DeserializeJson<Currency>(entity.Data);
 }

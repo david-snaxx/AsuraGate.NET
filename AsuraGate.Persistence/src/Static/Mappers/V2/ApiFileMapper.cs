@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class ApiFileMapper
     public static ApiFileEntity ToEntity(ApiFile model) => new ApiFileEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static ApiFile ToModel(ApiFileEntity entity) => JsonSerializer.Deserialize<ApiFile>(entity.Data)!;
+    public static ApiFile? ToModel(ApiFileEntity entity) => MapperUtils.DeserializeJson<ApiFile>(entity.Data);
 }

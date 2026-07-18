@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2.Pvp;
 using AsuraGate.Spec.Models.V2.Pvp;
 
@@ -9,8 +8,8 @@ public static class PvpAmuletMapper
     public static PvpAmuletEntity ToEntity(PvpAmulet model) => new PvpAmuletEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static PvpAmulet ToModel(PvpAmuletEntity entity) => JsonSerializer.Deserialize<PvpAmulet>(entity.Data)!;
+    public static PvpAmulet? ToModel(PvpAmuletEntity entity) => MapperUtils.DeserializeJson<PvpAmulet>(entity.Data);
 }

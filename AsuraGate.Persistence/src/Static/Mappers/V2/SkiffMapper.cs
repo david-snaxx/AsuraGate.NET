@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class SkiffMapper
     public static SkiffEntity ToEntity(Skiff model) => new SkiffEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Skiff ToModel(SkiffEntity entity) => JsonSerializer.Deserialize<Skiff>(entity.Data)!;
+    public static Skiff? ToModel(SkiffEntity entity) => MapperUtils.DeserializeJson<Skiff>(entity.Data);
 }

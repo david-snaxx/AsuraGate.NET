@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2.Pvp;
 using AsuraGate.Spec.Models.V2.Pvp;
 
@@ -9,8 +8,8 @@ public static class PvpRankMapper
     public static PvpRankEntity ToEntity(PvpRank model) => new PvpRankEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static PvpRank ToModel(PvpRankEntity entity) => JsonSerializer.Deserialize<PvpRank>(entity.Data)!;
+    public static PvpRank? ToModel(PvpRankEntity entity) => MapperUtils.DeserializeJson<PvpRank>(entity.Data);
 }

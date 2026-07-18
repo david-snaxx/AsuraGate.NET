@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class EmoteMapper
     public static EmoteEntity ToEntity(Emote model) => new EmoteEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Emote ToModel(EmoteEntity entity) => JsonSerializer.Deserialize<Emote>(entity.Data)!;
+    public static Emote? ToModel(EmoteEntity entity) => MapperUtils.DeserializeJson<Emote>(entity.Data);
 }

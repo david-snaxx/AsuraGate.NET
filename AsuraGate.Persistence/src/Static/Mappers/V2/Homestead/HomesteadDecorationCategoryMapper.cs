@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2.Homestead;
 using AsuraGate.Spec.Models.V2.Homestead;
 
@@ -9,8 +8,8 @@ public static class HomesteadDecorationCategoryMapper
     public static HomesteadDecorationCategoryEntity ToEntity(HomesteadDecorationCategory model) => new HomesteadDecorationCategoryEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static HomesteadDecorationCategory ToModel(HomesteadDecorationCategoryEntity entity) => JsonSerializer.Deserialize<HomesteadDecorationCategory>(entity.Data)!;
+    public static HomesteadDecorationCategory? ToModel(HomesteadDecorationCategoryEntity entity) => MapperUtils.DeserializeJson<HomesteadDecorationCategory>(entity.Data);
 }

@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2.Guild;
 using AsuraGate.Spec.Models.V2.Guild;
 
@@ -9,8 +8,8 @@ public static class GuildUpgradeMapper
     public static GuildUpgradeEntity ToEntity(GuildUpgrade model) => new GuildUpgradeEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static GuildUpgrade ToModel(GuildUpgradeEntity entity) => JsonSerializer.Deserialize<GuildUpgrade>(entity.Data)!;
+    public static GuildUpgrade? ToModel(GuildUpgradeEntity entity) => MapperUtils.DeserializeJson<GuildUpgrade>(entity.Data);
 }

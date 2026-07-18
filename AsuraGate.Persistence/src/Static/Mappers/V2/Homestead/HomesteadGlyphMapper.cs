@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2.Homestead;
 using AsuraGate.Spec.Models.V2.Homestead;
 
@@ -9,8 +8,8 @@ public static class HomesteadGlyphMapper
     public static HomesteadGlyphEntity ToEntity(HomesteadGlyph model) => new HomesteadGlyphEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static HomesteadGlyph ToModel(HomesteadGlyphEntity entity) => JsonSerializer.Deserialize<HomesteadGlyph>(entity.Data)!;
+    public static HomesteadGlyph? ToModel(HomesteadGlyphEntity entity) => MapperUtils.DeserializeJson<HomesteadGlyph>(entity.Data);
 }

@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2.Achievements;
 using AsuraGate.Spec.Models.V2.Achievements;
 
@@ -9,8 +8,8 @@ public static class AchievementCategoryMapper
     public static AchievementCategoryEntity ToEntity(AchievementCategory model) => new AchievementCategoryEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static AchievementCategory ToModel(AchievementCategoryEntity entity) => JsonSerializer.Deserialize<AchievementCategory>(entity.Data)!;
+    public static AchievementCategory? ToModel(AchievementCategoryEntity entity) => MapperUtils.DeserializeJson<AchievementCategory>(entity.Data);
 }

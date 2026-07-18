@@ -1,4 +1,3 @@
-using System.Text.Json;
 using AsuraGate.Persistence.Static.Entities.V2;
 using AsuraGate.Spec.Models.V2;
 
@@ -9,8 +8,8 @@ public static class SkinMapper
     public static SkinEntity ToEntity(Skin model) => new SkinEntity()
     {
         Id = model.Id,
-        Data = JsonSerializer.Serialize(model)
+        Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Skin ToModel(SkinEntity entity) => JsonSerializer.Deserialize<Skin>(entity.Data)!;
+    public static Skin? ToModel(SkinEntity entity) => MapperUtils.DeserializeJson<Skin>(entity.Data);
 }
