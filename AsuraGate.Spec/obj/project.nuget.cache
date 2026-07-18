@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ypzccANDj1Y=",
+  "dgSpecHash": "1ul+yAHGWFc=",
   "success": true,
   "projectFilePath": "C:\\Users\\snaxx\\workspace\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
   "expectedPackageFiles": [
@@ -27,8 +27,8 @@
       "filePath": "C:\\Users\\snaxx\\workspace\\AsuraGate.NET\\AsuraGate.Spec\\AsuraGate.Spec.csproj",
       "libraryId": "SQLitePCLRaw.lib.e_sqlite3",
       "targetGraphs": [
-        ".NETStandard,Version=v2.1",
-        "net10.0"
+        "net10.0",
+        "netstandard2.1"
       ]
     }
   ]

@@ -11,9 +11,5 @@ public static class ContinentMapper
         Data = MapperUtils.SerializeModel(model) ?? string.Empty
     };
 
-    public static Continent? ToModel(ContinentEntity entity)
-    {
-        
-        return MapperUtils.DeserializeJson<Continent>(entity.Data);
-    }
+    public static Continent? ToModel(ContinentEntity entity) => MapperUtils.DeserializeJson<Continent>(entity.Data);
 }
