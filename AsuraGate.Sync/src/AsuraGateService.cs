@@ -2,6 +2,7 @@ using AsuraGate.Gateway;
 using AsuraGate.Spec.Consts;
 using AsuraGate.Spec.Requests;
 using AsuraGate.Persistence;
+using AsuraGate.Persistence.Static.Mappers;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -23,6 +24,7 @@ public class AsuraGateService : IAsyncDisposable
             defaultLocalization?.ToString() ?? Gw2ApiLocalization.English,
             defaultSchemaVersion?.ToString() ?? Gw2ApiSchemaVersion.Latest,
             _logger = logger ?? NullLogger<Gw2ApiGateway>.Instance);
+        MapperUtils.Configure(logger ?? NullLogger<Gw2ApiGateway>.Instance);
         Gw2ApiNavigator = Gw2ApiNavigator.Instance;
         Gw2ApiPersistenceDatabase = new Gw2ApiPersistenceDatabase(staticDatabasePath);
         Gw2ApiPersistenceDatabase.Initialize().Wait();

@@ -13,9 +13,9 @@ public abstract class StaticRepository<TModel, TEntity, TId> :
 {
     private readonly Gw2ApiPersistenceDatabase _database;
     private readonly Func<TModel, TEntity> _toEntity;
-    private readonly Func<TEntity, TModel> _toModel;
+    private readonly Func<TEntity, TModel?> _toModel;
 
-    protected StaticRepository(Gw2ApiPersistenceDatabase database, Func<TModel, TEntity> toEntity, Func<TEntity, TModel> toModel)
+    protected StaticRepository(Gw2ApiPersistenceDatabase database, Func<TModel, TEntity> toEntity, Func<TEntity, TModel?> toModel)
     {
         _database = database;
         _toEntity = toEntity;
@@ -35,13 +35,13 @@ public abstract class StaticRepository<TModel, TEntity, TId> :
             .Table<TEntity>()
             .Where(entity => idList.Contains(entity.Id))
             .ToListAsync();
-        return entities.Select(_toModel);
+        return entities.Select(_toModel).OfType<TModel>();
     }
 
     public async Task<IEnumerable<TModel>> GetAllAsync()
     {
         var entities = await _database.Connection.Table<TEntity>().ToListAsync();
-        return entities.Select(_toModel);
+        return entities.Select(_toModel).OfType<TModel>();
     }
 
     public async Task<IEnumerable<TId>> GetCachedIdsAsync() =>
