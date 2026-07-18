@@ -1,5 +1,6 @@
 using AsuraGate.Persistence.Dynamic.Entities.Account.V2;
 using AsuraGate.Persistence.Dynamic.Entities.Character.V2;
+using AsuraGate.Persistence.Dynamic.Entities.Wvw.V2;
 using SQLite;
 
 namespace AsuraGate.Persistence;
@@ -84,5 +85,11 @@ public class Gw2ApiDynamicDatabase : ISnapshotDatabase, IAsyncDisposable
         await Connection.CreateTableAsync<CharacterSkillsSnapshotEntity>();
         await Connection.CreateTableAsync<CharacterSpecializationsSnapshotEntity>();
         await Connection.CreateTableAsync<CharacterTrainingSnapshotEntity>();
+
+        // from /v2/wvw/matches, keyed by match id - polled far more frequently than account/character data
+        await Connection.CreateTableAsync<WvwMatchSnapshotEntity>();
+        await Connection.CreateTableAsync<WvwMatchWorldOverviewSnapshotEntity>();
+        await Connection.CreateTableAsync<WvwMatchWorldScoresSnapshotEntity>();
+        await Connection.CreateTableAsync<WvwMatchWorldStatsSnapshotEntity>();
     }
 }
