@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace AsuraGate.Spec.Models.V2.Achievements;
@@ -45,9 +46,9 @@ public record Achievement
     [JsonPropertyName("prerequisites")]
     public int[] Prerequisites { get; init; } = [];
 
-    /// <summary>Rewards granted upon completion; empty if not provided.</summary>
+    /// <summary>Raw JSON elements of type-specific reward data; empty if not provided; use <see cref="GetRewards"/> to deserialize into the correct subtypes.</summary>
     [JsonPropertyName("rewards")]
-    public AchievementReward[] Rewards { get; init; } = [];
+    public JsonElement[] Rewards { get; init; } = [];
 
     /// <summary>Discrete collectible or step entries for achievements with bit-based progress; empty if not applicable.</summary>
     [JsonPropertyName("bits")]
@@ -56,6 +57,16 @@ public record Achievement
     /// <summary>Maximum achievement point cap for repeatable achievements; null for non-repeatable achievements.</summary>
     [JsonPropertyName("point_cap")]
     public int? PointCap { get; init; }
+
+    /// <summary>Deserializes each entry in <see cref="Rewards"/> into the correct <see cref="AchievementReward"/> subtype based on its "type" field.</summary>
+    public IEnumerable<AchievementReward?> GetRewards() => Rewards.Select(reward => reward.GetProperty("type").GetString() switch
+    {
+        "Coins" => (AchievementReward?)reward.Deserialize<AchievementRewardCoins>(),
+        "Item" => reward.Deserialize<AchievementRewardItem>(),
+        "Mastery" => reward.Deserialize<AchievementRewardMastery>(),
+        "Title" => reward.Deserialize<AchievementRewardTitle>(),
+        _ => null
+    });
 }
 
 /// <summary>Represents a single completion tier within an <see cref="Achievement"/>.</summary>
@@ -72,19 +83,20 @@ public record AchievementTier
 
 /// <summary>
 /// Represents a reward granted upon completing an <see cref="Achievement"/>.
-/// Concrete subtypes are <see cref="AchievementRewardCoins"/>, <see cref="AchievementRewardItem"/>,
+/// To check a reward's type you should check for the class name, not the "type" field, for example:
+/// <code>if (reward is AchievementRewardCoins coins) { ... }</code>
+/// Possible subtypes: <see cref="AchievementRewardCoins"/>, <see cref="AchievementRewardItem"/>,
 /// <see cref="AchievementRewardMastery"/>, and <see cref="AchievementRewardTitle"/>.
 /// </summary>
-[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
-[JsonDerivedType(typeof(AchievementRewardCoins), "Coins")]
-[JsonDerivedType(typeof(AchievementRewardItem), "Item")]
-[JsonDerivedType(typeof(AchievementRewardMastery), "Mastery")]
-[JsonDerivedType(typeof(AchievementRewardTitle), "Title")]
 public abstract record AchievementReward;
 
 /// <summary>An <see cref="AchievementReward"/> that grants a coin payout.</summary>
 public record AchievementRewardCoins : AchievementReward
 {
+    /// <summary>Discriminator value identifying this reward's kind; always "Coins".</summary>
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+
     /// <summary>Amount of coins awarded (in copper; 10000 = 1 gold).</summary>
     [JsonPropertyName("count")]
     public required int Count { get; init; }
@@ -93,6 +105,10 @@ public record AchievementRewardCoins : AchievementReward
 /// <summary>An <see cref="AchievementReward"/> that grants an item.</summary>
 public record AchievementRewardItem : AchievementReward
 {
+    /// <summary>Discriminator value identifying this reward's kind; always "Item".</summary>
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+
     /// <summary>Item ID awarded; resolvable to an <see cref="Item"/>.</summary>
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -105,6 +121,10 @@ public record AchievementRewardItem : AchievementReward
 /// <summary>An <see cref="AchievementReward"/> that grants a mastery point.</summary>
 public record AchievementRewardMastery : AchievementReward
 {
+    /// <summary>Discriminator value identifying this reward's kind; always "Mastery".</summary>
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+
     /// <summary>Mastery point ID awarded.</summary>
     [JsonPropertyName("id")]
     public required int Id { get; init; }
@@ -117,6 +137,10 @@ public record AchievementRewardMastery : AchievementReward
 /// <summary>An <see cref="AchievementReward"/> that unlocks a character title.</summary>
 public record AchievementRewardTitle : AchievementReward
 {
+    /// <summary>Discriminator value identifying this reward's kind; always "Title".</summary>
+    [JsonPropertyName("type")]
+    public required string Type { get; init; }
+
     /// <summary>Title ID awarded; resolvable to a <see cref="Title"/>.</summary>
     [JsonPropertyName("id")]
     public required int Id { get; init; }
